@@ -1,1 +1,1 @@
-# opengl-2Dgame
+# opengl-game2D
