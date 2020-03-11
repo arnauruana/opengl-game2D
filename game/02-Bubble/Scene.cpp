@@ -3,7 +3,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Scene.h"
 #include "Game.h"
-
+#include <GL/glew.h>
+#include <GL/glut.h>
 
 #define SCREEN_X 32
 #define SCREEN_Y 16
