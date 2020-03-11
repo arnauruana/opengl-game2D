@@ -6,6 +6,7 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 
+
 #define SCREEN_X 32
 #define SCREEN_Y 16
 
@@ -31,23 +32,25 @@ Scene::~Scene()
 void Scene::init()
 {
 	initShaders();
+
 	if (state == "menu") {
 		initMenu();
 	}
-	else if (state == "controls") { /* loadControls(); */;
+	else if (state == "controls") { /* loadControls(); */
 		initControls();
 	}
 	else if (state == "credits") { /* loadCredits(); */
 		initCredits();
 	}
-	else {
-		if (current_lvl == 1) init_Lvl1();
+	else { // state == playing
+		if (current_lvl == 1)	   init_Lvl1();
 		else if (current_lvl == 2) init_Lvl2();
 		else if (current_lvl == 3) init_Lvl3();
 		else if (current_lvl == 4) init_Lvl4();
 		else if (current_lvl == 5) init_Lvl5();
 	}
 }
+
 void Scene::initMenu()
 {
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
@@ -88,10 +91,25 @@ void Scene::initControls()
 	spriteControls->setNumberAnimations(0);
 	spriteControls->setPosition(glm::vec2(float(0), float(0)));
 }
-void Scene::init_Lvl1(){}
+
+void Scene::init_Lvl1()
+{
+	glClearColor(0.2, 0.2, 0.2, 1.0);
+	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	player = new Player();
+	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+	player->setTileMap(map);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	currentTime = 0.0f;
+}
+
 void Scene::init_Lvl2() {}
+
 void Scene::init_Lvl3() {}
+
 void Scene::init_Lvl4() {}
+
 void Scene::init_Lvl5() {}
 
 
@@ -110,7 +128,6 @@ void Scene::updateControls(int deltaTime) {
 		init();
 	}
 }
-
 
 //235 280 325 posiciones y de selector
 void Scene::updateMenu(int deltaTime) {
@@ -144,8 +161,6 @@ void Scene::updateMenu(int deltaTime) {
 			else state="credits";
 			init();
 		}
-	
-	
 }
 
 void Scene::update(int deltaTime)
@@ -153,7 +168,6 @@ void Scene::update(int deltaTime)
 	currentTime += deltaTime;
 	if (state == "menu") {
 		updateMenu(deltaTime);
-		
 	}
 	else if (state == "credits") {
 		updateCredits(deltaTime);
@@ -161,8 +175,11 @@ void Scene::update(int deltaTime)
 	else if (state == "controls") {
 		updateControls(deltaTime);
 	}
-	//player->update(deltaTime);
+	else { // state == playing
+		player->update(deltaTime);
+	}
 }
+
 
 void Scene::render()
 {
@@ -174,6 +191,7 @@ void Scene::render()
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+	
 	if (state == "menu") {
 		sprite->render();
 		spriteSelector->render();
@@ -184,9 +202,14 @@ void Scene::render()
 	else if (state == "controls") {
 		spriteControls->render();
 	}
-	/*map->render();*/
-	//player->render();
+	else // state == playing
+	{
+		map->render();
+		player->render();
+	}
 }
+
+
 void Scene::initShaders()
 {
 	Shader vShader, fShader;
@@ -216,6 +239,3 @@ void Scene::initShaders()
 	vShader.free();
 	fShader.free();
 }
-
-
-

@@ -4,7 +4,7 @@
 
 
 //Remove console (only works in Visual Studio)
-#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+//#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
 
 #define TIME_PER_FRAME 1000.f / 60.f // Approx. 60 fps
@@ -86,8 +86,9 @@ int main(int argc, char **argv)
 	// GLUT initialization
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)  - SCREEN_WIDTH)  / 2,
+						   (glutGet(GLUT_SCREEN_HEIGHT) - SCREEN_HEIGHT) / 2);
 
 	glutCreateWindow(argv[0]);
 	glutDisplayFunc(drawCallback);

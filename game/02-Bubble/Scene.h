@@ -50,7 +50,7 @@ private:
 	Texture spritesheet, spritesheetSelector, spritesheetCredits, spritesheetControls;
 	Sprite *sprite, *spriteSelector, *spriteCredits, *spriteControls;
 	string state = "menu";  // {menu,controls,playing,credits)
-	int current_lvl ; //{1,2,3,4,5}
+	int current_lvl = 1; //{1,2,3,4,5}
 };
 
 
