@@ -23,6 +23,9 @@ public:
 	void update(int deltaTime);
 	void render();
 	
+	void initMenu();
+	void updateMenu(int deltaTime);
+	
 	void initCredits();
 	void updateCredits(int deltaTime);
 
