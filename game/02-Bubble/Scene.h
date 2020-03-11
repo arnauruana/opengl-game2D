@@ -22,6 +22,18 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
+	
+	void initCredits();
+	void updateCredits(int deltaTime);
+
+	void initControls();
+	void updateControls(int deltaTime);
+
+	void init_Lvl1();
+	void init_Lvl2();
+	void init_Lvl3();
+	void init_Lvl4();
+	void init_Lvl5();
 
 private:
 	void initShaders();
@@ -32,7 +44,10 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
-
+	Texture spritesheet, spritesheetSelector, spritesheetCredits, spritesheetControls;
+	Sprite *sprite, *spriteSelector, *spriteCredits, *spriteControls;
+	string state = "menu";  // {menu,controls,playing,credits)
+	int current_lvl ; //{1,2,3,4,5}
 };
 
 
