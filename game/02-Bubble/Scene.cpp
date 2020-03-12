@@ -22,9 +22,9 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-	if(map != NULL)
+	if (map != NULL)
 		delete map;
-	if(player != NULL)
+	if (player != NULL)
 		delete player;
 }
 
@@ -60,7 +60,7 @@ void Scene::initMenu()
 	sprite = Sprite::createSprite(glm::ivec2(640, 480), glm::vec2(1.f, 1.f), &spritesheet, &texProgram);
 	sprite->setNumberAnimations(0);
 	sprite->setPosition(glm::vec2(float(0), float(0)));
-	
+
 	// selector
 	spritesheetSelector.loadFromFile("images/selector.jpg", TEXTURE_PIXEL_FORMAT_RGBA);
 	spriteSelector = Sprite::createSprite(glm::ivec2(180, 36), glm::vec2(1.f, 1.f), &spritesheetSelector, &texProgram);
@@ -94,8 +94,7 @@ void Scene::initControls()
 
 void Scene::init_Lvl1()
 {
-	glClearColor(0.2, 0.2, 0.2, 1.0);
-	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	map = TileMap::createTileMap("levels/1.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
@@ -104,13 +103,49 @@ void Scene::init_Lvl1()
 	currentTime = 0.0f;
 }
 
-void Scene::init_Lvl2() {}
+void Scene::init_Lvl2()
+{
+	map = TileMap::createTileMap("levels/2.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	player = new Player();
+	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+	player->setTileMap(map);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	currentTime = 0.0f;
+}
 
-void Scene::init_Lvl3() {}
+void Scene::init_Lvl3()
+{
+	map = TileMap::createTileMap("levels/3.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	player = new Player();
+	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+	player->setTileMap(map);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	currentTime = 0.0f;
+}
 
-void Scene::init_Lvl4() {}
+void Scene::init_Lvl4()
+{
+	map = TileMap::createTileMap("levels/4.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	player = new Player();
+	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+	player->setTileMap(map);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	currentTime = 0.0f;
+}
 
-void Scene::init_Lvl5() {}
+void Scene::init_Lvl5()
+{
+	map = TileMap::createTileMap("levels/5.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	player = new Player();
+	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+	player->setTileMap(map);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	currentTime = 0.0f;
+}
 
 
 void Scene::updateCredits(int deltaTime) {
@@ -132,35 +167,35 @@ void Scene::updateControls(int deltaTime) {
 //235 280 325 posiciones y de selector
 void Scene::updateMenu(int deltaTime) {
 	sprite->update(deltaTime);
-		if (Game::instance().getSpecialKey(GLUT_KEY_UP)) {
-			glm::vec2 posSelector = spriteSelector->getPosition();
-			if (posSelector.y == 235) posSelector.y = 325.f;
-			else if (posSelector.y == 280) posSelector.y = 235;
-			else if (posSelector.y == 325) posSelector.y = 280;
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP)) {
+		glm::vec2 posSelector = spriteSelector->getPosition();
+		if (posSelector.y == 235) posSelector.y = 325.f;
+		else if (posSelector.y == 280) posSelector.y = 235;
+		else if (posSelector.y == 325) posSelector.y = 280;
 
 
-			spriteSelector->setPosition(posSelector);
-			spriteSelector->render();
-			Game::instance().specialKeyReleased(GLUT_KEY_UP);
-		}
-		else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
-			glm::vec2 posSelector = spriteSelector->getPosition();
-			if (posSelector.y == 325) posSelector.y = 235.f;
-			else if (posSelector.y == 280) posSelector.y = 325;
-			else if (posSelector.y == 235) posSelector.y = 280;
+		spriteSelector->setPosition(posSelector);
+		spriteSelector->render();
+		Game::instance().specialKeyReleased(GLUT_KEY_UP);
+	}
+	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
+		glm::vec2 posSelector = spriteSelector->getPosition();
+		if (posSelector.y == 325) posSelector.y = 235.f;
+		else if (posSelector.y == 280) posSelector.y = 325;
+		else if (posSelector.y == 235) posSelector.y = 280;
 
-			spriteSelector->setPosition(posSelector);
-			spriteSelector->render();
-			Game::instance().specialKeyReleased(GLUT_KEY_DOWN);
+		spriteSelector->setPosition(posSelector);
+		spriteSelector->render();
+		Game::instance().specialKeyReleased(GLUT_KEY_DOWN);
 
-		}
-		// return key == 13
-		else if (Game::instance().getKey(13)) {
-			if ((spriteSelector->getPosition()).y == 235) state = "playing";
-			else if ((spriteSelector->getPosition()).y == 280) state = "controls";
-			else state="credits";
-			init();
-		}
+	}
+	// return key == 13
+	else if (Game::instance().getKey(13)) {
+		if ((spriteSelector->getPosition()).y == 235) state = "playing";
+		else if ((spriteSelector->getPosition()).y == 280) state = "controls";
+		else state = "credits";
+		init();
+	}
 }
 
 void Scene::update(int deltaTime)
@@ -191,7 +226,7 @@ void Scene::render()
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
-	
+
 	if (state == "menu") {
 		sprite->render();
 		spriteSelector->render();
@@ -215,13 +250,13 @@ void Scene::initShaders()
 	Shader vShader, fShader;
 
 	vShader.initFromFile(VERTEX_SHADER, "shaders/texture.vert");
-	if(!vShader.isCompiled())
+	if (!vShader.isCompiled())
 	{
 		cout << "Vertex Shader Error" << endl;
 		cout << "" << vShader.log() << endl << endl;
 	}
 	fShader.initFromFile(FRAGMENT_SHADER, "shaders/texture.frag");
-	if(!fShader.isCompiled())
+	if (!fShader.isCompiled())
 	{
 		cout << "Fragment Shader Error" << endl;
 		cout << "" << fShader.log() << endl << endl;
@@ -230,7 +265,7 @@ void Scene::initShaders()
 	texProgram.addShader(vShader);
 	texProgram.addShader(fShader);
 	texProgram.link();
-	if(!texProgram.isLinked())
+	if (!texProgram.isLinked())
 	{
 		cout << "Shader Linking Error" << endl;
 		cout << "" << texProgram.log() << endl << endl;

@@ -1,3 +1,2 @@
 ﻿  Scene.cpp
-C:\Users\arnau\Documents\GitHub\opengl-game2D\game\02-Bubble\Scene.cpp(97,33): warning C4305: 'argument': truncation from 'double' to 'GLclampf'
   02-Bubble.vcxproj -> C:\Users\arnau\Documents\GitHub\opengl-game2D\game\Debug\02-Bubble.exe
