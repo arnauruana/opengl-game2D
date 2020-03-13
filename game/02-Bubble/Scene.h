@@ -3,9 +3,25 @@
 
 
 #include <glm/glm.hpp>
+
 #include "ShaderProgram.h"
 #include "TileMap.h"
 #include "Player.h"
+
+
+const int MENU = 1;
+const int CONT = 2;
+const int CRED = 3;
+const int PLAY = 4;
+
+const int LVL1 = 1;
+const int LVL2 = 2;
+const int LVL3 = 3;
+const int LVL4 = 4;
+const int LVL5 = 5;
+
+const int DEFAULT_STATE = MENU;
+const int DEFAULT_LEVEL = LVL1;
 
 
 // Scene contains all the entities of our game.
@@ -14,7 +30,6 @@
 
 class Scene
 {
-
 public:
 	Scene();
 	~Scene();
@@ -32,25 +47,36 @@ public:
 	void initControls();
 	void updateControls(int deltaTime);
 
-	void init_Lvl1();
-	void init_Lvl2();
-	void init_Lvl3();
-	void init_Lvl4();
-	void init_Lvl5();
+	void initPlay();
+	void updatePlay(int deltaTime);
+
+	void initLevel1();
 
 private:
 	void initShaders();
 
 private:
-	TileMap *map;
-	Player *player;
-	ShaderProgram texProgram;
-	float currentTime;
+	GLfloat currentTime;
 	glm::mat4 projection;
-	Texture spritesheet, spritesheetSelector, spritesheetCredits, spritesheetControls;
-	Sprite *sprite, *spriteSelector, *spriteCredits, *spriteControls;
-	string state = "menu";  // {menu,controls,playing,credits)
-	int current_lvl = 1; //{1,2,3,4,5}
+	ShaderProgram texProgram;
+
+	Texture spritesheetMenu;
+	Texture spritesheetControls;
+	Texture spritesheetCredits;
+	Texture spritesheetSelector;
+
+	Sprite* spriteMenu;
+	Sprite* spriteControls;
+	Sprite* spriteCredits;
+	Sprite* spriteSelector;
+	
+	TileMap* map;
+	Player* player;
+
+	GLint state = DEFAULT_STATE;	// { MENU | CONT | CRED | PLAY }
+	GLint level = DEFAULT_LEVEL;	// { LVL1 | LVL2 | LVL3 | LVL4 | LVL5 }
+
+	glm::vec2 selectorPos = glm::vec2(480.f / 7.f, 235.f);
 };
 
 

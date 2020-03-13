@@ -45,43 +45,56 @@ void TileMap::free()
 	glDeleteBuffers(1, &vbo);
 }
 
-bool TileMap::loadLevel(const string &levelFile)
+bool TileMap::loadLevel(const string& levelFile)
 {
 	ifstream fin;
 	string line, tilesheetFile;
-	int tile;
-	
-	fin.open(levelFile);
-	if(!fin.is_open()) return false;
+	stringstream sstream;
+	char tile;
 
-	fin >> line;
-	if (line != "TILEMAP") return false;
-	
-	fin >> mapSize.x >> mapSize.y;
-
-	fin >> tileSize >> blockSize;
-
-	fin >> tilesheetFile;
+	fin.open(levelFile.c_str());
+	if (!fin.is_open())
+		return false;
+	getline(fin, line);
+	if (line.compare(0, 7, "TILEMAP") != 0)
+		return false;
+	getline(fin, line);
+	sstream.str(line);
+	sstream >> mapSize.x >> mapSize.y;
+	getline(fin, line);
+	sstream.str(line);
+	sstream >> tileSize >> blockSize;
+	getline(fin, line);
+	sstream.str(line);
+	sstream >> tilesheetFile;
 	tilesheet.loadFromFile(tilesheetFile, TEXTURE_PIXEL_FORMAT_RGBA);
 	tilesheet.setWrapS(GL_CLAMP_TO_EDGE);
 	tilesheet.setWrapT(GL_CLAMP_TO_EDGE);
 	tilesheet.setMinFilter(GL_NEAREST);
 	tilesheet.setMagFilter(GL_NEAREST);
-
-	fin >> tilesheetSize.x >> tilesheetSize.y;
+	getline(fin, line);
+	sstream.str(line);
+	sstream >> tilesheetSize.x >> tilesheetSize.y;
 	tileTexSize = glm::vec2(1.f / tilesheetSize.x, 1.f / tilesheetSize.y);
-	
+
 	map = new int[mapSize.x * mapSize.y];
-	for(int j=0; j<mapSize.y; j++)
+	for (int j = 0; j < mapSize.y; j++)
 	{
-		for(int i=0; i<mapSize.x; i++)
+		for (int i = 0; i < mapSize.x; i++)
 		{
-			fin >> tile;
-			map[j*mapSize.x + i] = tile;
+			fin.get(tile);
+			if (tile == ' ')
+				map[j * mapSize.x + i] = 0;
+			else
+				map[j * mapSize.x + i] = tile - int('0');
 		}
+		fin.get(tile);
+#ifndef _WIN32
+		fin.get(tile);
+#endif
 	}
 	fin.close();
-	
+
 	return true;
 }
 

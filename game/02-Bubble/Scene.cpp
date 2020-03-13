@@ -1,11 +1,15 @@
 #include <iostream>
 #include <cmath>
 #include <glm/gtc/matrix_transform.hpp>
+
 #include "Scene.h"
 #include "Game.h"
+
 #include <GL/glew.h>
 #include <GL/glut.h>
 
+
+#define KEY_RETURN 13
 
 #define SCREEN_X 32
 #define SCREEN_Y 16
@@ -16,85 +20,114 @@
 
 Scene::Scene()
 {
-	map = NULL;
-	player = NULL;
+	this->map = NULL;
+	this->player = NULL;
 }
 
 Scene::~Scene()
 {
-	if (map != NULL)
-		delete map;
-	if (player != NULL)
-		delete player;
+	if (this->map != NULL)
+	{
+		delete this->map;
+	}
+
+	if (this->player != NULL)
+	{
+		delete this->player;
+	}
 }
 
 
 void Scene::init()
 {
-	initShaders();
+	this->initShaders();
 
-	if (state == "menu") {
-		initMenu();
-	}
-	else if (state == "controls") { /* loadControls(); */
-		initControls();
-	}
-	else if (state == "credits") { /* loadCredits(); */
-		initCredits();
-	}
-	else { // state == playing
-		if (current_lvl == 1)	   init_Lvl1();
-		else if (current_lvl == 2) init_Lvl2();
-		else if (current_lvl == 3) init_Lvl3();
-		else if (current_lvl == 4) init_Lvl4();
-		else if (current_lvl == 5) init_Lvl5();
+	switch (this->state)
+	{
+	case MENU:
+		this->initMenu();
+		break;
+	case CONT:
+		this->initControls();
+		break;
+	case CRED:
+		this->initCredits();
+		break;
+	case PLAY:
+		this->initPlay();
+		break;
+	default:
+		cout << "[SCENE::init] Wrong game state: " << this->state << endl;
+		cin >> this->state; // DEBUG
+		exit(EXIT_FAILURE);
 	}
 }
 
 void Scene::initMenu()
 {
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	this->projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 
 	// background
-	spritesheet.loadFromFile("images/menu.jpg", TEXTURE_PIXEL_FORMAT_RGB);
-	sprite = Sprite::createSprite(glm::ivec2(640, 480), glm::vec2(1.f, 1.f), &spritesheet, &texProgram);
-	sprite->setNumberAnimations(0);
-	sprite->setPosition(glm::vec2(float(0), float(0)));
+	this->spritesheetMenu.loadFromFile("images/menu.jpg", TEXTURE_PIXEL_FORMAT_RGB);
+	this->spriteMenu = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(1.f, 1.f), &this->spritesheetMenu, &this->texProgram);
+	this->spriteMenu->setNumberAnimations(0);
+	this->spriteMenu->setPosition(glm::vec2(0.f, 0.f));
 
 	// selector
-	spritesheetSelector.loadFromFile("images/selector.jpg", TEXTURE_PIXEL_FORMAT_RGBA);
-	spriteSelector = Sprite::createSprite(glm::ivec2(180, 36), glm::vec2(1.f, 1.f), &spritesheetSelector, &texProgram);
-	spriteSelector->setNumberAnimations(0);
-	spriteSelector->setPosition(glm::vec2(float(85), float(235)));//play
-	//spriteSelector->setPosition(glm::vec2(float(85), float(280))); //controls
-	//spriteSelector->setPosition(glm::vec2(float(85), float(325))); //credits
-}
-
-void Scene::initCredits()
-{
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
-
-	// background
-	spritesheetCredits.loadFromFile("images/credits.jpg", TEXTURE_PIXEL_FORMAT_RGB);
-	spriteCredits = Sprite::createSprite(glm::ivec2(640, 480), glm::vec2(1.f, 1.f), &spritesheetCredits, &texProgram);
-	spriteCredits->setNumberAnimations(0);
-	spriteCredits->setPosition(glm::vec2(float(0), float(0)));
+	this->spritesheetSelector.loadFromFile("images/selector.jpg", TEXTURE_PIXEL_FORMAT_RGBA);
+	this->spriteSelector = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH/3 - 30, 36), glm::vec2(1.f, 1.f), &this->spritesheetSelector, &this->texProgram);
+	this->spriteSelector->setNumberAnimations(0);
+	this->spriteSelector->setPosition(this->selectorPos);
 }
 
 void Scene::initControls()
 {
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	this->projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 
 	// background
-	spritesheetControls.loadFromFile("images/controls.jpg", TEXTURE_PIXEL_FORMAT_RGB);
-	spriteControls = Sprite::createSprite(glm::ivec2(640, 480), glm::vec2(1.f, 1.f), &spritesheetControls, &texProgram);
-	spriteControls->setNumberAnimations(0);
-	spriteControls->setPosition(glm::vec2(float(0), float(0)));
+	this->spritesheetControls.loadFromFile("images/controls.jpg", TEXTURE_PIXEL_FORMAT_RGB);
+	this->spriteControls = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(1.f, 1.f), &this->spritesheetControls, &this->texProgram);
+	this->spriteControls->setNumberAnimations(0);
+	this->spriteControls->setPosition(glm::vec2(0.f, 0.f));
 }
 
-void Scene::init_Lvl1()
+void Scene::initCredits()
 {
-	map = TileMap::createTileMap("levels/1.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	this->projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+
+	// background
+	this->spritesheetCredits.loadFromFile("images/credits.jpg", TEXTURE_PIXEL_FORMAT_RGB);
+	this->spriteCredits = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(1.f, 1.f), &this->spritesheetCredits, &this->texProgram);
+	this->spriteCredits->setNumberAnimations(0);
+	this->spriteCredits->setPosition(glm::vec2(0.f, 0.f));
+}
+
+void Scene::initPlay()
+{
+	switch (this->level)
+	{
+	case LVL1:
+		this->initLevel1();
+		break;
+	case LVL2:
+		break;
+	case LVL3:
+		break;
+	case LVL4:
+		break;
+	case LVL5:
+		break;
+	default:
+		cout << "[SCENE::initPlay] Wrong game level: " << this->level << endl;
+		cin >> this->level; // DEBUG
+		exit(EXIT_FAILURE);
+	}
+}
+
+
+void Scene::initLevel1()
+{
+	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
@@ -103,116 +136,140 @@ void Scene::init_Lvl1()
 	currentTime = 0.0f;
 }
 
-void Scene::init_Lvl2()
-{
-	map = TileMap::createTileMap("levels/2.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	player = new Player();
-	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
-	player->setTileMap(map);
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
-	currentTime = 0.0f;
-}
-
-void Scene::init_Lvl3()
-{
-	map = TileMap::createTileMap("levels/3.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	player = new Player();
-	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
-	player->setTileMap(map);
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
-	currentTime = 0.0f;
-}
-
-void Scene::init_Lvl4()
-{
-	map = TileMap::createTileMap("levels/4.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	player = new Player();
-	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
-	player->setTileMap(map);
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
-	currentTime = 0.0f;
-}
-
-void Scene::init_Lvl5()
-{
-	map = TileMap::createTileMap("levels/5.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	player = new Player();
-	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
-	player->setTileMap(map);
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
-	currentTime = 0.0f;
-}
-
-
-void Scene::updateCredits(int deltaTime) {
-	spriteCredits->update(deltaTime);
-	if (Game::instance().getKey('B') || Game::instance().getKey('b')) {
-		state = "menu";
-		init();
-	}
-}
-
-void Scene::updateControls(int deltaTime) {
-	spriteControls->update(deltaTime);
-	if (Game::instance().getKey('B') || Game::instance().getKey('b')) {
-		state = "menu";
-		init();
-	}
-}
-
-//235 280 325 posiciones y de selector
-void Scene::updateMenu(int deltaTime) {
-	sprite->update(deltaTime);
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP)) {
-		glm::vec2 posSelector = spriteSelector->getPosition();
-		if (posSelector.y == 235) posSelector.y = 325.f;
-		else if (posSelector.y == 280) posSelector.y = 235;
-		else if (posSelector.y == 325) posSelector.y = 280;
-
-
-		spriteSelector->setPosition(posSelector);
-		spriteSelector->render();
-		Game::instance().specialKeyReleased(GLUT_KEY_UP);
-	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
-		glm::vec2 posSelector = spriteSelector->getPosition();
-		if (posSelector.y == 325) posSelector.y = 235.f;
-		else if (posSelector.y == 280) posSelector.y = 325;
-		else if (posSelector.y == 235) posSelector.y = 280;
-
-		spriteSelector->setPosition(posSelector);
-		spriteSelector->render();
-		Game::instance().specialKeyReleased(GLUT_KEY_DOWN);
-
-	}
-	// return key == 13
-	else if (Game::instance().getKey(13)) {
-		if ((spriteSelector->getPosition()).y == 235) state = "playing";
-		else if ((spriteSelector->getPosition()).y == 280) state = "controls";
-		else state = "credits";
-		init();
-	}
-}
 
 void Scene::update(int deltaTime)
 {
-	currentTime += deltaTime;
-	if (state == "menu") {
-		updateMenu(deltaTime);
+	this->currentTime += deltaTime;
+
+	switch (this->state)
+	{
+	case MENU:
+		this->updateMenu(deltaTime);
+		break;
+	case CONT:
+		this->updateControls(deltaTime);
+		break;
+	case CRED:
+		this->updateCredits(deltaTime);
+		break;
+	case PLAY:
+		this->updatePlay(deltaTime);
+		break;
+	default:
+		cout << "[SCENE::update] Wrong game state: " << this->state << endl;
+		cin >> this->state; // DEBUG
+		exit(EXIT_FAILURE);
 	}
-	else if (state == "credits") {
-		updateCredits(deltaTime);
+}
+
+void Scene::updateMenu(int deltaTime)
+{
+	this->spriteMenu->update(deltaTime);
+
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP))
+	{
+		this->selectorPos = this->spriteSelector->getPosition();
+
+		int posY = int(this->selectorPos.y);
+		switch (posY)
+		{
+		case 235:
+			this->selectorPos.y = 325.f;
+			break;
+		case 280:
+			this->selectorPos.y = 235.f;
+			break;
+		case 325:
+			this->selectorPos.y = 280.f;
+			break;
+		default:
+			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
+			cin >> posY; // DEBUG
+			exit(EXIT_FAILURE);
+		}
+		this->spriteSelector->setPosition(this->selectorPos);
+
+		Game::instance().specialKeyReleased(GLUT_KEY_UP);
 	}
-	else if (state == "controls") {
-		updateControls(deltaTime);
+	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN))
+	{
+		this->selectorPos = this->spriteSelector->getPosition();
+
+		int posY = int(this->selectorPos.y);
+		switch (posY)
+		{
+		case 235:
+			this->selectorPos.y = 280.f;
+			break;
+		case 280:
+			this->selectorPos.y = 325.f;
+			break;
+		case 325:
+			this->selectorPos.y = 235.f;
+			break;
+		default:
+			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
+			cin >> posY; // DEBUG
+			exit(EXIT_FAILURE);
+		}
+		this->spriteSelector->setPosition(this->selectorPos);
+
+		Game::instance().specialKeyReleased(GLUT_KEY_DOWN);
 	}
-	else { // state == playing
-		player->update(deltaTime);
+	else if (Game::instance().getKey(KEY_RETURN))
+	{
+		this->selectorPos = this->spriteSelector->getPosition();
+
+		int posY = int(this->selectorPos.y);
+		switch (posY)
+		{
+		case 235:
+			this->selectorPos.y = 235.f;
+			this->state = PLAY;
+			break;
+		case 280:
+			this->selectorPos.y = 280.f;
+			this->state = CONT;
+			break;
+		case 325:
+			this->selectorPos.y = 325.f;
+			this->state = CRED;
+			break;
+		default:
+			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
+			cin >> posY; // DEBUG
+			exit(EXIT_FAILURE);
+		}
+		
+		this->init();
 	}
+}
+
+void Scene::updateControls(int deltaTime)
+{
+	this->spriteControls->update(deltaTime);
+
+	if (Game::instance().getKey('B') || Game::instance().getKey('b'))
+	{
+		this->state = MENU;
+		this->init();
+	}
+}
+
+void Scene::updateCredits(int deltaTime)
+{
+	this->spriteCredits->update(deltaTime);
+
+	if (Game::instance().getKey('B') || Game::instance().getKey('b'))
+	{
+		this->state = MENU;
+		this->init();
+	}
+}
+
+void Scene::updatePlay(int deltaTime)
+{
+	player->update(deltaTime);
 }
 
 
@@ -227,14 +284,14 @@ void Scene::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 
-	if (state == "menu") {
-		sprite->render();
+	if (state == MENU) {
+		spriteMenu->render();
 		spriteSelector->render();
 	}
-	else if (state == "credits") {
+	else if (state == CRED) {
 		spriteCredits->render();
 	}
-	else if (state == "controls") {
+	else if (state == CONT) {
 		spriteControls->render();
 	}
 	else // state == playing
