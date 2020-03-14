@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "Game.h"
-
+#include <iostream>
 
 //Remove console (only works in Visual Studio)
 //#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
@@ -80,6 +80,21 @@ static void idleCallback()
 	}
 }
 
+void resizeCallback(int width, int height)
+{
+	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+
+	if (width < SCREEN_WIDTH || height < SCREEN_HEIGHT)
+	{
+		glutReshapeWindow(SCREEN_WIDTH, SCREEN_HEIGHT);
+		return;
+	}
+
+	int windowS = width < height ? width : height;
+
+	glutReshapeWindow(windowS, windowS);
+}
+
 
 int main(int argc, char **argv)
 {
@@ -90,8 +105,9 @@ int main(int argc, char **argv)
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH)  - SCREEN_WIDTH)  / 2,
 						   (glutGet(GLUT_SCREEN_HEIGHT) - SCREEN_HEIGHT) / 2);
 
-	glutCreateWindow(argv[0]);
+	glutCreateWindow("Baba Is You");
 	glutDisplayFunc(drawCallback);
+	glutReshapeFunc(resizeCallback);
 	glutIdleFunc(idleCallback);
 	glutKeyboardFunc(keyboardDownCallback);
 	glutKeyboardUpFunc(keyboardUpCallback);
