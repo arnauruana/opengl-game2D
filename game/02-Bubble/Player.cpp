@@ -21,7 +21,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
 	spritesheet.loadFromFile("images/baba.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.20, 0.25), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(0.20, 0.25), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(4);
 	
 		sprite->setAnimationSpeed(MOVE_BACKWARD, 8);
@@ -62,34 +62,79 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void Player::update(int deltaTime)
 {
-	sprite->update(deltaTime);
-	if(Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	this->sprite->update(deltaTime);
+
+	if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
-		if(sprite->animation() != MOVE_LEFT)
-			sprite->changeAnimation(MOVE_LEFT);
-		posPlayer.x -= 2;
-		
+		if (this->sprite->animation() != MOVE_LEFT)
+		{
+			this->sprite->changeAnimation(MOVE_LEFT);
+		}
+
+		if (this->posPlayer.x == 0) return; // not leave the map
+
+		this->posPlayer.x -= 24;
+
+		if (this->map->collisionMoveLeft(this->posPlayer, glm::ivec2(24, 24)))
+		{
+			this->posPlayer.x += 24;
+		}
+
+		Game::instance().specialKeyReleased(GLUT_KEY_LEFT);
 	}
-	else if(Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	else if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
 	{
-		if(sprite->animation() != MOVE_RIGHT)
-			sprite->changeAnimation(MOVE_RIGHT);
-		posPlayer.x += 2;
+		if (this->sprite->animation() != MOVE_RIGHT)
+		{
+			this->sprite->changeAnimation(MOVE_RIGHT);
+		}
 		
+		if (this->posPlayer.x == SCREEN_WIDTH - 24) return; // not leave the map
+
+		this->posPlayer.x += 24;
+		
+		if (this->map->collisionMoveRight(this->posPlayer, glm::ivec2(24, 24)))
+		{
+			this->posPlayer.x -= 24;
+		}
+
+		Game::instance().specialKeyReleased(GLUT_KEY_RIGHT);
 	}
 	else if (Game::instance().getSpecialKey(GLUT_KEY_UP))
 	{
-		if (sprite->animation() != MOVE_BACKWARD)
-			sprite->changeAnimation(MOVE_BACKWARD);
-		posPlayer.y -= 2;
+		if (this->sprite->animation() != MOVE_BACKWARD)
+		{
+			this->sprite->changeAnimation(MOVE_BACKWARD);
+		}
+
+		if (this->posPlayer.y == 0) return; // not leave the map
 		
+		this->posPlayer.y -= 24;
+
+		if (this->map->collisionMoveUp(this->posPlayer, glm::ivec2(24, 24)))
+		{
+			this->posPlayer.y += 24;
+		}
+		
+		Game::instance().specialKeyReleased(GLUT_KEY_UP);
 	}
 	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN))
 	{
-		if (sprite->animation() != MOVE_FORWARD)
-			sprite->changeAnimation(MOVE_FORWARD);
-		posPlayer.y += 2;
+		if (this->sprite->animation() != MOVE_FORWARD)
+		{
+			this->sprite->changeAnimation(MOVE_FORWARD);
+		}
+
+		if (this->posPlayer.y == SCREEN_HEIGHT - 24) return; // not leave the map
 		
+		this->posPlayer.y += 24;
+
+		if (this->map->collisionMoveDown(this->posPlayer, glm::ivec2(24, 24)))
+		{
+			this->posPlayer.y -= 24;
+		}
+		
+		Game::instance().specialKeyReleased(GLUT_KEY_DOWN);
 	}
 	
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
@@ -98,20 +143,16 @@ void Player::update(int deltaTime)
 
 void Player::render()
 {
-	sprite->render();
+	this->sprite->render();
 }
 
 void Player::setTileMap(TileMap *tileMap)
 {
-	map = tileMap;
+	this->map = tileMap;
 }
 
 void Player::setPosition(const glm::vec2 &pos)
 {
-	posPlayer = pos;
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+	this->posPlayer = pos;
+	this->sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
-
-
-
-
