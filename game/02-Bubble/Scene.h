@@ -104,6 +104,10 @@ private:
 	Player* player4;
 	Player* player5;
 
+	Texture spritesheetRock;
+
+	Sprite* spriteRock;
+
 	GLint state = DEFAULT_STATE;	// { MENU | CONT | CRED | PLAY }
 	GLint level = DEFAULT_LEVEL;	// { LVL1 | LVL2 | LVL3 | LVL4 | LVL5 }
 

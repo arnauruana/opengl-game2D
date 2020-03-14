@@ -175,10 +175,15 @@ void Scene::initLevel2()
 {
 	this->map2 = TileMap::createTileMap(PATH_LVL2, glm::vec2(SCREEN_X, SCREEN_Y), this->texProgram);
 
+	this->spritesheetRock.loadFromFile("images/tiles.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	this->spriteRock = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1.f/32.f, 1.f/66.f), &this->spritesheetRock, &this->texProgram);
+	this->spriteRock->setNumberAnimations(0);
+	this->spriteRock->setPosition(glm::vec2(9 * this->map2->getTileSize(), 10 * this->map2->getTileSize()));
+
 	this->player2 = new Player();
 	this->player2->init(glm::ivec2(SCREEN_X, SCREEN_Y), this->texProgram);
 	this->player2->setTileMap(this->map2);
-	this->player2->setPosition(glm::vec2(9 * this->map2->getTileSize(), 10 * this->map2->getTileSize()));
+	this->player2->setPosition(glm::vec2(1 * this->map2->getTileSize(), 1 * this->map2->getTileSize()));
 
 	this->currentTime = 0.0f;
 }
@@ -345,6 +350,7 @@ void Scene::updateLevel1(int deltaTime)
 void Scene::updateLevel2(int deltaTime)
 {
 	this->player2->update(deltaTime);
+	this->spriteRock->update(deltaTime);
 }
 
 
@@ -428,6 +434,9 @@ void Scene::renderLevel2()
 {
 	this->map2->render();
 	this->player2->render();
+
+	this->texProgram.setUniform4f("color", 1.0f, 0.5f, 0.0f, 1.0f);
+	this->spriteRock->render();
 }
 
 
