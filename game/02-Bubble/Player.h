@@ -6,6 +6,12 @@
 #include "TileMap.h"
 
 
+enum PlayerAnims
+{
+	MOVE_FORWARD, MOVE_RIGHT, MOVE_LEFT, MOVE_BACKWARD
+};
+
+
 // Player is basically a Sprite that represents the player. As such it has
 // all properties it needs to track its movement, jumping, and collisions.
 
@@ -18,6 +24,9 @@ public:
 	void update(int deltaTime);
 	void render();
 	
+	glm::ivec2 getPosition() const;
+	int getAnimation() const;
+
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 	

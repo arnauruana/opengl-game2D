@@ -20,8 +20,8 @@ const int LVL3 = 3;
 const int LVL4 = 4;
 const int LVL5 = 5;
 
-const int DEFAULT_STATE = MENU;
-const int DEFAULT_LEVEL = LVL1;
+const int DEFAULT_STATE = PLAY;
+const int DEFAULT_LEVEL = LVL2;
 
 const string PATH_LVL1 = "levels/level01.txt";
 const string PATH_LVL2 = "levels/level02.txt";
@@ -40,8 +40,8 @@ public:
 	Scene();
 	~Scene();
 
-	int getState();
-	int getLevel();
+	int getState() const;
+	int getLevel() const;
 
 	void setState(int state);
 	void setLevel(int level);
@@ -77,26 +77,18 @@ public:
 private:
 	void initShaders();
 
+	bool checkCollisionStop() const;
+	bool checkCollisionMove() const;
+
 private:
-	GLfloat currentTime;
-	glm::mat4 projection;
-	ShaderProgram texProgram;
+	GLint state = DEFAULT_STATE;	// { MENU | CONT | CRED | PLAY }
+	GLint level = DEFAULT_LEVEL;	// { LVL1 | LVL2 | LVL3 | LVL4 | LVL5 }
 
-	Texture spritesheetMenu;
-	Texture spritesheetControls;
-	Texture spritesheetCredits;
-	Texture spritesheetSelector;
-
-	Sprite* spriteMenu;
-	Sprite* spriteControls;
-	Sprite* spriteCredits;
-	Sprite* spriteSelector;
-	
-	TileMap* map1;
-	TileMap* map2;
-	TileMap* map3;
-	TileMap* map4;
-	TileMap* map5;
+	TileMap* level1;
+	TileMap* level2;
+	TileMap* level3;
+	TileMap* level4;
+	TileMap* level5;
 
 	Player* player1;
 	Player* player2;
@@ -104,13 +96,26 @@ private:
 	Player* player4;
 	Player* player5;
 
-	Texture spritesheetRock;
+	Sprite* spriteMenu;
+	Sprite* spriteControls;
+	Sprite* spriteCredits;
+	Sprite* spriteSelector;
 
 	Sprite* spriteRock;
+	Sprite* spriteWall;
 
-	GLint state = DEFAULT_STATE;	// { MENU | CONT | CRED | PLAY }
-	GLint level = DEFAULT_LEVEL;	// { LVL1 | LVL2 | LVL3 | LVL4 | LVL5 }
+	Texture spritesheetMenu;
+	Texture spritesheetControls;
+	Texture spritesheetCredits;
+	Texture spritesheetSelector;
 
+	Texture spritesheetRock;
+	Texture spritesheetWall;
+
+	GLfloat currentTime;
+	ShaderProgram texProgram;
+	
+	glm::mat4 projection;
 	glm::vec2 selectorPos = glm::vec2(480.f / 7.f, 235.f);
 };
 

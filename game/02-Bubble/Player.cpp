@@ -11,12 +11,6 @@
 #define FALL_STEP 4
 
 
-enum PlayerAnims
-{
-	MOVE_FORWARD, MOVE_RIGHT, MOVE_LEFT, MOVE_BACKWARD
-};
-
-
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
@@ -137,7 +131,7 @@ void Player::update(int deltaTime)
 		Game::instance().specialKeyReleased(GLUT_KEY_DOWN);
 	}
 	
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+	this->sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
 
@@ -145,6 +139,18 @@ void Player::render()
 {
 	this->sprite->render();
 }
+
+
+int Player::getAnimation() const
+{
+	return this->sprite->animation();
+}
+
+glm::ivec2 Player::getPosition() const
+{
+	return this->posPlayer;
+}
+
 
 void Player::setTileMap(TileMap *tileMap)
 {
