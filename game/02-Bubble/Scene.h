@@ -20,8 +20,8 @@ const int LVL3 = 3;
 const int LVL4 = 4;
 const int LVL5 = 5;
 
-const int DEFAULT_STATE = PLAY;
-const int DEFAULT_LEVEL = LVL2;
+const int DEFAULT_STATE = MENU;
+const int DEFAULT_LEVEL = LVL1;
 
 const string PATH_LVL1 = "levels/level01.txt";
 const string PATH_LVL2 = "levels/level02.txt";

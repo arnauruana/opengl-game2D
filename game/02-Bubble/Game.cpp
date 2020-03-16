@@ -54,15 +54,15 @@ void Game::specialKeyReleased(int key)
 	specialKeys[key] = false;
 }
 
-void Game::mouseMove(int x, int y)
+void Game::mouseMoved(int x, int y)
 {
 }
 
-void Game::mousePress(int button)
+void Game::mousePressed(int button)
 {
 }
 
-void Game::mouseRelease(int button)
+void Game::mouseReleased(int button)
 {
 }
 

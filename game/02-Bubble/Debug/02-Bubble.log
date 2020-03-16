@@ -1,2 +1,6 @@
-﻿  Scene.cpp
+﻿  Game.cpp
+  Player.cpp
+  Scene.cpp
+  main.cpp
+  Generating Code...
   02-Bubble.vcxproj -> C:\Users\arnau\Documents\GitHub\opengl-game2D\game\Debug\02-Bubble.exe

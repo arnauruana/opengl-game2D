@@ -9,13 +9,19 @@
 #define SCREEN_HEIGHT 480
 
 
-// Game is a singleton (a class with a single instance) that represents our whole application
-
-
 class Game
 {
+public:
+
+	typedef unsigned int uint;
+
+	static const uint DEFAULT_WINDOW_WIDTH = 480;
+	static const uint DEFAULT_WINDOW_HEIGHT = 480;
+
+	static const uint FPS = 60;
 
 public:
+
 	Game() {}
 	
 	
@@ -35,9 +41,9 @@ public:
 	void keyReleased(int key);
 	void specialKeyPressed(int key);
 	void specialKeyReleased(int key);
-	void mouseMove(int x, int y);
-	void mousePress(int button);
-	void mouseRelease(int button);
+	void mouseMoved(int x, int y);
+	void mousePressed(int button);
+	void mouseReleased(int button);
 	
 	bool getKey(int key) const;
 	bool getSpecialKey(int key) const;
@@ -47,7 +53,6 @@ private:
 	Scene scene;                      // Scene to render
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
-
 };
 
 
