@@ -21,39 +21,56 @@ public:
 	static const uint FPS = 60;
 
 public:
-
-	Game() {}
+		
+	Game();
+	~Game();
 	
-	
-	static Game &instance()
+	static Game& instance()
 	{
-		static Game G;
-	
-		return G;
+		static Game game;
+		return game;
 	}
 	
 	void init();
-	bool update(int deltaTime);
+	bool update(int time);
 	void render();
-	
-	// Input callback methods
+	void resize(int width, int height);
+
+	bool getKey(int key) const;
+	bool getSpecialKey(int key) const;
+
 	void keyPressed(int key);
 	void keyReleased(int key);
 	void specialKeyPressed(int key);
 	void specialKeyReleased(int key);
-	void mouseMoved(int x, int y);
+
 	void mousePressed(int button);
 	void mouseReleased(int button);
-	
-	bool getKey(int key) const;
-	bool getSpecialKey(int key) const;
+	void mouseMoved(int x, int y);
 
 private:
 
-	bool bPlay;                       // Continue to play game?
-	Scene scene;                      // Scene to render
-	bool keys[256], specialKeys[256]; // Store key states so that 
-	                                  // we can have access at any time
+	void toggleFullScreen();
+	void enableFullScreen();
+	void disableFullScreen();
+
+	void saveWindowContext();
+	void restoreWindowContext();
+
+private:
+
+	bool playing;
+
+	bool key[256];
+	bool skey[256];
+
+	bool windowF;
+	uint windowH;
+	uint windowW;
+	uint windowX;
+	uint windowY;
+
+	Scene scene;
 };
 
 

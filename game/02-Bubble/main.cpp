@@ -20,6 +20,7 @@ void idleCallback()
 		{
 			exit(EXIT_SUCCESS);
 		}
+
 		prevTime = currentTime;
 		glutPostRedisplay();
 	}
@@ -28,22 +29,11 @@ void idleCallback()
 void drawCallback()
 {
 	Game::instance().render();
-	glutSwapBuffers();
 }
 
 void resizeCallback(int width, int height)
 {
-	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-
-	if (width < Game::DEFAULT_WINDOW_WIDTH || height < Game::DEFAULT_WINDOW_HEIGHT)
-	{
-		glutReshapeWindow(Game::DEFAULT_WINDOW_WIDTH, Game::DEFAULT_WINDOW_HEIGHT);
-		return;
-	}
-
-	int windowS = width < height ? width : height;
-
-	glutReshapeWindow(windowS, windowS);
+	Game::instance().resize(width, height);
 }
 
 
@@ -97,9 +87,9 @@ inline void initWindow(int argc, char** argv)
 	glutInitWindowSize(Game::DEFAULT_WINDOW_WIDTH, Game::DEFAULT_WINDOW_HEIGHT);
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - Game::DEFAULT_WINDOW_WIDTH) / 2,
 		(glutGet(GLUT_SCREEN_HEIGHT) - Game::DEFAULT_WINDOW_HEIGHT) / 2);
-	glutCreateWindow("Baba Is You");
+	glutCreateWindow("Window is game 'Baba Is You'");
 	
-	glutSetCursor(GLUT_CURSOR_NONE);
+	//glutSetCursor(GLUT_CURSOR_NONE);
 }
 
 inline void initFunctions()
