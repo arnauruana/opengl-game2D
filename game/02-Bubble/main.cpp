@@ -1,14 +1,12 @@
 #include "Game.h"
 
-#include <GL/glut.h>
 #include <GL/glew.h>
-
-#include <iostream>
+#include <GL/glut.h>
 
 
 const float TPF = 1000.f / Game::FPS;
 
-static int prevTime;
+int prevTime;
 
 
 void idleCallback()
@@ -37,9 +35,9 @@ void resizeCallback(int width, int height)
 {
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
-	if (width < SCREEN_WIDTH || height < SCREEN_HEIGHT)
+	if (width < Game::DEFAULT_WINDOW_WIDTH || height < Game::DEFAULT_WINDOW_HEIGHT)
 	{
-		glutReshapeWindow(SCREEN_WIDTH, SCREEN_HEIGHT);
+		glutReshapeWindow(Game::DEFAULT_WINDOW_WIDTH, Game::DEFAULT_WINDOW_HEIGHT);
 		return;
 	}
 
@@ -75,19 +73,13 @@ void mouseCallback(int button, int state, int x, int y)
 	switch (state)
 	{
 	case GLUT_DOWN:
-	{
 		Game::instance().mousePressed(button);
 		break;
-	}
 	case GLUT_UP:
-	{
 		Game::instance().mouseReleased(button);
 		break;
-	}
 	default:
-	{
 		exit(EXIT_FAILURE);
-	}
 	}
 }
 
@@ -100,11 +92,14 @@ void motionCallback(int x, int y)
 inline void initWindow(int argc, char** argv)
 {
 	glutInit(&argc, argv);
+
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(Game::DEFAULT_WINDOW_WIDTH, Game::DEFAULT_WINDOW_HEIGHT);
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - Game::DEFAULT_WINDOW_WIDTH) / 2,
 		(glutGet(GLUT_SCREEN_HEIGHT) - Game::DEFAULT_WINDOW_HEIGHT) / 2);
-	glutCreateWindow(argv[0]);
+	glutCreateWindow("Baba Is You");
+	
+	glutSetCursor(GLUT_CURSOR_NONE);
 }
 
 inline void initFunctions()
@@ -159,4 +154,3 @@ int main(int argc, char** argv)
 
 	return EXIT_SUCCESS;
 }
-
