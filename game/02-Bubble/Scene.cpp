@@ -1,12 +1,12 @@
-#include <iostream>
 #include <cmath>
+#include <iostream>
+
+#include <GL/glew.h>
+#include <GL/glut.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Scene.h"
 #include "Game.h"
-
-#include <GL/glew.h>
-#include <GL/glut.h>
 
 
 #define KEY_RETURN 13
