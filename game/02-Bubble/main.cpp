@@ -84,10 +84,10 @@ inline void initWindow(int argc, char** argv)
 	glutInit(&argc, argv);
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(Game::DEFAULT_WINDOW_WIDTH, Game::DEFAULT_WINDOW_HEIGHT);
-	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - Game::DEFAULT_WINDOW_WIDTH) / 2,
-		(glutGet(GLUT_SCREEN_HEIGHT) - Game::DEFAULT_WINDOW_HEIGHT) / 2);
-	glutCreateWindow("Window is game 'Baba Is You'");
+	glutInitWindowSize(Game::GAME_WINDOW_WIDTH, Game::GAME_WINDOW_HEIGHT);
+	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - Game::GAME_WINDOW_WIDTH) / 2,
+		(glutGet(GLUT_SCREEN_HEIGHT) - Game::GAME_WINDOW_HEIGHT) / 2);
+	glutCreateWindow("WINDOW IS GAME");
 	
 	//glutSetCursor(GLUT_CURSOR_NONE);
 }
@@ -141,6 +141,4 @@ int main(int argc, char** argv)
 	initGame();
 
 	start();
-
-	return EXIT_SUCCESS;
 }

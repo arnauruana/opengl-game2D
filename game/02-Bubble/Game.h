@@ -15,8 +15,8 @@ public:
 
 	typedef unsigned int uint;
 
-	static const uint DEFAULT_WINDOW_WIDTH = 480;
-	static const uint DEFAULT_WINDOW_HEIGHT = 480;
+	static const uint GAME_WINDOW_WIDTH = 480;
+	static const uint GAME_WINDOW_HEIGHT = 480;
 
 	static const uint FPS = 60;
 
@@ -75,5 +75,3 @@ private:
 
 
 #endif // _GAME_INCLUDE
-
-

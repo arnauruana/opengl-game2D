@@ -47,7 +47,7 @@ void Game::resize(int width, int height)
 	else
 	{
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-		glutReshapeWindow(Game::DEFAULT_WINDOW_WIDTH, Game::DEFAULT_WINDOW_HEIGHT);
+		glutReshapeWindow(Game::GAME_WINDOW_WIDTH, Game::GAME_WINDOW_HEIGHT);
 	}
 }
 
