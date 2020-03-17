@@ -96,7 +96,7 @@ void Scene::init()
 	this->initShaders();
 
 	this->projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
-	
+
 	switch (this->state)
 	{
 	case MENU:
