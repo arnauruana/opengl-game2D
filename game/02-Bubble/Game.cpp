@@ -4,13 +4,20 @@
 #include <GL/glut.h>
 
 
-#define TILE_BAR_WIDTH 8
-#define TILE_BAR_HEIGHT 31
-
-
 Game::Game() {}
 
 Game::~Game() {}
+
+
+bool Game::getKey(int key) const
+{
+	return this->key[key];
+}
+
+bool Game::getSpecialKey(int key) const
+{
+	return this->skey[key];
+}
 
 
 void Game::init()
@@ -52,17 +59,6 @@ void Game::resize(int width, int height)
 }
 
 
-bool Game::getKey(int key) const
-{
-	return this->key[key];
-}
-
-bool Game::getSpecialKey(int key) const
-{
-	return this->skey[key];
-}
-
-
 void Game::keyPressed(int key)
 {
 	this->key[key] = true;
@@ -71,18 +67,22 @@ void Game::keyPressed(int key)
 		this->playing = false;
 
 	// TEMPORARILY
-	if (key == '0') this->scene.setState(MENU);
+	if (key == '0') this->scene.setState(Scene::State::MENU);
 	if (key == '1') this->scene.setLevel(LVL1);
 	if (key == '2') this->scene.setLevel(LVL2);
 	if (key == '3') this->scene.setLevel(LVL3);
 	if (key == '4') this->scene.setLevel(LVL4);
 	if (key == '5') this->scene.setLevel(LVL5);
 	// TEMPORARILY
+
+	keyboard::key[key] = true;
 }
 
 void Game::keyReleased(int key)
 {
 	this->key[key] = false;
+
+	keyboard::key[key] = false;
 }
 
 void Game::specialKeyPressed(int key)
@@ -90,25 +90,22 @@ void Game::specialKeyPressed(int key)
 	this->skey[key] = true;
 
 	if (key == GLUT_KEY_F11) this->toggleFullScreen();
+
+	keyboard::skey[key] = true;
 }
 
 void Game::specialKeyReleased(int key)
 {
 	this->skey[key] = false;
+	keyboard::skey[key] = false;
 }
 
 
-void Game::mousePressed(int button)
-{
-}
+void Game::mousePressed(int button) {}
 
-void Game::mouseReleased(int button)
-{
-}
+void Game::mouseReleased(int button) {}
 
-void Game::mouseMoved(int x, int y)
-{
-}
+void Game::mouseMoved(int x, int y) {}
 
 
 void Game::toggleFullScreen()

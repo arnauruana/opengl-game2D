@@ -31,13 +31,13 @@ public:
 		return game;
 	}
 	
+	bool getKey(int key) const;
+	bool getSpecialKey(int key) const;
+
 	void init();
 	bool update(int time);
 	void render();
 	void resize(int width, int height);
-
-	bool getKey(int key) const;
-	bool getSpecialKey(int key) const;
 
 	void keyPressed(int key);
 	void keyReleased(int key);

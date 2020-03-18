@@ -9,8 +9,6 @@
 #include "Game.h"
 
 
-#define KEY_RETURN 13
-
 #define SCREEN_X 0
 #define SCREEN_Y 0
 
@@ -78,7 +76,7 @@ int Scene::getLevel() const
 }
 
 
-void Scene::setState(int state)
+void Scene::setState(Scene::State state)
 {
 	this->state = state;
 	this->init();
@@ -97,54 +95,26 @@ void Scene::init()
 
 	this->projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 
+	this->menu.setShader(this->texProgram);
+
 	switch (this->state)
 	{
-	case MENU:
-		this->initMenu();
-		break;
-	case CONT:
-		this->initControls();
-		break;
-	case CRED:
-		this->initCredits();
-		break;
-	case PLAY:
-		this->initPlay();
-		break;
-	default:
-		cout << "[SCENE::init] Wrong game state: " << this->state << endl;
-		cin >> this->state; // DEBUG
-		exit(EXIT_FAILURE);
+		case this->State::MENU:
+		{
+			this->menu.init();
+			break;
+		}
+		case this->State::PLAY:
+		{
+			this->initPlay();
+			break;
+		}
+		default:
+		{
+			std::cout << "[SCENE::init] Wrong game state: " << this->state << std::endl;
+			exit(EXIT_FAILURE);
+		}
 	}
-}
-
-void Scene::initMenu()
-{
-	this->spritesheetMenu.loadFromFile("images/menu.jpg", TEXTURE_PIXEL_FORMAT_RGB);
-	this->spriteMenu = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(1.f, 1.f), &this->spritesheetMenu, &this->texProgram);
-	this->spriteMenu->setNumberAnimations(0);
-	this->spriteMenu->setPosition(glm::vec2(0.f, 0.f));
-
-	this->spritesheetSelector.loadFromFile("images/selector.jpg", TEXTURE_PIXEL_FORMAT_RGBA);
-	this->spriteSelector = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH/3 - 30, 36), glm::vec2(1.f, 1.f), &this->spritesheetSelector, &this->texProgram);
-	this->spriteSelector->setNumberAnimations(0);
-	this->spriteSelector->setPosition(this->selectorPos);
-}
-
-void Scene::initControls()
-{
-	this->spritesheetControls.loadFromFile("images/controls.jpg", TEXTURE_PIXEL_FORMAT_RGB);
-	this->spriteControls = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(1.f, 1.f), &this->spritesheetControls, &this->texProgram);
-	this->spriteControls->setNumberAnimations(0);
-	this->spriteControls->setPosition(glm::vec2(0.f, 0.f));
-}
-
-void Scene::initCredits()
-{
-	this->spritesheetCredits.loadFromFile("images/credits.jpg", TEXTURE_PIXEL_FORMAT_RGB);
-	this->spriteCredits = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(1.f, 1.f), &this->spritesheetCredits, &this->texProgram);
-	this->spriteCredits->setNumberAnimations(0);
-	this->spriteCredits->setPosition(glm::vec2(0.f, 0.f));
 }
 
 void Scene::initPlay()
@@ -164,7 +134,7 @@ void Scene::initPlay()
 	case LVL5:
 		break;
 	default:
-		cout << "[SCENE::initPlay] Wrong game level: " << this->level << endl;
+		std::cout << "[SCENE::initPlay] Wrong game level: " << this->level << std::endl;
 		cin >> this->level; // DEBUG
 		exit(EXIT_FAILURE);
 	}
@@ -207,131 +177,25 @@ void Scene::initLevel2()
 
 void Scene::update(int deltaTime)
 {
+	if (Settings::playing && this->state != this->State::PLAY)
+	{
+		this->state = this->State::PLAY;
+		this->init();
+	}
+
 	this->currentTime += deltaTime;
 
 	switch (this->state)
 	{
 	case MENU:
-		this->updateMenu(deltaTime);
-		break;
-	case CONT:
-		this->updateControls(deltaTime);
-		break;
-	case CRED:
-		this->updateCredits(deltaTime);
+		this->menu.update(deltaTime);
 		break;
 	case PLAY:
 		this->updatePlay(deltaTime);
 		break;
 	default:
-		cout << "[SCENE::update] Wrong game state: " << this->state << endl;
-		cin >> this->state; // DEBUG
+		std::cout << "[SCENE::update] Wrong game state: " << this->state << std::endl;
 		exit(EXIT_FAILURE);
-	}
-}
-
-void Scene::updateMenu(int deltaTime)
-{
-	this->spriteMenu->update(deltaTime);
-
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP))
-	{
-		this->selectorPos = this->spriteSelector->getPosition();
-
-		int posY = int(this->selectorPos.y);
-		switch (posY)
-		{
-		case 235:
-			this->selectorPos.y = 325.f;
-			break;
-		case 280:
-			this->selectorPos.y = 235.f;
-			break;
-		case 325:
-			this->selectorPos.y = 280.f;
-			break;
-		default:
-			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
-			cin >> posY; // DEBUG
-			exit(EXIT_FAILURE);
-		}
-		this->spriteSelector->setPosition(this->selectorPos);
-
-		Game::instance().specialKeyReleased(GLUT_KEY_UP);
-	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN))
-	{
-		this->selectorPos = this->spriteSelector->getPosition();
-
-		int posY = int(this->selectorPos.y);
-		switch (posY)
-		{
-		case 235:
-			this->selectorPos.y = 280.f;
-			break;
-		case 280:
-			this->selectorPos.y = 325.f;
-			break;
-		case 325:
-			this->selectorPos.y = 235.f;
-			break;
-		default:
-			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
-			cin >> posY; // DEBUG
-			exit(EXIT_FAILURE);
-		}
-		this->spriteSelector->setPosition(this->selectorPos);
-
-		Game::instance().specialKeyReleased(GLUT_KEY_DOWN);
-	}
-	else if (Game::instance().getKey(KEY_RETURN))
-	{
-		this->selectorPos = this->spriteSelector->getPosition();
-
-		int posY = int(this->selectorPos.y);
-		switch (posY)
-		{
-		case 235:
-			this->selectorPos.y = 235.f;
-			this->state = PLAY;
-			break;
-		case 280:
-			this->selectorPos.y = 280.f;
-			this->state = CONT;
-			break;
-		case 325:
-			this->selectorPos.y = 325.f;
-			this->state = CRED;
-			break;
-		default:
-			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
-			cin >> posY; // DEBUG
-			exit(EXIT_FAILURE);
-		}
-		
-		this->init();
-	}
-}
-
-void Scene::updateControls(int deltaTime)
-{
-	this->spriteControls->update(deltaTime);
-
-	if (Game::instance().getKey('B') || Game::instance().getKey('b'))
-	{
-		this->state = MENU;
-		this->init();
-	}
-}
-
-void Scene::updateCredits(int deltaTime)
-{
-	this->spriteCredits->update(deltaTime);
-
-	if (Game::instance().getKey('B') || Game::instance().getKey('b'))
-	{
-		this->state = MENU;
-		this->init();
 	}
 }
 
@@ -352,7 +216,7 @@ void Scene::updatePlay(int deltaTime)
 	case LVL5:
 		break;
 	default:
-		cout << "[SCENE::updatePlay] Wrong game level: " << this->level << endl;
+		std::cout << "[SCENE::updatePlay] Wrong game level: " << this->level << std::endl;
 		cin >> this->level; // DEBUG
 		exit(EXIT_FAILURE);
 	}
@@ -415,39 +279,17 @@ void Scene::render()
 	switch (this->state)
 	{
 	case MENU:
-		this->renderMenu();
-		break;
-	case CONT:
-		this->renderControls();
-		break;
-	case CRED:
-		this->renderCredits();
+		this->menu.render();
 		break;
 	case PLAY:
 		this->renderPlay();
 		break;
 	default:
-		cout << "[SCENE::render] Wrong game state: " << this->state << endl;
-		cin >> this->state; // DEBUG
+		std::cout << "[SCENE::render] Wrong game state: " << this->state << std::endl;
 		exit(EXIT_FAILURE);
 	}
 }
 
-void Scene::renderMenu()
-{
-	this->spriteMenu->render();
-	this->spriteSelector->render();
-}
-
-void Scene::renderControls()
-{
-	this->spriteControls->render();
-}
-
-void Scene::renderCredits()
-{
-	this->spriteCredits->render();
-}
 
 void Scene::renderPlay()
 {
@@ -466,7 +308,7 @@ void Scene::renderPlay()
 	case LVL5:
 		break;
 	default:
-		cout << "[SCENE::renderPlay] Wrong game level: " << this->level << endl;
+		std::cout << "[SCENE::renderPlay] Wrong game level: " << this->level << std::endl;
 		cin >> this->level; // DEBUG
 		exit(EXIT_FAILURE);
 	}
@@ -500,14 +342,14 @@ void Scene::initShaders()
 	vShader.initFromFile(VERTEX_SHADER, "shaders/texture.vert");
 	if (!vShader.isCompiled())
 	{
-		cout << "Vertex Shader Error" << endl;
-		cout << "" << vShader.log() << endl << endl;
+		std::cout << "Vertex Shader Error" << std::endl;
+		std::cout << "" << vShader.log() << std::endl << std::endl;
 	}
 	fShader.initFromFile(FRAGMENT_SHADER, "shaders/texture.frag");
 	if (!fShader.isCompiled())
 	{
-		cout << "Fragment Shader Error" << endl;
-		cout << "" << fShader.log() << endl << endl;
+		std::cout << "Fragment Shader Error" << std::endl;
+		std::cout << "" << fShader.log() << std::endl << std::endl;
 	}
 	texProgram.init();
 	texProgram.addShader(vShader);
@@ -515,8 +357,8 @@ void Scene::initShaders()
 	texProgram.link();
 	if (!texProgram.isLinked())
 	{
-		cout << "Shader Linking Error" << endl;
-		cout << "" << texProgram.log() << endl << endl;
+		std::cout << "Shader Linking Error" << std::endl;
+		std::cout << "" << texProgram.log() << std::endl << std::endl;
 	}
 	texProgram.bindFragmentOutput("outColor");
 	vShader.free();

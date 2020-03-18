@@ -7,12 +7,11 @@
 #include "ShaderProgram.h"
 #include "TileMap.h"
 #include "Player.h"
+#include "Menu.h"
 
 
 const int MENU = 1;
-const int CONT = 2;
-const int CRED = 3;
-const int PLAY = 4;
+const int PLAY = 2;
 
 const int LVL1 = 1;
 const int LVL2 = 2;
@@ -20,7 +19,7 @@ const int LVL3 = 3;
 const int LVL4 = 4;
 const int LVL5 = 5;
 
-const int DEFAULT_STATE = MENU;
+const int DEFAULT_STATE = PLAY;
 const int DEFAULT_LEVEL = LVL1;
 
 const string PATH_LVL1 = "levels/level01.txt";
@@ -30,37 +29,26 @@ const string PATH_LVL4 = "levels/level04.txt";
 const string PATH_LVL5 = "levels/level05.txt";
 
 
-// Scene contains all the entities of our game.
-// It is responsible for updating and render them.
-
-
 class Scene
 {
 public:
+
+	static enum State { MENU, PLAY };
+
+public:
+
 	Scene();
 	~Scene();
 
 	int getState() const;
 	int getLevel() const;
 
-	void setState(int state);
+	void setState(State state);
 	void setLevel(int level);
 
 	void init();
 	void update(int deltaTime);
 	void render();
-	
-	void initMenu();
-	void updateMenu(int deltaTime);
-	void renderMenu();
-	
-	void initControls();
-	void updateControls(int deltaTime);
-	void renderControls();
-
-	void initCredits();
-	void updateCredits(int deltaTime);
-	void renderCredits();
 
 	void initPlay();
 	void updatePlay(int deltaTime);
@@ -75,14 +63,17 @@ public:
 	void renderLevel2();
 
 private:
+
 	void initShaders();
 
 	bool checkCollisionStop() const;
 	bool checkCollisionMove() const;
 
 private:
-	GLint state = DEFAULT_STATE;	// { MENU | CONT | CRED | PLAY }
-	GLint level = DEFAULT_LEVEL;	// { LVL1 | LVL2 | LVL3 | LVL4 | LVL5 }
+
+	Scene::State state = this->State::MENU;
+
+	GLint level = DEFAULT_LEVEL;
 
 	TileMap* level1;
 	TileMap* level2;
@@ -117,6 +108,8 @@ private:
 	
 	glm::mat4 projection;
 	glm::vec2 selectorPos = glm::vec2(480.f / 7.f, 235.f);
+
+	Menu menu;
 };
 
 
