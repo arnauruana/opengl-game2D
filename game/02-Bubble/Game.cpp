@@ -63,11 +63,10 @@ void Game::keyPressed(int key)
 {
 	this->key[key] = true;
 
-	if(key == 27) // Escape code
-		this->playing = false;
+	if(key == KEY_SCAPE) this->playing = false;
 
 	// TEMPORARILY
-	if (key == '0') this->scene.setState(Scene::State::MENU);
+	if (key == '0') { this->scene.setState(Scene::State::MENU); Settings::playing = false; }
 	if (key == '1') this->scene.setLevel(LVL1);
 	if (key == '2') this->scene.setLevel(LVL2);
 	if (key == '3') this->scene.setLevel(LVL3);

@@ -33,7 +33,7 @@ class Scene
 {
 public:
 
-	static enum State { MENU, PLAY };
+	enum State { MENU, PLAY };
 
 public:
 
@@ -71,7 +71,7 @@ private:
 
 private:
 
-	Scene::State state = this->State::MENU;
+	Scene::State state = Scene::State::MENU;
 
 	GLint level = DEFAULT_LEVEL;
 
@@ -107,7 +107,6 @@ private:
 	ShaderProgram texProgram;
 	
 	glm::mat4 projection;
-	glm::vec2 selectorPos = glm::vec2(480.f / 7.f, 235.f);
 
 	Menu menu;
 };

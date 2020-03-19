@@ -15,12 +15,12 @@ class Menu
 {
 public:
 
+	enum State { MENU, CONT, CRED };
+
 	inline static const std::string PATH_MENU = Settings::PATH_IMG_MENU + Settings::IMG_MENU;
 	inline static const std::string PATH_SELE = Settings::PATH_IMG_MENU + Settings::IMG_SELE;
 	inline static const std::string PATH_CONT = Settings::PATH_IMG_MENU + Settings::IMG_CONT;
 	inline static const std::string PATH_CRED = Settings::PATH_IMG_MENU + Settings::IMG_CRED;
-
-	inline static enum State { MENU, CONT, CRED };
 
 public:
 
@@ -50,7 +50,7 @@ private:
 
 private:
 
-	Menu::State state = this->State::MENU;
+	Menu::State state = Menu::State::MENU;
 
 	Sprite* spriteMenu;
 	Sprite* spriteSelector;

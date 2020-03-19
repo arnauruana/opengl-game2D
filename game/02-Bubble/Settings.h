@@ -6,6 +6,7 @@
 
 
 #define KEY_RETURN 13
+#define KEY_SCAPE 27
 
 #define TILE_BAR_WIDTH 8
 #define TILE_BAR_HEIGHT 31
@@ -25,7 +26,7 @@ struct Settings
 	inline static const std::string IMG_CONT = "controls.jpg";
 	inline static const std::string IMG_CRED = "credits.jpg";
 
-	inline static enum Format { RGB, RGBA };
+	enum Format { RGB, RGBA };
 
 	inline static const Format FORMAT_MENU = Format::RGB;
 	inline static const Format FORMAT_SELE = Format::RGBA;
