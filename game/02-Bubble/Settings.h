@@ -19,8 +19,7 @@ struct Settings
 	inline static const int GAME_WINDOW_WIDTH = 480;
 	inline static const int GAME_WINDOW_HEIGHT = 480;
 
-	inline static const std::string PATH_IMG_MENU = "images/menu/";
-
+	inline static const std::string PATH_MENU = "images/menu/";
 	inline static const std::string IMG_MENU = "menu.jpg";
 	inline static const std::string IMG_SELE = "selector.jpg";
 	inline static const std::string IMG_CONT = "controls.jpg";

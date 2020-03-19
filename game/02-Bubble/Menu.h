@@ -17,10 +17,10 @@ public:
 
 	enum State { MENU, CONT, CRED };
 
-	inline static const std::string PATH_MENU = Settings::PATH_IMG_MENU + Settings::IMG_MENU;
-	inline static const std::string PATH_SELE = Settings::PATH_IMG_MENU + Settings::IMG_SELE;
-	inline static const std::string PATH_CONT = Settings::PATH_IMG_MENU + Settings::IMG_CONT;
-	inline static const std::string PATH_CRED = Settings::PATH_IMG_MENU + Settings::IMG_CRED;
+	inline static const std::string PATH_MENU = Settings::PATH_MENU + Settings::IMG_MENU;
+	inline static const std::string PATH_SELE = Settings::PATH_MENU + Settings::IMG_SELE;
+	inline static const std::string PATH_CONT = Settings::PATH_MENU + Settings::IMG_CONT;
+	inline static const std::string PATH_CRED = Settings::PATH_MENU + Settings::IMG_CRED;
 
 public:
 

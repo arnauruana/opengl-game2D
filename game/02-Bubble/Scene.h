@@ -8,6 +8,7 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "Menu.h"
+#include "Object.h"
 
 
 const int MENU = 1;
@@ -87,18 +88,8 @@ private:
 	Player* player4;
 	Player* player5;
 
-	Sprite* spriteMenu;
-	Sprite* spriteControls;
-	Sprite* spriteCredits;
-	Sprite* spriteSelector;
-
 	Sprite* spriteRock;
 	Sprite* spriteWall;
-
-	Texture spritesheetMenu;
-	Texture spritesheetControls;
-	Texture spritesheetCredits;
-	Texture spritesheetSelector;
 
 	Texture spritesheetRock;
 	Texture spritesheetWall;
@@ -109,8 +100,9 @@ private:
 	glm::mat4 projection;
 
 	Menu menu;
+
+	Object rock;
 };
 
 
 #endif // _SCENE_INCLUDE
-

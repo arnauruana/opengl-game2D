@@ -32,11 +32,6 @@ Scene::Scene()
 	this->player4 = NULL;
 	this->player5 = NULL;
 
-	this->spriteMenu = NULL;
-	this->spriteControls = NULL;
-	this->spriteCredits = NULL;
-	this->spriteSelector = NULL;
-
 	this->spriteRock = NULL;
 	this->spriteWall = NULL;
 }
@@ -54,11 +49,6 @@ Scene::~Scene()
 	if (this->player3 != NULL) delete this->player3;
 	if (this->player4 != NULL) delete this->player4;
 	if (this->player5 != NULL) delete this->player5;
-
-	if (this->spriteMenu != NULL) delete this->spriteMenu;
-	if (this->spriteControls != NULL) delete this->spriteControls;
-	if (this->spriteCredits != NULL) delete this->spriteCredits;
-	if (this->spriteSelector != NULL) delete this->spriteSelector;
 
 	if (this->spriteRock != NULL) delete this->spriteRock;
 	if (this->spriteWall != NULL) delete this->spriteWall;
@@ -171,6 +161,11 @@ void Scene::initLevel2()
 	this->player2->setTileMap(this->level2);
 	this->player2->setPosition(glm::vec2(1 * this->level2->getTileSize(), 1 * this->level2->getTileSize()));
 
+	this->rock.setMap(this->level2);
+	this->rock.setShader(this->texProgram);
+	this->rock.setType(Object::Type::ROCK);
+	this->rock.init();
+
 	this->currentTime = 0.0f;
 }
 
@@ -263,6 +258,8 @@ void Scene::updateLevel2(int deltaTime)
 			exit(EXIT_FAILURE);
 		}
 	}
+
+	this->rock.update(deltaTime);
 }
 
 
@@ -289,7 +286,6 @@ void Scene::render()
 		exit(EXIT_FAILURE);
 	}
 }
-
 
 void Scene::renderPlay()
 {
@@ -332,6 +328,8 @@ void Scene::renderLevel2()
 
 	this->texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f); // white => baba
 	this->player2->render();
+
+	this->rock.render();
 }
 
 
