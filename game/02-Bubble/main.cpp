@@ -89,7 +89,7 @@ inline void initWindow(int argc, char** argv)
 		(glutGet(GLUT_SCREEN_HEIGHT) - Game::GAME_WINDOW_HEIGHT) / 2);
 	glutCreateWindow("WINDOW IS GAME");
 	
-	//glutSetCursor(GLUT_CURSOR_NONE);
+	glutSetCursor(GLUT_CURSOR_NONE);
 }
 
 inline void initFunctions()

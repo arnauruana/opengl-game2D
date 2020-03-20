@@ -7,6 +7,7 @@
 #include "ShaderProgram.h"
 #include "TileMap.h"
 #include "Player.h"
+#include "Play.h"
 #include "Menu.h"
 #include "Object.h"
 

@@ -15,7 +15,7 @@ class Menu
 {
 public:
 
-	enum State { MENU, CONT, CRED };
+	enum class State { MENU, CONT, CRED };
 
 	inline static const std::string PATH_MENU = Settings::PATH_MENU + Settings::IMG_MENU;
 	inline static const std::string PATH_SELE = Settings::PATH_MENU + Settings::IMG_SELE;

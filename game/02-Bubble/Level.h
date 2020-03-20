@@ -17,6 +17,10 @@ public:
 
 	void setShader(const ShaderProgram& shader);
 
+	void init();
+	void update(int deltaTime);
+	void render();
+
 private:
 
 	TileMap* map;

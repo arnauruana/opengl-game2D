@@ -32,24 +32,24 @@ void Menu::init()
 {
 	switch (this->state)
 	{
-		case this->State::MENU:
+		case Menu::State::MENU:
 		{
 			this->initMenu();
 			break;
 		}
-		case this->State::CONT:
+		case Menu::State::CONT:
 		{
 			this->initControls();
 			break;
 		}
-		case this->State::CRED:
+		case Menu::State::CRED:
 		{
 			this->initCredits();
 			break;
 		}
 		default:
 		{
-			cout << "[MENU::init] Wrong menu state: " << this->state << endl;
+			cout << "[MENU::init] wrong menu state: " << endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -59,24 +59,24 @@ void Menu::update(int deltaTime)
 {
 	switch (this->state)
 	{
-		case this->State::MENU:
+		case Menu::State::MENU:
 		{
 			this->updateMenu(deltaTime);
 			break;
 		}
-		case this->State::CONT:
+		case Menu::State::CONT:
 		{
 			this->updateControls(deltaTime);
 			break;
 		}
-		case this->State::CRED:
+		case Menu::State::CRED:
 		{
 			this->updateCredits(deltaTime);
 			break;
 		}
 		default:
 		{
-			cout << "[MENU::update] Wrong menu state: " << this->state << endl;
+			cout << "[MENU::update] wrong menu state: " <<  endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -86,24 +86,24 @@ void Menu::render()
 {
 	switch (this->state)
 	{
-		case this->State::MENU:
+		case Menu::State::MENU:
 		{
 			this->renderMenu();
 			break;
 		}
-		case this->State::CONT:
+		case Menu::State::CONT:
 		{
 			this->renderControls();
 			break;
 		}
-		case this->State::CRED:
+		case Menu::State::CRED:
 		{
 			this->renderCredits();
 			break;
 		}
 		default:
 		{
-			cout << "[MENU::render] Wrong menu state: " << this->state << endl;
+			cout << "[MENU::render] wrong menu state: " << endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -206,21 +206,29 @@ void Menu::updateMenu(int deltaTime)
 		int posY = int(this->selectorPos.y);
 		switch (posY)
 		{
-		case 235:
-			this->selectorPos.y = 235.f;
-			Settings::playing = true;
-			break;
-		case 280:
-			this->selectorPos.y = 280.f;
-			this->state = this->State::CONT;
-			break;
-		case 325:
-			this->selectorPos.y = 325.f;
-			this->state = this->State::CRED;
-			break;
-		default:
-			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
-			exit(EXIT_FAILURE);
+			case 235:
+			{
+				this->selectorPos.y = 235.f;
+				Settings::playing = true;
+				break;
+			}
+			case 280:
+			{
+				this->selectorPos.y = 280.f;
+				this->state = Menu::State::CONT;
+				break;
+			}
+			case 325:
+			{
+				this->selectorPos.y = 325.f;
+				this->state = Menu::State::CRED;
+				break;
+			}
+			default:
+			{
+				cout << "[SCENE::updateMenu] wrong selector position: " << posY << endl;
+				exit(EXIT_FAILURE);
+			}
 		}
 
 		this->init();
@@ -233,7 +241,7 @@ void Menu::updateControls(int deltaTime)
 
 	if (keyboard::key['B'] || keyboard::key['b'])
 	{
-		this->state = this->State::MENU;
+		this->state = Menu::State::MENU;
 		this->init();
 	}
 }
@@ -244,7 +252,7 @@ void Menu::updateCredits(int deltaTime)
 
 	if (keyboard::key['B'] || keyboard::key['b'])
 	{
-		this->state = this->State::MENU;
+		this->state = Menu::State::MENU;
 		this->init();
 	}
 }

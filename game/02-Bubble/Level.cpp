@@ -18,3 +18,19 @@ void Level::setShader(const ShaderProgram& shader)
 {
 	this->shader = shader;
 }
+
+
+void Level::init()
+{
+
+}
+
+void Level::update(int deltaTime)
+{
+
+}
+
+void Level::render()
+{
+
+}
