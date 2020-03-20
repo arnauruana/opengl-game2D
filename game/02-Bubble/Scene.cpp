@@ -163,7 +163,7 @@ void Scene::initLevel2()
 
 	this->rock.setMap(this->level2);
 	this->rock.setShader(this->texProgram);
-	this->rock.setType(Object::Type::ROCK);
+	this->rock.setType(Object::Type::FLAG);
 	this->rock.init();
 
 	this->currentTime = 0.0f;
@@ -259,7 +259,42 @@ void Scene::updateLevel2(int deltaTime)
 		}
 	}
 
+	posRock = this->rock.getPosition();
+
 	this->rock.update(deltaTime);
+
+	if (posPlayer.x == posRock.x && posPlayer.y == posRock.y)
+	{
+		if (this->rock.getBehaviour() == Object::Behaviour::PUSH)
+		{
+			int orientation = this->player2->getAnimation();
+
+			switch (orientation)
+			{
+			case 0: // FORWARD
+				this->rock.setPosition(glm::ivec2(posRock.x, posRock.y + 24));
+				break;
+			case 1: // RIGHT
+				this->rock.setPosition(glm::ivec2(posRock.x + 24, posRock.y));
+				break;
+			case 2: // LEFT
+				this->rock.setPosition(glm::ivec2(posRock.x - 24, posRock.y));
+				break;
+			case 3: // BACKWARD
+				this->rock.setPosition(glm::ivec2(posRock.x, posRock.y - 24));
+				break;
+			default:
+				exit(EXIT_FAILURE);
+			}
+		}
+
+		if (this->rock.getBehaviour() == Object::Behaviour::WIN)
+		{
+			Settings::playing = false;
+			this->state = MENU;
+			this->init();
+		}
+	}
 }
 
 
