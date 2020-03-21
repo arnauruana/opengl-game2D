@@ -24,11 +24,6 @@ void Object::setBehaviour(Object::Behaviour behaviour)
 	this->behaviour = behaviour;
 }
 
-void Object::setMap(TileMap* map)
-{
-	this->map = map;
-}
-
 void Object::setPosition(const glm::vec2& position)
 {
 	this->sprite->setPosition(position);
@@ -53,7 +48,7 @@ void Object::setType(Object::Type type)
 			this->color = glm::vec3(1.f, 1.f, 0.f);
 			break;
 		}
-		case Object::Type::FLOOR:
+		case Object::Type::WALL:
 		{
 			this->path += Settings::IMG_FLOOR;
 			this->format = Settings::FORMAT_FLOOR;

@@ -18,8 +18,8 @@ public:
 	enum class Type
 	{
 		FLAG,
-		FLOOR,
 		ROCK,
+		WALL,
 	};
 
 	enum class Behaviour
@@ -40,7 +40,6 @@ public:
 	glm::ivec2 getPosition();
 
 	void setBehaviour(Object::Behaviour behaviour);
-	void setMap(TileMap* map);
 	void setPosition(const glm::vec2& position);
 	void setShader(const ShaderProgram& shader);
 	void setType(Object::Type type);
@@ -60,8 +59,6 @@ private:
 	Object::Behaviour behaviour;
 
 	glm::vec3 color;
-
-	TileMap* map;
 
 	Sprite* sprite;
 	Texture texture;

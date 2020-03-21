@@ -56,10 +56,6 @@ public:
 	void updatePlay(int deltaTime);
 	void renderPlay();
 
-	void initLevel1();
-	void updateLevel1(int deltaTime);
-	void renderLevel1();
-
 	void initLevel2();
 	void updateLevel2(int deltaTime);
 	void renderLevel2();
@@ -67,9 +63,6 @@ public:
 private:
 
 	void initShaders();
-
-	bool checkCollisionStop() const;
-	bool checkCollisionMove() const;
 
 private:
 
@@ -81,15 +74,6 @@ private:
 
 	Player* player1;
 	Player* player2;
-	Player* player3;
-	Player* player4;
-	Player* player5;
-
-	Sprite* spriteRock;
-	Sprite* spriteWall;
-
-	Texture spritesheetRock;
-	Texture spritesheetWall;
 
 	GLfloat currentTime;
 	ShaderProgram texProgram;

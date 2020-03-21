@@ -1,5 +1,7 @@
 #include "Level.h"
 
+#include <GL/glut.h>
+
 #include <iostream>
 #include <fstream>
 
@@ -23,15 +25,111 @@ void Level::setShader(const ShaderProgram& shader)
 
 void Level::init()
 {
+	glutSetWindowTitle("WINDOW IS LEVEL"); // FIXME
+
+	this->player = new Player();
+	this->player->init(glm::ivec2(0, 0), this->shader);
+	this->player->setPosition(glm::vec2(6 * 24, 9 * 24));
+
 	this->loadObjects();
+}
+
+void collision(Object* object, Player* player)
+{
+	glm::vec2 posObj = object->getPosition();
+	glm::vec2 posPlayer = player->getPosition();
+
+	if (posObj.x == posPlayer.x && posObj.y == posPlayer.y)
+	{
+		switch (object->getBehaviour())
+		{
+			case Object::Behaviour::STOP:
+			{
+				switch (player->getAnimation())
+				{
+					case MOVE_FORWARD:
+					{
+						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+						break;
+					}
+					case MOVE_BACKWARD:
+					{
+						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
+						break;
+					}
+					case MOVE_RIGHT:
+					{
+						player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+						break;
+					}
+					case MOVE_LEFT:
+					{
+						player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
+						break;
+					}
+					default:
+					{
+						exit(1);
+					}
+				}
+				break;
+			}
+			case Object::Behaviour::PUSH:
+			{
+				switch (player->getAnimation())
+				{
+					case MOVE_FORWARD:
+					{
+						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
+						break;
+					}
+					case MOVE_BACKWARD:
+					{
+						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+						break;
+					}
+					case MOVE_RIGHT:
+					{
+						object->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
+						break;
+					}
+					case MOVE_LEFT:
+					{
+						object->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+						break;
+					}
+					default:
+					{
+						exit(1);
+					}
+				}
+				break;
+			}
+			case Object::Behaviour::WIN:
+			{
+				exit(0);
+			}
+			default:
+			{
+				exit(1);
+			}
+		}
+	}
 }
 
 void Level::update(int deltaTime)
 {
+	this->player->update(deltaTime);
+
 	for (int i = 0; i < objects.size(); ++i)
 	{
 		objects[i]->update(deltaTime);
+		collision(objects[i], player);
 	}
+
+	// COLLISIONS //
+
+
 }
 
 void Level::render()
@@ -40,12 +138,15 @@ void Level::render()
 	{
 		objects[i]->render();
 	}
+
+	this->shader.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f); // white => baba
+	this->player->render();
 }
 
 
 bool Level::loadObjects()
 {
-	ifstream fin("levels/map1.txt");
+	ifstream fin("levels/1.txt");
 
 	if (!fin.is_open())
 	{
@@ -62,39 +163,41 @@ bool Level::loadObjects()
 	int mapWidth, mapHeight;
 	fin >> mapWidth >> mapHeight;
 
-	int sizeSprite, sizeBlock;
-	fin >> sizeSprite >> sizeBlock;
+	int spriteSize;
+	fin >> spriteSize;
 
-	string obj;
-	int i = 0;
+	std::string obj;
 	for (int r = 0; r < mapHeight; ++r)
 	{
 		for (int c = 0; c < mapWidth; ++c)
 		{
-			fin >> obj; cout << obj << endl;
+			fin >> obj;
 
 			if (obj != "none")
 			{
-				objects.push_back(Object::create());
+				Object* object = Object::create();
+				objects.push_back(object);
 
 				if (obj == "rock")
 				{
-					objects[i]->setType(Object::Type::ROCK);
-					objects[i]->setBehaviour(Object::Behaviour::PUSH);
-					objects[i]->setShader(this->shader);
+					object->setType(Object::Type::ROCK);
+					object->setShader(this->shader);
 				}
 
 				if (obj == "flag")
 				{
-					objects[i]->setType(Object::Type::FLAG);
-					objects[i]->setBehaviour(Object::Behaviour::WIN);
-					objects[i]->setShader(this->shader);
+					object->setType(Object::Type::FLAG);
+					object->setShader(this->shader);
 				}
 
-				objects[i]->init();
-				objects[i]->setPosition(glm::vec2(r * sizeSprite, c * sizeSprite));
+				if (obj == "wall")
+				{
+					object->setType(Object::Type::WALL);
+					object->setShader(this->shader);
+				}
 
-				++i;
+				object->init();
+				object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
 			}
 		}
 	}
