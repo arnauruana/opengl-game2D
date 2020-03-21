@@ -21,6 +21,11 @@ public:
 	void update(int deltaTime);
 	void render();
 
+public:
+
+	bool loadMap();
+
+
 private:
 
 	TileMap* map;
