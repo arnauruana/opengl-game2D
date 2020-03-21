@@ -5,11 +5,11 @@
 #include <glm/glm.hpp>
 
 #include "ShaderProgram.h"
-#include "TileMap.h"
 #include "Player.h"
+#include "TileMap.h"
 #include "Play.h"
 #include "Menu.h"
-#include "Object.h"
+#include "Level.h"
 
 
 const int MENU = 1;
@@ -78,10 +78,6 @@ private:
 	GLint level = DEFAULT_LEVEL;
 
 	TileMap* level1;
-	TileMap* level2;
-	TileMap* level3;
-	TileMap* level4;
-	TileMap* level5;
 
 	Player* player1;
 	Player* player2;
@@ -102,7 +98,7 @@ private:
 
 	Menu menu;
 
-	Object rock;
+	Level map;
 };
 
 

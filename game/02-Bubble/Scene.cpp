@@ -7,6 +7,7 @@
 
 #include "Scene.h"
 #include "Game.h"
+#include "Object.h"
 
 
 #define SCREEN_X 0
@@ -17,14 +18,10 @@
 #define MOVE_LEFT 2;
 #define MOVE_BACKWARD 3;
 
-
+Object* object = Object::create();
 Scene::Scene()
 {
 	this->level1 = NULL;
-	this->level2 = NULL;
-	this->level3 = NULL;
-	this->level4 = NULL;
-	this->level5 = NULL;
 
 	this->player1 = NULL;
 	this->player2 = NULL;
@@ -39,10 +36,6 @@ Scene::Scene()
 Scene::~Scene()
 {
 	if (this->level1 != NULL) delete this->level1;
-	if (this->level2 != NULL) delete this->level2;
-	if (this->level3 != NULL) delete this->level3;
-	if (this->level4 != NULL) delete this->level4;
-	if (this->level5 != NULL) delete this->level5;
 
 	if (this->player1 != NULL) delete this->player1;
 	if (this->player2 != NULL) delete this->player2;
@@ -136,7 +129,6 @@ void Scene::initLevel1()
 	
 	this->player1 = new Player();
 	this->player1->init(glm::ivec2(SCREEN_X, SCREEN_Y), this->texProgram);
-	this->player1->setTileMap(this->level1);
 	this->player1->setPosition(glm::vec2(1 * this->level1->getTileSize(), 1 * this->level1->getTileSize()));
 
 	this->currentTime = 0.0f;
@@ -144,27 +136,26 @@ void Scene::initLevel1()
 
 void Scene::initLevel2()
 {
-	this->level2 = TileMap::createTileMap(PATH_LVL2, glm::vec2(SCREEN_X, SCREEN_Y), this->texProgram);
-
 	this->spritesheetRock.loadFromFile("images/rock.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	this->spriteRock = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1.f, 1.f), &this->spritesheetRock, &this->texProgram);
 	this->spriteRock->setNumberAnimations(0);
-	this->spriteRock->setPosition(glm::vec2(9 * this->level2->getTileSize(), 10 * this->level2->getTileSize()));
+	this->spriteRock->setPosition(glm::vec2(9 * 24, 10 * 24));
 
 	this->spritesheetWall.loadFromFile("images/tiles.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	this->spriteWall = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(2.f / 32.f, 2.f / 66.f), &this->spritesheetWall, &this->texProgram);
 	this->spriteWall->setNumberAnimations(0);
-	this->spriteWall->setPosition(glm::vec2(5 * this->level2->getTileSize(), 5 * this->level2->getTileSize()));
+	this->spriteWall->setPosition(glm::vec2(5 * 24, 5 * 24));
 
 	this->player2 = new Player();
 	this->player2->init(glm::ivec2(SCREEN_X, SCREEN_Y), this->texProgram);
-	this->player2->setTileMap(this->level2);
-	this->player2->setPosition(glm::vec2(1 * this->level2->getTileSize(), 1 * this->level2->getTileSize()));
+	this->player2->setPosition(glm::vec2(1 * 24, 1 * 24));
 
-	this->rock.setMap(this->level2);
-	this->rock.setShader(this->texProgram);
-	this->rock.setType(Object::Type::FLAG);
-	this->rock.init();
+	this->map.init();
+	object->setType(Object::Type::ROCK);
+	object->setBehaviour(Object::Behaviour::PUSH);
+	object->setShader(this->texProgram);
+	object->init();
+	object->setPosition(glm::vec2(0*24, 0*24));
 
 	this->currentTime = 0.0f;
 }
@@ -259,42 +250,8 @@ void Scene::updateLevel2(int deltaTime)
 		}
 	}
 
-	posRock = this->rock.getPosition();
-
-	this->rock.update(deltaTime);
-
-	if (posPlayer.x == posRock.x && posPlayer.y == posRock.y)
-	{
-		if (this->rock.getBehaviour() == Object::Behaviour::PUSH)
-		{
-			int orientation = this->player2->getAnimation();
-
-			switch (orientation)
-			{
-			case 0: // FORWARD
-				this->rock.setPosition(glm::ivec2(posRock.x, posRock.y + 24));
-				break;
-			case 1: // RIGHT
-				this->rock.setPosition(glm::ivec2(posRock.x + 24, posRock.y));
-				break;
-			case 2: // LEFT
-				this->rock.setPosition(glm::ivec2(posRock.x - 24, posRock.y));
-				break;
-			case 3: // BACKWARD
-				this->rock.setPosition(glm::ivec2(posRock.x, posRock.y - 24));
-				break;
-			default:
-				exit(EXIT_FAILURE);
-			}
-		}
-
-		if (this->rock.getBehaviour() == Object::Behaviour::WIN)
-		{
-			Settings::playing = false;
-			this->state = MENU;
-			this->init();
-		}
-	}
+	map.update(deltaTime);
+	object->update(deltaTime);
 }
 
 
@@ -353,8 +310,6 @@ void Scene::renderLevel1()
 
 void Scene::renderLevel2()
 {
-	this->level2->render();
-
 	this->texProgram.setUniform4f("color", 0.2f, 0.2f, 0.2f, 1.0f); // grey => wall
 	this->spriteWall->render();
 
@@ -364,7 +319,8 @@ void Scene::renderLevel2()
 	this->texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f); // white => baba
 	this->player2->render();
 
-	this->rock.render();
+	this->map.render();
+	//object->render();
 }
 
 

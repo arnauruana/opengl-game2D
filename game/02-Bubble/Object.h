@@ -34,21 +34,25 @@ public:
 
 public:
 
-	Object();
-	~Object();
+	static Object* create();
 
 	Object::Behaviour getBehaviour();
 	glm::ivec2 getPosition();
 
 	void setBehaviour(Object::Behaviour behaviour);
 	void setMap(TileMap* map);
-	void setPosition(const glm::ivec2& position);
+	void setPosition(const glm::vec2& position);
 	void setShader(const ShaderProgram& shader);
 	void setType(Object::Type type);
 
 	void init();
 	void update(int deltaTime);
 	void render();
+
+private:
+
+	Object();
+	~Object();
 
 private:
 

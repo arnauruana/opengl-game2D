@@ -27,17 +27,14 @@ public:
 	glm::ivec2 getPosition() const;
 	int getAnimation() const;
 
-	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 	
 private:
-	bool bJumping;
-	glm::ivec2 tileMapDispl, posPlayer;
-	int jumpAngle, startY;
-	Texture spritesheet;
-	Sprite *sprite;
-	TileMap *map;
 
+	glm::ivec2 tileMapDispl, posPlayer;
+
+	Sprite* sprite;
+	Texture spritesheet;
 };
 
 

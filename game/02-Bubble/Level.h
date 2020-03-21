@@ -2,6 +2,7 @@
 #define _LEVEL_INCLUDE
 
 
+#include "Object.h"
 #include "Player.h";
 #include "TileMap.h"
 
@@ -21,16 +22,14 @@ public:
 	void update(int deltaTime);
 	void render();
 
-public:
+private:
 
-	bool loadMap();
-
+	bool loadObjects();
 
 private:
 
-	TileMap* map;
-
 	Player* player;
+	std::vector<Object*> objects;
 
 	ShaderProgram shader;
 };

@@ -1,14 +1,10 @@
 #include "Object.h"
 
 
-Object::Object()
+Object* Object::create()
 {
-	this->sprite = NULL;
-}
-
-Object::~Object()
-{
-	if (this->sprite != NULL) delete this->sprite;
+	Object* object = new Object();
+	return object;
 }
 
 
@@ -33,7 +29,7 @@ void Object::setMap(TileMap* map)
 	this->map = map;
 }
 
-void Object::setPosition(const glm::ivec2& position)
+void Object::setPosition(const glm::vec2& position)
 {
 	this->sprite->setPosition(position);
 }
@@ -93,7 +89,6 @@ void Object::init()
 	this->sprite->addKeyframe(0, glm::vec2(1.f/3.f, 0.f));
 	this->sprite->addKeyframe(0, glm::vec2(2.f/3.f, 0.f));
 	this->sprite->changeAnimation(0);
-	this->sprite->setPosition(glm::vec2(2 * this->map->getTileSize(), 2 * this->map->getTileSize()));
 }
 
 void Object::update(int deltaTime)
@@ -105,4 +100,15 @@ void Object::render()
 {
 	this->shader.setUniform4f("color", this->color.x, this->color.y, this->color.z, 1.0f);
 	this->sprite->render();
+}
+
+
+Object::Object()
+{
+	this->sprite = NULL;
+}
+
+Object::~Object()
+{
+	if (this->sprite != NULL) delete this->sprite;
 }
