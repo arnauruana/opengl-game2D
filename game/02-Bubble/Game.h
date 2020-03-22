@@ -4,9 +4,7 @@
 
 #include "Scene.h"
 
-
-#define SCREEN_WIDTH  480
-#define SCREEN_HEIGHT 480
+#include <GL/glut.h>
 
 
 class Game

@@ -1,8 +1,5 @@
 #include "Game.h"
 
-#include <GL/glew.h>
-#include <GL/glut.h>
-
 
 const float TPF = 1000.f / Game::FPS;
 

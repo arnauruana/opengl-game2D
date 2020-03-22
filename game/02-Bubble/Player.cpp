@@ -1,14 +1,11 @@
 #include <cmath>
 #include <iostream>
+
 #include <GL/glew.h>
 #include <GL/glut.h>
+
 #include "Player.h"
 #include "Game.h"
-
-
-#define JUMP_ANGLE_STEP 4
-#define JUMP_HEIGHT 96
-#define FALL_STEP 4
 
 
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
@@ -77,7 +74,7 @@ void Player::update(int deltaTime)
 			this->sprite->changeAnimation(MOVE_RIGHT);
 		}
 		
-		if (this->posPlayer.x == SCREEN_WIDTH - 24) return; // not leave the map
+		if (this->posPlayer.x == 480 - 24) return; // not leave the map
 
 		this->posPlayer.x += 24;
 
@@ -103,7 +100,7 @@ void Player::update(int deltaTime)
 			this->sprite->changeAnimation(MOVE_FORWARD);
 		}
 
-		if (this->posPlayer.y == SCREEN_HEIGHT - 24) return; // not leave the map
+		if (this->posPlayer.y == 480 - 24) return; // not leave the map
 		
 		this->posPlayer.y += 24;
 		

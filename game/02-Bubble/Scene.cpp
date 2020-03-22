@@ -1,48 +1,16 @@
-#include <cmath>
-#include <iostream>
-
-#include <GL/glew.h>
-#include <GL/glut.h>
-#include <glm/gtc/matrix_transform.hpp>
-
 #include "Scene.h"
-#include "Game.h"
-
-
-#define SCREEN_X 0
-#define SCREEN_Y 0
-
-#define MOVE_FORWARD 0;
-#define MOVE_RIGHT 1;
-#define MOVE_LEFT 2;
-#define MOVE_BACKWARD 3;
 
 
 Scene::Scene()
 {
-	this->level1 = NULL;
-
 	this->player1 = NULL;
 	this->player2 = NULL;
 }
 
 Scene::~Scene()
 {
-	if (this->level1 != NULL) delete this->level1;
-
 	if (this->player1 != NULL) delete this->player1;
 	if (this->player2 != NULL) delete this->player2;
-}
-
-
-int Scene::getState() const
-{
-	return this->state;
-}
-
-int Scene::getLevel() const
-{
-	return this->level;
 }
 
 
@@ -63,25 +31,25 @@ void Scene::init()
 {
 	this->initShaders();
 
-	this->projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
+	this->projection = glm::ortho(0.f, float(480 - 1), float(480 - 1), 0.f);
 
 	this->menu.setShader(this->texProgram);
 
 	switch (this->state)
 	{
-		case this->State::MENU:
+		case Scene::State::MENU:
 		{
 			this->menu.init();
 			break;
 		}
-		case this->State::PLAY:
+		case Scene::State::PLAY:
 		{
 			this->initPlay();
 			break;
 		}
 		default:
 		{
-			std::cout << "[SCENE::init] Wrong game state: " << this->state << std::endl;
+			std::cout << "[SCENE::init] Wrong game state: " << std::endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -116,9 +84,9 @@ void Scene::initLevel2()
 
 void Scene::update(int deltaTime)
 {
-	if (Settings::playing && this->state != this->State::PLAY)
+	if (Settings::playing && this->state != Scene::State::PLAY)
 	{
-		this->state = this->State::PLAY;
+		this->state = Scene::State::PLAY;
 		this->init();
 	}
 
@@ -126,14 +94,14 @@ void Scene::update(int deltaTime)
 
 	switch (this->state)
 	{
-	case MENU:
+	case Scene::State::MENU:
 		this->menu.update(deltaTime);
 		break;
-	case PLAY:
+	case Scene::State::PLAY:
 		this->updatePlay(deltaTime);
 		break;
 	default:
-		std::cout << "[SCENE::update] Wrong game state: " << this->state << std::endl;
+		std::cout << "[SCENE::update] Wrong game state: " << std::endl;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -174,14 +142,14 @@ void Scene::render()
 
 	switch (this->state)
 	{
-	case MENU:
+	case Scene::State::MENU:
 		this->menu.render();
 		break;
-	case PLAY:
+	case Scene::State::PLAY:
 		this->renderPlay();
 		break;
 	default:
-		std::cout << "[SCENE::render] Wrong game state: " << this->state << std::endl;
+		std::cout << "[SCENE::render] Wrong game state: " << std::endl;
 		exit(EXIT_FAILURE);
 	}
 }
