@@ -19,9 +19,9 @@ bool Game::getSpecialKey(int key) const
 
 void Game::init()
 {
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClearColor(0.165f, 0.14f, 0.14f, 1.0f);
 
-	this->playing = true;
+	this->exit = false;
 	this->windowF = false;
 
 	this->scene.init();
@@ -31,7 +31,7 @@ bool Game::update(int deltaTime)
 {
 	this->scene.update(deltaTime);
 	
-	return this->playing;
+	return !this->exit;
 }
 
 void Game::render()
@@ -62,7 +62,7 @@ void Game::keyPressed(int key)
 {
 	this->key[key] = true;
 
-	if(key == KEY_SCAPE) this->playing = false;
+	if (key == KEY_SCAPE) this->exit = true;
 
 	keyboard::key[key] = true;
 }

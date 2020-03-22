@@ -33,7 +33,7 @@ public:
 	bool getSpecialKey(int key) const;
 
 	void init();
-	bool update(int time);
+	bool update(int deltaTime);
 	void render();
 	void resize(int width, int height);
 
@@ -41,10 +41,6 @@ public:
 	void keyReleased(int key);
 	void specialKeyPressed(int key);
 	void specialKeyReleased(int key);
-
-	void mousePressed(int button);
-	void mouseReleased(int button);
-	void mouseMoved(int x, int y);
 
 private:
 
@@ -57,7 +53,7 @@ private:
 
 private:
 
-	bool playing;
+	bool exit;
 
 	bool key[256];
 	bool skey[256];
