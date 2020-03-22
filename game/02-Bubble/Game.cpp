@@ -62,15 +62,6 @@ void Game::keyPressed(int key)
 
 	if(key == KEY_SCAPE) this->playing = false;
 
-	// TEMPORARILY
-	if (key == '0') { this->scene.setState(Scene::State::MENU); Settings::playing = false; }
-	if (key == '1') this->scene.setLevel(LVL1);
-	if (key == '2') this->scene.setLevel(LVL2);
-	if (key == '3') this->scene.setLevel(LVL3);
-	if (key == '4') this->scene.setLevel(LVL4);
-	if (key == '5') this->scene.setLevel(LVL5);
-	// TEMPORARILY
-
 	keyboard::key[key] = true;
 }
 

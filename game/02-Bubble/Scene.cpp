@@ -1,17 +1,9 @@
 #include "Scene.h"
 
 
-Scene::Scene()
-{
-	this->player1 = NULL;
-	this->player2 = NULL;
-}
+Scene::Scene() {}
 
-Scene::~Scene()
-{
-	if (this->player1 != NULL) delete this->player1;
-	if (this->player2 != NULL) delete this->player2;
-}
+Scene::~Scene() {}
 
 
 void Scene::setState(Scene::State state)
@@ -22,7 +14,6 @@ void Scene::setState(Scene::State state)
 
 void Scene::setLevel(int level)
 {
-	this->level = level;
 	this->init();
 }
 
@@ -33,18 +24,18 @@ void Scene::init()
 
 	this->projection = glm::ortho(0.f, float(480 - 1), float(480 - 1), 0.f);
 
-	this->menu.setShader(this->texProgram);
-
 	switch (this->state)
 	{
 		case Scene::State::MENU:
 		{
+			this->menu.setShader(this->texProgram);
 			this->menu.init();
 			break;
 		}
 		case Scene::State::PLAY:
 		{
-			this->initPlay();
+			this->play.setShader(this->texProgram);
+			this->play.init();
 			break;
 		}
 		default:
@@ -54,33 +45,6 @@ void Scene::init()
 		}
 	}
 }
-
-void Scene::initPlay()
-{
-	switch (this->level)
-	{
-	case LVL1:
-	case LVL2:
-	case LVL3:
-	case LVL4:
-	case LVL5:
-		this->initLevel2();
-		break;
-	default:
-		std::cout << "[SCENE::initPlay] Wrong game level: " << this->level << std::endl;
-		cin >> this->level; // DEBUG
-		exit(EXIT_FAILURE);
-	}
-}
-
-void Scene::initLevel2()
-{
-	this->map.setShader(this->texProgram);
-	this->map.init();
-
-	this->currentTime = 0.0f;
-}
-
 
 void Scene::update(int deltaTime)
 {
@@ -94,41 +58,23 @@ void Scene::update(int deltaTime)
 
 	switch (this->state)
 	{
-	case Scene::State::MENU:
-		this->menu.update(deltaTime);
-		break;
-	case Scene::State::PLAY:
-		this->updatePlay(deltaTime);
-		break;
-	default:
-		std::cout << "[SCENE::update] Wrong game state: " << std::endl;
-		exit(EXIT_FAILURE);
+		case Scene::State::MENU:
+		{
+			this->menu.update(deltaTime);
+			break;
+		}
+		case Scene::State::PLAY:
+		{
+			this->play.update(deltaTime);
+			break;
+		}
+		default:
+		{
+			std::cout << "[SCENE::update] wrong game state: " << std::endl;
+			exit(EXIT_FAILURE);
+		}
 	}
 }
-
-void Scene::updatePlay(int deltaTime)
-{
-	switch (this->level)
-	{
-	case LVL1:
-	case LVL2:
-	case LVL3:
-	case LVL4:
-	case LVL5:
-		this->updateLevel2(deltaTime);
-		break;
-	default:
-		std::cout << "[SCENE::updatePlay] Wrong game level: " << this->level << std::endl;
-		cin >> this->level; // DEBUG
-		exit(EXIT_FAILURE);
-	}
-}
-
-void Scene::updateLevel2(int deltaTime)
-{
-	map.update(deltaTime);
-}
-
 
 void Scene::render()
 {
@@ -146,34 +92,13 @@ void Scene::render()
 		this->menu.render();
 		break;
 	case Scene::State::PLAY:
-		this->renderPlay();
+		this->play.render();
+		//this->renderPlay();
 		break;
 	default:
 		std::cout << "[SCENE::render] Wrong game state: " << std::endl;
 		exit(EXIT_FAILURE);
 	}
-}
-
-void Scene::renderPlay()
-{
-	switch (this->level)
-	{
-	case LVL1:
-	case LVL2:
-	case LVL3:
-	case LVL4:
-	case LVL5:
-		this->renderLevel2();
-		break;
-	default:
-		std::cout << "[SCENE::renderPlay] Wrong game level: " << this->level << std::endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
-void Scene::renderLevel2()
-{
-	this->map.render();
 }
 
 

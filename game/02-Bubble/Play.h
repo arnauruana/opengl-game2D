@@ -3,6 +3,7 @@
 
 
 #include "Level.h"
+//#include "Settings.h"
 
 #include <iostream>
 
@@ -26,7 +27,7 @@ public:
 
 private:
 
-	Play::State state = Play::State::LEVEL1;
+	Play::State state;
 
 	Level level1;
 	Level level2;

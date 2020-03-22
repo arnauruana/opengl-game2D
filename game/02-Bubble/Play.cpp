@@ -14,6 +14,8 @@ void Play::setShader(const ShaderProgram& shader)
 
 void Play::init()
 {
+	this->state = Play::State::LEVEL1;
+
 	switch (this->state)
 	{
 		case Play::State::LEVEL1:
