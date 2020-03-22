@@ -9,9 +9,6 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <cmath>
-#include <iostream>
-
 
 const int MENU = 1;
 const int PLAY = 2;

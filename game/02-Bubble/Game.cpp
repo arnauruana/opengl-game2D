@@ -97,13 +97,6 @@ void Game::specialKeyReleased(int key)
 }
 
 
-void Game::mousePressed(int button) {}
-
-void Game::mouseReleased(int button) {}
-
-void Game::mouseMoved(int x, int y) {}
-
-
 void Game::toggleFullScreen()
 {
 	if (!this->windowF)

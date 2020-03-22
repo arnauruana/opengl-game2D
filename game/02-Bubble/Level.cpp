@@ -25,7 +25,7 @@ void Level::setShader(const ShaderProgram& shader)
 
 void Level::init()
 {
-	glutSetWindowTitle("WINDOW IS LEVEL"); // FIXME
+	glutSetWindowTitle("WINDOW IS GAME");
 
 	this->player = new Player();
 	this->player->init(glm::ivec2(0, 0), this->shader);

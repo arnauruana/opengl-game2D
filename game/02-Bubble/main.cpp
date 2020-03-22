@@ -55,37 +55,15 @@ void specialUpCallback(int key, int x, int y)
 }
 
 
-void mouseCallback(int button, int state, int x, int y)
-{
-	switch (state)
-	{
-	case GLUT_DOWN:
-		Game::instance().mousePressed(button);
-		break;
-	case GLUT_UP:
-		Game::instance().mouseReleased(button);
-		break;
-	default:
-		exit(EXIT_FAILURE);
-	}
-}
-
-void motionCallback(int x, int y)
-{
-	Game::instance().mouseMoved(x, y);
-}
-
-
 inline void initWindow(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(Game::GAME_WINDOW_WIDTH, Game::GAME_WINDOW_HEIGHT);
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - Game::GAME_WINDOW_WIDTH) / 2,
 		(glutGet(GLUT_SCREEN_HEIGHT) - Game::GAME_WINDOW_HEIGHT) / 2);
-	glutCreateWindow("WINDOW IS GAME");
 	
+	glutCreateWindow("");
 	glutSetCursor(GLUT_CURSOR_NONE);
 }
 
@@ -99,10 +77,6 @@ inline void initFunctions()
 	glutKeyboardUpFunc(keyboardUpCallback);
 	glutSpecialFunc(specialDownCallback);
 	glutSpecialUpFunc(specialUpCallback);
-
-	glutMouseFunc(mouseCallback);
-	glutMotionFunc(motionCallback);
-	glutPassiveMotionFunc(motionCallback);
 }
 
 

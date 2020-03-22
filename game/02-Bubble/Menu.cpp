@@ -112,6 +112,8 @@ void Menu::render()
 
 void Menu::initMenu()
 {
+	glutSetWindowTitle("WINDOW IS MENU");
+
 	this->textureMenu.loadFromFile(Menu::PATH_MENU, PixelFormat(Settings::FORMAT_MENU));
 
 	this->spriteMenu = Sprite::createSprite(glm::ivec2(Settings::GAME_WINDOW_WIDTH, Settings::GAME_WINDOW_HEIGHT), glm::vec2(1.f, 1.f), &this->textureMenu, &this->shader);
@@ -132,6 +134,8 @@ void Menu::initSelector()
 
 void Menu::initControls()
 {
+	glutSetWindowTitle("WINDOW IS CONTROLS");
+
 	this->textureControls.loadFromFile(Menu::PATH_CONT, PixelFormat(Settings::FORMAT_CONT));
 	
 	this->spriteControls = Sprite::createSprite(glm::ivec2(Settings::GAME_WINDOW_WIDTH, Settings::GAME_WINDOW_HEIGHT), glm::vec2(1.f, 1.f), &this->textureControls, &this->shader);
@@ -141,6 +145,8 @@ void Menu::initControls()
 
 void Menu::initCredits()
 {
+	glutSetWindowTitle("WINDOW IS CREDITS");
+
 	this->textureCredits.loadFromFile(Menu::PATH_CRED, PixelFormat(Settings::FORMAT_CRED));
 	
 	this->spriteCredits = Sprite::createSprite(glm::ivec2(Settings::GAME_WINDOW_WIDTH, Settings::GAME_WINDOW_HEIGHT), glm::vec2(1.f, 1.f), &this->textureCredits, &this->shader);
