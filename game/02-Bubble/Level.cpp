@@ -178,24 +178,11 @@ bool Level::loadObjects()
 				Object* object = Object::create();
 				objects.push_back(object);
 
-				if (obj == "rock")
-				{
-					object->setType(Object::Type::ROCK);
-					object->setShader(this->shader);
-				}
+				if (obj == "rock") object->setType(Object::Type::ROCK);
+				if (obj == "flag") object->setType(Object::Type::FLAG);
+				if (obj == "wall") object->setType(Object::Type::WALL);
 
-				if (obj == "flag")
-				{
-					object->setType(Object::Type::FLAG);
-					object->setShader(this->shader);
-				}
-
-				if (obj == "wall")
-				{
-					object->setType(Object::Type::WALL);
-					object->setShader(this->shader);
-				}
-
+				object->setShader(this->shader);
 				object->init();
 				object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
 			}

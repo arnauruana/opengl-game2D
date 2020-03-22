@@ -53,7 +53,7 @@ void Object::setType(Object::Type type)
 			this->path += Settings::IMG_FLOOR;
 			this->format = Settings::FORMAT_FLOOR;
 			this->behaviour = Object::Behaviour::STOP;
-			this->color = glm::vec3(0.2f, 0.2f, 0.2f);
+			this->color = glm::vec3(0.3f, 0.3f, 0.3f);
 			break;
 		}
 		case Object::Type::ROCK:
