@@ -5,7 +5,6 @@
 #include "Settings.h"
 #include "ShaderProgram.h"
 #include "Sprite.h"
-#include "TileMap.h"
 #include "Texture.h"
 
 #include <iostream>

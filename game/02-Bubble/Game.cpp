@@ -19,6 +19,8 @@ bool Game::getSpecialKey(int key) const
 
 void Game::init()
 {
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
 	this->playing = true;
 	this->windowF = false;
 
