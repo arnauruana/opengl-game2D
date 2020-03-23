@@ -107,7 +107,8 @@ void collision(Object* object, Player* player)
 			}
 			case Object::Behaviour::WIN:
 			{
-				exit(0);
+				Settings::playing = false; // DEBUG
+				break;
 			}
 			default:
 			{

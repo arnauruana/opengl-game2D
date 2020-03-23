@@ -2,10 +2,8 @@
 #define _SCENE_INCLUDE
 
 
-#include "Level.h"
 #include "Menu.h"
 #include "Play.h"
-#include "Player.h"
 
 
 class Scene
@@ -19,12 +17,21 @@ public:
 	Scene();
 	~Scene();
 
-	void setState(State state);
-	void setLevel(int level);
-
 	void init();
 	void update(int deltaTime);
 	void render();
+
+private:
+
+	inline void updateState();
+
+	inline void initMenu();
+	inline void updateMenu(int deltaTime);
+	inline void renderMenu();
+
+	inline void initPlay();
+	inline void updatePlay(int deltaTime);
+	inline void renderPlay();
 
 private:
 
@@ -32,10 +39,6 @@ private:
 
 	Menu menu;
 	Play play;
-
-	GLfloat currentTime;
-	glm::mat4 projection;
-	ShaderProgram texProgram;
 };
 
 
