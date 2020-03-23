@@ -7,8 +7,6 @@
 #include "Play.h"
 #include "Player.h"
 
-#include <glm/gtc/matrix_transform.hpp>
-
 
 class Scene
 {
@@ -27,10 +25,6 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
-
-private:
-
-	void initShaders();
 
 private:
 

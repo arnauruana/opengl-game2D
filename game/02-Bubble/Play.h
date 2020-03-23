@@ -5,6 +5,8 @@
 #include "Level.h"
 //#include "Settings.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <iostream>
 
 
@@ -19,11 +21,13 @@ public:
 	Play();
 	~Play();
 
-	void setShader(const ShaderProgram& shader);
-
 	void init();
 	void update(int deltaTime);
 	void render();
+
+private:
+
+	void initShader();
 
 private:
 

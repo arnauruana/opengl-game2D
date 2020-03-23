@@ -8,6 +8,8 @@
 #include "Sprite.h"
 #include "Texture.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <string>
 
 
@@ -27,26 +29,27 @@ public:
 	Menu();
 	~Menu();
 
-	void setShader(const ShaderProgram& shader);
-
 	void init();
 	void update(int deltaTime);
 	void render();
 
 private:
 
-	void initMenu();
 	void initSelector();
-	void initControls();
-	void initCredits();
 
+	void initMenu();
 	void updateMenu(int deltaTime);
-	void updateControls(int deltaTime);
-	void updateCredits(int deltaTime);
-
 	void renderMenu();
+	
+	void initControls();
+	void updateControls(int deltaTime);
 	void renderControls();
+
+	void initCredits();
+	void updateCredits(int deltaTime);
 	void renderCredits();
+
+	void initShader();
 
 private:
 
