@@ -82,7 +82,8 @@ inline void Scene::updateState()
 		this->state = Scene::State::PLAY;
 		this->init();
 	}
-	if (!Settings::playing && this->state == Scene::State::PLAY)
+
+	else if (!Settings::playing && this->state == Scene::State::PLAY)
 	{
 		this->state = Scene::State::MENU;
 		this->init();

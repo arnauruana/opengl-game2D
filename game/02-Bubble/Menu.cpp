@@ -1,9 +1,5 @@
 #include "Menu.h"
 
-#include <GL/glut.h>
-
-#include <iostream>
-
 
 Menu::Menu()
 {
@@ -45,7 +41,7 @@ void Menu::init()
 		}
 		default:
 		{
-			cout << "[MENU::init] wrong menu state: " << endl;
+			std::cout << "[MENU::init] wrong menu state: " << std::endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -72,7 +68,7 @@ void Menu::update(int deltaTime)
 		}
 		default:
 		{
-			cout << "[MENU::update] wrong menu state: " <<  endl;
+			std::cerr << "[MENU::update] wrong menu state: " << std::endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -81,11 +77,11 @@ void Menu::update(int deltaTime)
 void Menu::render()
 {
 	glm::mat4 projection = glm::ortho(0.f, float(480 - 1), float(480 - 1), 0.f);
+	glm::mat4 modelview = glm::mat4(1.0f);
+	
 	this->shader.use();
 	this->shader.setUniformMatrix4f("projection", projection);
 	this->shader.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
-
-	glm::mat4 modelview = glm::mat4(1.0f);
 	this->shader.setUniformMatrix4f("modelview", modelview);
 	this->shader.setUniform2f("texCoordDispl", 0.f, 0.f);
 
@@ -108,7 +104,7 @@ void Menu::render()
 		}
 		default:
 		{
-			cout << "[MENU::render] wrong menu state: " << endl;
+			std::cerr << "[MENU::render] wrong menu state: " << endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -180,7 +176,7 @@ void Menu::updateMenu(int deltaTime)
 			this->selectorPos.y = 280.f;
 			break;
 		default:
-			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
+			std::cerr << "[SCENE::updateMenu] wrong selector position: " << std::endl;
 			exit(EXIT_FAILURE);
 		}
 		this->spriteSelector->setPosition(this->selectorPos);
@@ -203,7 +199,7 @@ void Menu::updateMenu(int deltaTime)
 		case 325:
 			break;
 		default:
-			cout << "[SCENE::updateMenu] Wrong selector position: " << posY << endl;
+			std::cerr << "[SCENE::updateMenu] Wrong selector position: " << std::endl;
 			exit(EXIT_FAILURE);
 		}
 		this->spriteSelector->setPosition(this->selectorPos);
@@ -237,7 +233,7 @@ void Menu::updateMenu(int deltaTime)
 			}
 			default:
 			{
-				cout << "[SCENE::updateMenu] wrong selector position: " << posY << endl;
+				std::cerr << "[SCENE::updateMenu] wrong selector position: " << std::endl;
 				exit(EXIT_FAILURE);
 			}
 		}

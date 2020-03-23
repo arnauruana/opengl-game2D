@@ -9,7 +9,9 @@
 #include "Texture.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <GL/glut.h>
 
+#include <iostream>
 #include <string>
 
 
