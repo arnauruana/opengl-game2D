@@ -17,8 +17,25 @@ public:
 	enum class Type
 	{
 		FLAG,
+		LAVA,
 		ROCK,
 		WALL,
+		WATER,
+
+		TXT_BABA,
+		TXT_FLAG,
+		TXT_LAVA,
+		TXT_ROCK,
+		TXT_WALL,
+
+		TXT_IS,
+		TXT_NEAR,
+
+		TXT_PUSH,
+		TXT_STOP,
+		TXT_WATER,
+		TXT_WIN,
+		TXT_YOU,
 	};
 
 	enum class Behaviour

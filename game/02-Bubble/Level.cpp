@@ -81,11 +81,28 @@ bool Level::loadMap()
 				else
 				{
 					Object* object = Object::create();
-					objects.push_back(object);
+					this->objects.push_back(object);
 
-					if (obj == "rock") object->setType(Object::Type::ROCK);
 					if (obj == "flag") object->setType(Object::Type::FLAG);
+					if (obj == "lava") object->setType(Object::Type::LAVA);
+					if (obj == "rock") object->setType(Object::Type::ROCK);
 					if (obj == "wall") object->setType(Object::Type::WALL);
+					if (obj == "water") object->setType(Object::Type::WATER);
+
+					if (obj == "BABA") object->setType(Object::Type::TXT_BABA);
+					if (obj == "FLAG") object->setType(Object::Type::TXT_FLAG);
+					if (obj == "LAVA") object->setType(Object::Type::TXT_LAVA);
+					if (obj == "ROCK") object->setType(Object::Type::TXT_ROCK);
+					if (obj == "WALL") object->setType(Object::Type::TXT_WALL);
+
+					if (obj == "IS") object->setType(Object::Type::TXT_IS);
+					if (obj == "NEAR") object->setType(Object::Type::TXT_NEAR);
+
+					if (obj == "PUSH") object->setType(Object::Type::TXT_PUSH);
+					if (obj == "STOP") object->setType(Object::Type::TXT_STOP);
+					if (obj == "WATER") object->setType(Object::Type::TXT_WATER);
+					if (obj == "WIN") object->setType(Object::Type::TXT_WIN);
+					if (obj == "YOU") object->setType(Object::Type::TXT_YOU);
 
 					object->setShader(this->shader);
 					object->init();

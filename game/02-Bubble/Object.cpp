@@ -50,10 +50,10 @@ void Object::setType(Object::Type type)
 		}
 		case Object::Type::WALL:
 		{
-			this->path += Settings::IMG_FLOOR;
+			this->path += Settings::IMG_WALL;
 			this->format = Settings::FORMAT_FLOOR;
 			this->behaviour = Object::Behaviour::STOP;
-			this->color = glm::vec3(0.3f, 0.3f, 0.3f);
+			this->color = glm::vec3(0.4f, 0.4f, 0.4f);
 			break;
 		}
 		case Object::Type::ROCK:
@@ -62,6 +62,78 @@ void Object::setType(Object::Type type)
 			this->format = Settings::FORMAT_ROCK;
 			this->behaviour = Object::Behaviour::PUSH;
 			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
+			break;
+		}
+		case Object::Type::TXT_BABA:
+		{
+			this->path += Settings::TXT_BABA;
+			this->format = Settings::FORMAT_TXTBABA;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(1.0f, 1.0f, 1.0f);
+			break;
+		}
+		case Object::Type::TXT_ROCK:
+		{
+			this->path += Settings::TXT_ROCK;
+			this->format = Settings::FORMAT_TXTROCK;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
+			break;
+		}
+		case Object::Type::TXT_WALL:
+		{
+			this->path += Settings::TXT_WALL;
+			this->format = Settings::FORMAT_TXTWALL;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(0.4f, 0.4f, 0.4f);
+			break;
+		}
+		case Object::Type::TXT_FLAG:
+		{
+			this->path += Settings::TXT_FLAG;
+			this->format = Settings::FORMAT_TXTFLAG;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(1.f, 1.f, 0.f);
+			break;
+		}
+		case Object::Type::TXT_IS:
+		{
+			this->path += Settings::TXT_IS;
+			this->format = Settings::FORMAT_TXTIS;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(1.0f, 0.0f, 1.0f);
+			break;
+		}
+		case Object::Type::TXT_YOU:
+		{
+			this->path += Settings::TXT_YOU;
+			this->format = Settings::FORMAT_TXTYOU;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(1.0f, 1.0f, 1.0f);
+			break;
+		}
+		case Object::Type::TXT_STOP:
+		{
+			this->path += Settings::TXT_STOP;
+			this->format = Settings::FORMAT_TXTSTOP;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(0.4f, 0.4f, 0.4f);
+			break;
+		}
+		case Object::Type::TXT_PUSH:
+		{
+			this->path += Settings::TXT_PUSH;
+			this->format = Settings::FORMAT_TXTPUSH;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
+			break;
+		}
+		case Object::Type::TXT_WIN:
+		{
+			this->path += Settings::TXT_WIN;
+			this->format = Settings::FORMAT_TXTWIN;
+			this->behaviour = Object::Behaviour::PUSH;
+			this->color = glm::vec3(1.f, 1.f, 0.f);
 			break;
 		}
 		default:
