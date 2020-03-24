@@ -5,6 +5,10 @@
 #include "Object.h"
 #include "Player.h"
 
+#include <GL/glut.h>
+
+#include <iostream>
+#include <fstream>
 #include <vector>
 
 
@@ -23,7 +27,15 @@ public:
 
 private:
 
-	bool loadObjects();
+	bool loadMap();
+
+	void updatePlayer(int deltaTime);
+	void renderPlayer();
+
+	void updateObjects(int deltaTime);
+	void renderObjects();
+
+	void collision(Object* object, Player* player);
 
 private:
 
