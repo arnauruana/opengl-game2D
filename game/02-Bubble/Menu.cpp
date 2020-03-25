@@ -163,7 +163,7 @@ void Menu::updateMenu(int deltaTime)
 	if (keyboard::skey[GLUT_KEY_UP])
 	{
 		this->selectorPos = this->spriteSelector->getPosition();
-
+		Sounds::instance().playSoundEffect("MENU");
 		int posY = int(this->selectorPos.y);
 		switch (posY)
 		{
@@ -186,7 +186,7 @@ void Menu::updateMenu(int deltaTime)
 	else if (keyboard::skey[GLUT_KEY_DOWN])
 	{
 		this->selectorPos = this->spriteSelector->getPosition();
-
+		Sounds::instance().playSoundEffect("MENU");
 		int posY = int(this->selectorPos.y);
 		switch (posY)
 		{

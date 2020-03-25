@@ -7,6 +7,7 @@
 #include "ShaderProgram.h"
 #include "Sprite.h"
 #include "Texture.h"
+#include "Sounds.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glut.h>
