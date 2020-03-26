@@ -16,6 +16,8 @@ public:
 
 	enum class Type
 	{
+		NONE,
+
 		FLAG,
 		LAVA,
 		ROCK,
@@ -27,33 +29,43 @@ public:
 		TXT_LAVA,
 		TXT_ROCK,
 		TXT_WALL,
+		TXT_WATER,
 
 		TXT_IS,
 		TXT_NEAR,
 
+		TXT_DEFEAT,
 		TXT_PUSH,
 		TXT_STOP,
-		TXT_WATER,
 		TXT_WIN,
 		TXT_YOU,
 	};
 
 	enum class Behaviour
 	{
-		KILL,
-		MOVE,
 		NONE,
+
+		DEFEAT,
 		PUSH,
 		STOP,
 		WIN,
+		YOU,
+
+		PRE,
+		OP,
+		POST,
 	};
 
 public:
 
+	Object();
+	~Object();
+
 	static Object* create();
 
-	Object::Behaviour getBehaviour();
-	glm::ivec2 getPosition();
+	Object::Type getType() const;
+	Object::Behaviour getBehaviour() const;
+	glm::ivec2 getPosition() const;
 
 	void setBehaviour(Object::Behaviour behaviour);
 	void setPosition(const glm::vec2& position);
@@ -63,11 +75,6 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
-
-private:
-
-	Object();
-	~Object();
 
 private:
 

@@ -35,7 +35,9 @@ private:
 	void updateObjects(int deltaTime);
 	void renderObjects();
 
+	void assignBehaviours();
 	void collision(Object* object, Player* player);
+	Object* find(int posX, int posY) const;
 
 private:
 

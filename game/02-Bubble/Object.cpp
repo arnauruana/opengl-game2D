@@ -1,6 +1,17 @@
 #include "Object.h"
 
 
+Object::Object()
+{
+	this->sprite = NULL;
+}
+
+Object::~Object()
+{
+	if (this->sprite != NULL) delete this->sprite;
+}
+
+
 Object* Object::create()
 {
 	Object* object = new Object();
@@ -8,12 +19,17 @@ Object* Object::create()
 }
 
 
-Object::Behaviour Object::getBehaviour()
+Object::Type Object::getType() const
+{
+	return this->type;
+}
+
+Object::Behaviour Object::getBehaviour() const
 {
 	return this->behaviour;
 }
 
-glm::ivec2 Object::getPosition()
+glm::ivec2 Object::getPosition() const
 {
 	return this->sprite->getPosition();
 }
@@ -40,11 +56,16 @@ void Object::setType(Object::Type type)
 
 	switch (this->type)
 	{
+		case Object::Type::NONE:
+		{
+			this->behaviour = Object::Behaviour::NONE;
+			break;
+		}
 		case Object::Type::FLAG:
 		{
 			this->path += Settings::IMG_FLAG;
 			this->format = Settings::FORMAT_FLAG;
-			this->behaviour = Object::Behaviour::WIN;
+			this->behaviour = Object::Behaviour::NONE;
 			this->color = glm::vec3(1.f, 1.f, 0.f);
 			break;
 		}
@@ -52,7 +73,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::IMG_WALL;
 			this->format = Settings::FORMAT_FLOOR;
-			this->behaviour = Object::Behaviour::STOP;
+			this->behaviour = Object::Behaviour::NONE;
 			this->color = glm::vec3(0.4f, 0.4f, 0.4f);
 			break;
 		}
@@ -60,7 +81,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::IMG_ROCK;
 			this->format = Settings::FORMAT_ROCK;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::NONE;
 			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
 			break;
 		}
@@ -68,7 +89,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_BABA;
 			this->format = Settings::FORMAT_TXTBABA;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::PRE;
 			this->color = glm::vec3(1.0f, 1.0f, 1.0f);
 			break;
 		}
@@ -76,7 +97,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_ROCK;
 			this->format = Settings::FORMAT_TXTROCK;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::PRE;
 			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
 			break;
 		}
@@ -84,7 +105,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_WALL;
 			this->format = Settings::FORMAT_TXTWALL;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::PRE;
 			this->color = glm::vec3(0.4f, 0.4f, 0.4f);
 			break;
 		}
@@ -92,7 +113,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_FLAG;
 			this->format = Settings::FORMAT_TXTFLAG;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::PRE;
 			this->color = glm::vec3(1.f, 1.f, 0.f);
 			break;
 		}
@@ -100,7 +121,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_IS;
 			this->format = Settings::FORMAT_TXTIS;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::OP;
 			this->color = glm::vec3(1.0f, 0.0f, 1.0f);
 			break;
 		}
@@ -108,7 +129,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_YOU;
 			this->format = Settings::FORMAT_TXTYOU;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::POST;
 			this->color = glm::vec3(1.0f, 1.0f, 1.0f);
 			break;
 		}
@@ -116,7 +137,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_STOP;
 			this->format = Settings::FORMAT_TXTSTOP;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::POST;
 			this->color = glm::vec3(0.4f, 0.4f, 0.4f);
 			break;
 		}
@@ -124,7 +145,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_PUSH;
 			this->format = Settings::FORMAT_TXTPUSH;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::POST;
 			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
 			break;
 		}
@@ -132,7 +153,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_WIN;
 			this->format = Settings::FORMAT_TXTWIN;
-			this->behaviour = Object::Behaviour::PUSH;
+			this->behaviour = Object::Behaviour::POST;
 			this->color = glm::vec3(1.f, 1.f, 0.f);
 			break;
 		}
@@ -167,15 +188,4 @@ void Object::render()
 {
 	this->shader.setUniform4f("color", this->color.x, this->color.y, this->color.z, 1.0f);
 	this->sprite->render();
-}
-
-
-Object::Object()
-{
-	this->sprite = NULL;
-}
-
-Object::~Object()
-{
-	if (this->sprite != NULL) delete this->sprite;
 }
