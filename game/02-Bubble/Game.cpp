@@ -6,17 +6,6 @@ Game::Game() {}
 Game::~Game() {}
 
 
-bool Game::getKey(int key) const
-{
-	return this->key[key];
-}
-
-bool Game::getSpecialKey(int key) const
-{
-	return this->skey[key];
-}
-
-
 void Game::init()
 {
 	glClearColor(0.165f, 0.14f, 0.14f, 1.0f);
@@ -53,44 +42,50 @@ void Game::resize(int width, int height)
 	else
 	{
 		glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-		glutReshapeWindow(Game::GAME_WINDOW_WIDTH, Game::GAME_WINDOW_HEIGHT);
+		glutReshapeWindow(Settings::GAME_WINDOW_WIDTH, Settings::GAME_WINDOW_HEIGHT);
 	}
 }
 
 
 void Game::keyPressed(int key)
 {
-	this->key[key] = true;
-
-	if (key == KEY_SCAPE) this->exit = true;
-
 	keyboard::key[key] = true;
+
+	switch (key)
+	{
+		case KEY_SCAPE:
+		{
+			this->exit = true;
+			break;
+		}
+	}
 }
 
 void Game::keyReleased(int key)
 {
-	this->key[key] = false;
-
 	keyboard::key[key] = false;
 }
 
 void Game::specialKeyPressed(int key)
 {
-	this->skey[key] = true;
-
-	if (key == GLUT_KEY_F11) this->toggleFullScreen();
-
 	keyboard::skey[key] = true;
+
+	switch (key)
+	{
+		case GLUT_KEY_F11:
+		{
+			this->toggleFullScreen();
+		}
+	}
 }
 
 void Game::specialKeyReleased(int key)
 {
-	this->skey[key] = false;
 	keyboard::skey[key] = false;
 }
 
 
-void Game::toggleFullScreen()
+inline void Game::toggleFullScreen()
 {
 	if (!this->windowF)
 	{
@@ -102,7 +97,7 @@ void Game::toggleFullScreen()
 	}
 }
 
-void Game::enableFullScreen()
+inline void Game::enableFullScreen()
 {
 	this->saveWindowContext();
 	this->windowF = true;
@@ -110,13 +105,13 @@ void Game::enableFullScreen()
 	glutFullScreen();
 }
 
-void Game::disableFullScreen()
+inline void Game::disableFullScreen()
 {
 	this->restoreWindowContext();
 	this->windowF = false;
 }
 
-void Game::saveWindowContext()
+inline void Game::saveWindowContext()
 {
 	this->windowX = glutGet(GLUT_WINDOW_X) - TILE_BAR_WIDTH;
 	this->windowY = glutGet(GLUT_WINDOW_Y) - TILE_BAR_HEIGHT;
@@ -125,7 +120,7 @@ void Game::saveWindowContext()
 	this->windowH = glutGet(GLUT_WINDOW_HEIGHT);
 }
 
-void Game::restoreWindowContext()
+inline void Game::restoreWindowContext() const
 {
 	glutPositionWindow(this->windowX, this->windowY);
 	glutReshapeWindow(this->windowW, this->windowH);

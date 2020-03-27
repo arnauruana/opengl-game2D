@@ -4,19 +4,15 @@
 
 #include "Scene.h"
 
-#include <GL/glut.h>
-
 
 class Game
 {
 public:
 
-	typedef unsigned int uint;
+	static const GLuint GAME_WINDOW_WIDTH = 480;
+	static const GLuint GAME_WINDOW_HEIGHT = 480;
 
-	static const uint GAME_WINDOW_WIDTH = 480;
-	static const uint GAME_WINDOW_HEIGHT = 480;
-
-	static const uint FPS = 60;
+	static const GLuint FPS = 60;
 
 public:
 		
@@ -28,9 +24,6 @@ public:
 		static Game game;
 		return game;
 	}
-	
-	bool getKey(int key) const;
-	bool getSpecialKey(int key) const;
 
 	void init();
 	bool update(int deltaTime);
@@ -44,25 +37,22 @@ public:
 
 private:
 
-	void toggleFullScreen();
-	void enableFullScreen();
-	void disableFullScreen();
+	inline void toggleFullScreen();
+	inline void enableFullScreen();
+	inline void disableFullScreen();
 
-	void saveWindowContext();
-	void restoreWindowContext();
+	inline void saveWindowContext();
+	inline void restoreWindowContext() const;
 
 private:
 
-	bool exit;
+	GLboolean exit;
+	GLboolean windowF;
 
-	bool key[256];
-	bool skey[256];
-
-	bool windowF;
-	uint windowH;
-	uint windowW;
-	uint windowX;
-	uint windowY;
+	GLuint windowH;
+	GLuint windowW;
+	GLuint windowX;
+	GLuint windowY;
 
 	Scene scene;
 };
