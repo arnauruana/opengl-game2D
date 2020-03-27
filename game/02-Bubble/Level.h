@@ -40,6 +40,8 @@ private:
 	Object* find(int posX, int posY) const;
 
 private:
+	
+	bool updateBehaviour = false;
 
 	Player* player;
 	std::vector<Object*> objects;

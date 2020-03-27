@@ -33,7 +33,7 @@ void Level::init()
 
 void Level::update(int deltaTime)
 {
-	this->assignBehaviours();
+	if (this->updateBehaviour) this->assignBehaviours();
 
 	this->updatePlayer(deltaTime);
 	this->updateObjects(deltaTime);
@@ -177,7 +177,6 @@ void Level::assignBehaviours()
 
 	std::vector<Text> texts;
 
-	
 	for (Object* obj : this->objects)
 	{
 		if (obj->getBehaviour() == Object::Behaviour::OP)
@@ -204,9 +203,34 @@ void Level::assignBehaviours()
 			{
 				texts.push_back(txt);
 			}
+
+			// ^^^ horizontal word checking ^^^ | vvv vertical vord checking vvv //
+
+			Text txt2;
+
+			txt2.op = obj->getType();
+
+			pos = obj->getPosition();
+
+			Object* pre2 = find(pos.x, pos.y - 24);
+			if (pre2->getType() != Object::Type::NONE && pre2->getBehaviour() == Object::Behaviour::PRE)
+			{
+				txt2.pre = pre2->getType();
+			}
+
+			Object* post2 = find(pos.x, pos.y + 24);
+			if (post2->getType() != Object::Type::NONE && post2->getBehaviour() == Object::Behaviour::POST)
+			{
+				txt2.post = post2->getType();
+			}
+
+			if (txt2.pre != Object::Type::NONE && txt2.post != Object::Type::NONE)
+			{
+				texts.push_back(txt2);
+			}
 		}
 	}
-
+	cout << texts.size() << endl;
 	for (Object* object : this->objects)
 	{
 		switch (object->getType())
@@ -343,6 +367,8 @@ void Level::assignBehaviours()
 			}
 		}
 	}
+
+	this->updateBehaviour = false;
 }
 
 void Level::collision(Object* object, Player* player)
@@ -388,6 +414,9 @@ void Level::collision(Object* object, Player* player)
 			case Object::Behaviour::OP:
 			case Object::Behaviour::PRE:
 			case Object::Behaviour::POST:
+			{
+				this->updateBehaviour = true;
+			}
 			case Object::Behaviour::PUSH:
 			{
 				switch (player->getAnimation())
@@ -438,7 +467,10 @@ Object* Level::find(int posX, int posY) const
 	{
 		if (object->getPosition().x == posX && object->getPosition().y == posY)
 		{
-			return object;
+			if (object->getBehaviour() == Object::Behaviour::PRE || object->getBehaviour() == Object::Behaviour::POST)
+			{
+				return object;
+			}
 		}
 	}
 
