@@ -27,7 +27,7 @@ void Level::init()
 		std::cerr << "[LEVEL::init] error while loading map" << std::endl;
 		exit(EXIT_FAILURE);
 	}
-
+	Sounds::instance().playMusic(true);
 	this->assignBehaviours();
 }
 
@@ -48,8 +48,8 @@ void Level::render()
 
 bool Level::loadMap()
 {
-	ifstream fin("levels/1.txt");
-	//ifstream fin("levels/2.txt");
+	//ifstream fin("levels/1.txt");
+	ifstream fin("levels/2.txt");
 
 	if (!fin.is_open())
 	{
@@ -104,6 +104,7 @@ bool Level::loadMap()
 					if (obj == "IS") object->setType(Object::Type::TXT_IS);
 					if (obj == "NEAR") object->setType(Object::Type::TXT_NEAR);
 
+					if (obj == "DEFEAT") object->setType(Object::Type::TXT_DEFEAT);
 					if (obj == "PUSH") object->setType(Object::Type::TXT_PUSH);
 					if (obj == "STOP") object->setType(Object::Type::TXT_STOP);
 					if (obj == "WATER") object->setType(Object::Type::TXT_WATER);

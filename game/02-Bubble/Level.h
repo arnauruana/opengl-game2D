@@ -4,6 +4,7 @@
 
 #include "Object.h"
 #include "Player.h"
+#include "Sounds.h"
 
 #include <GL/glut.h>
 

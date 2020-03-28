@@ -31,7 +31,18 @@ void Scene::init()
 void Scene::update(int deltaTime)
 {
 	this->updateState();
-
+	if (keyboard::key['M'] || keyboard::key['m']) {
+		if (Sounds::instance().muted) {
+			Sounds::instance().muted = false;
+			Sounds::instance().playMusic(this->state != Scene::State::MENU);
+		}
+		else {
+			Sounds::instance().muted = true;
+			Sounds::instance().stop();
+		}
+		keyboard::key['M'] = false;
+		keyboard::key['m'] = false;
+	}
 	switch (this->state)
 	{
 		case Scene::State::MENU:
@@ -93,6 +104,7 @@ inline void Scene::updateState()
 
 inline void Scene::initMenu()
 {
+	Sounds::instance().playMusic(false);
 	this->menu.init();
 }
 

@@ -18,9 +18,10 @@ public:
 		return S;
 	}
 
-	void playMusic(bool& playing);
+	void playMusic(bool playing);
 	void playSoundEffect(const string& effect);
-
+	void stop();
+	bool muted;
 
 private:
 };
