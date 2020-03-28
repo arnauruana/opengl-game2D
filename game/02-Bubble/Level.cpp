@@ -48,7 +48,7 @@ void Level::render()
 
 bool Level::loadMap()
 {
-	ifstream fin("levels/1.txt");
+	ifstream fin("levels/2.txt");
 	if (!fin.is_open())
 	{
 		return false;
@@ -102,6 +102,7 @@ bool Level::loadMap()
 					if (obj == "IS") object->setType(Object::Type::TXT_IS);
 					if (obj == "NEAR") object->setType(Object::Type::TXT_NEAR);
 
+					if (obj == "DEFEAT") object->setType(Object::Type::TXT_DEFEAT);
 					if (obj == "PUSH") object->setType(Object::Type::TXT_PUSH);
 					if (obj == "STOP") object->setType(Object::Type::TXT_STOP);
 					if (obj == "WATER") object->setType(Object::Type::TXT_WATER);
@@ -113,6 +114,7 @@ bool Level::loadMap()
 					object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
 				}
 			}
+			cout << r << endl;
 		}
 	}
 

@@ -39,6 +39,9 @@ struct Settings
 	inline static const std::string TXT_FLAG = "word-flag.png";
 	inline static const std::string TXT_ROCK = "word-rock.png";
 	inline static const std::string TXT_WALL = "word-wall.png";
+	inline static const std::string TXT_LAVA = "word-lava.png";
+	inline static const std::string TXT_DEFEAT = "word-defeat.png";
+
 
 	inline static const std::string TXT_IS = "word-is.png";
 	inline static const std::string TXT_NEAR = "word-near.png";
@@ -65,6 +68,8 @@ struct Settings
 	inline static const Format FORMAT_TXTFLAG = Format::RGBA;
 	inline static const Format FORMAT_TXTROCK = Format::RGBA;
 	inline static const Format FORMAT_TXTWALL = Format::RGBA;
+	inline static const Format FORMAT_TXTLAVA = Format::RGBA;
+	inline static const Format FORMAT_TXTDEFEAT = Format::RGBA;
 
 	inline static const Format FORMAT_TXTIS = Format::RGBA;
 	inline static const Format FORMAT_TXTNEAR = Format::RGBA;

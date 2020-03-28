@@ -85,6 +85,14 @@ void Object::setType(Object::Type type)
 			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
 			break;
 		}
+		case Object::Type:: LAVA:
+		{
+			this->path += Settings::IMG_LAVA;
+			this->format = Settings::FORMAT_LAVA;
+			this->behaviour = Object::Behaviour::NONE;
+			this->color = glm::vec3(1.0f, 0.f, 0.f);
+			break;
+		}
 		case Object::Type::TXT_BABA:
 		{
 			this->path += Settings::TXT_BABA;
@@ -155,6 +163,22 @@ void Object::setType(Object::Type type)
 			this->format = Settings::FORMAT_TXTWIN;
 			this->behaviour = Object::Behaviour::POST;
 			this->color = glm::vec3(1.f, 1.f, 0.f);
+			break;
+		}
+		case Object::Type::TXT_LAVA :
+		{
+			this->path += Settings::TXT_LAVA;
+			this->format = Settings::FORMAT_TXTLAVA;
+			this->behaviour = Object::Behaviour::POST;
+			this->color = glm::vec3(1.f, 0.f, 0.f);
+			break;
+		}
+		case Object::Type::TXT_DEFEAT:
+		{
+			this->path += Settings::TXT_DEFEAT;
+			this->format = Settings::FORMAT_TXTDEFEAT;
+			this->behaviour = Object::Behaviour::POST;
+			this->color = glm::vec3(1.f, 0.f, 0.f);
 			break;
 		}
 		default:
