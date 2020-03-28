@@ -37,10 +37,11 @@ private:
 
 	void assignBehaviours();
 	void collision(Object* object, Player* player);
+	bool collision(Object* object);
 	Object* find(int posX, int posY) const;
 
 private:
-	
+
 	bool updateBehaviour = false;
 
 	Player* player;

@@ -48,7 +48,9 @@ void Level::render()
 
 bool Level::loadMap()
 {
-	ifstream fin("levels/2.txt");
+	ifstream fin("levels/1.txt");
+	//ifstream fin("levels/2.txt");
+
 	if (!fin.is_open())
 	{
 		return false;
@@ -102,7 +104,6 @@ bool Level::loadMap()
 					if (obj == "IS") object->setType(Object::Type::TXT_IS);
 					if (obj == "NEAR") object->setType(Object::Type::TXT_NEAR);
 
-					if (obj == "DEFEAT") object->setType(Object::Type::TXT_DEFEAT);
 					if (obj == "PUSH") object->setType(Object::Type::TXT_PUSH);
 					if (obj == "STOP") object->setType(Object::Type::TXT_STOP);
 					if (obj == "WATER") object->setType(Object::Type::TXT_WATER);
@@ -114,7 +115,6 @@ bool Level::loadMap()
 					object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
 				}
 			}
-			cout << r << endl;
 		}
 	}
 
@@ -237,136 +237,136 @@ void Level::assignBehaviours()
 	{
 		switch (object->getType())
 		{
-			case Object::Type::FLAG:
+		case Object::Type::FLAG:
+		{
+			for (Text text : texts)
 			{
-				for (Text text : texts)
+				if (text.pre == Object::Type::TXT_FLAG && text.op == Object::Type::TXT_IS)
 				{
-					if (text.pre == Object::Type::TXT_FLAG && text.op == Object::Type::TXT_IS)
+					switch (text.post)
 					{
-						switch (text.post)
-						{
-							case Object::Type::TXT_DEFEAT:
-							{
-								object->setBehaviour(Object::Behaviour::DEFEAT);
-								break;
-							}
-							case Object::Type::TXT_PUSH:
-							{
-								object->setBehaviour(Object::Behaviour::PUSH);
-								break;
-							}
-							case Object::Type::TXT_STOP:
-							{
-								object->setBehaviour(Object::Behaviour::STOP);
-								break;
-							}
-							case Object::Type::TXT_WIN:
-							{
-								object->setBehaviour(Object::Behaviour::WIN);
-								break;
-							}
-							case Object::Type::TXT_YOU:
-							{
-								object->setBehaviour(Object::Behaviour::YOU);
-								break;
-							}
-							default:
-							{
-								break;
-							}
-						}
+					case Object::Type::TXT_DEFEAT:
+					{
+						object->setBehaviour(Object::Behaviour::DEFEAT);
+						break;
+					}
+					case Object::Type::TXT_PUSH:
+					{
+						object->setBehaviour(Object::Behaviour::PUSH);
+						break;
+					}
+					case Object::Type::TXT_STOP:
+					{
+						object->setBehaviour(Object::Behaviour::STOP);
+						break;
+					}
+					case Object::Type::TXT_WIN:
+					{
+						object->setBehaviour(Object::Behaviour::WIN);
+						break;
+					}
+					case Object::Type::TXT_YOU:
+					{
+						object->setBehaviour(Object::Behaviour::YOU);
+						break;
+					}
+					default:
+					{
+						break;
+					}
 					}
 				}
-				break;
 			}
-			case Object::Type::ROCK:
+			break;
+		}
+		case Object::Type::ROCK:
+		{
+			for (Text text : texts)
 			{
-				for (Text text : texts)
+				if (text.pre == Object::Type::TXT_ROCK && text.op == Object::Type::TXT_IS)
 				{
-					if (text.pre == Object::Type::TXT_ROCK && text.op == Object::Type::TXT_IS)
+					switch (text.post)
 					{
-						switch (text.post)
-						{
-							case Object::Type::TXT_DEFEAT:
-							{
-								object->setBehaviour(Object::Behaviour::DEFEAT);
-								break;
-							}
-							case Object::Type::TXT_PUSH:
-							{
-								object->setBehaviour(Object::Behaviour::PUSH);
-								break;
-							}
-							case Object::Type::TXT_STOP:
-							{
-								object->setBehaviour(Object::Behaviour::STOP);
-								break;
-							}
-							case Object::Type::TXT_WIN:
-							{
-								object->setBehaviour(Object::Behaviour::WIN);
-								break;
-							}
-							case Object::Type::TXT_YOU:
-							{
-								object->setBehaviour(Object::Behaviour::YOU);
-								break;
-							}
-							default:
-							{
-								break;
-							}
-						}
+					case Object::Type::TXT_DEFEAT:
+					{
+						object->setBehaviour(Object::Behaviour::DEFEAT);
+						break;
+					}
+					case Object::Type::TXT_PUSH:
+					{
+						object->setBehaviour(Object::Behaviour::PUSH);
+						break;
+					}
+					case Object::Type::TXT_STOP:
+					{
+						object->setBehaviour(Object::Behaviour::STOP);
+						break;
+					}
+					case Object::Type::TXT_WIN:
+					{
+						object->setBehaviour(Object::Behaviour::WIN);
+						break;
+					}
+					case Object::Type::TXT_YOU:
+					{
+						object->setBehaviour(Object::Behaviour::YOU);
+						break;
+					}
+					default:
+					{
+						break;
+					}
 					}
 				}
-				break;
 			}
-			case Object::Type::WALL:
+			break;
+		}
+		case Object::Type::WALL:
+		{
+			for (Text text : texts)
 			{
-				for (Text text : texts)
+				if (text.pre == Object::Type::TXT_WALL && text.op == Object::Type::TXT_IS)
 				{
-					if (text.pre == Object::Type::TXT_WALL && text.op == Object::Type::TXT_IS)
+					switch (text.post)
 					{
-						switch (text.post)
-						{
-							case Object::Type::TXT_DEFEAT:
-							{
-								object->setBehaviour(Object::Behaviour::DEFEAT);
-								break;
-							}
-							case Object::Type::TXT_PUSH:
-							{
-								object->setBehaviour(Object::Behaviour::PUSH);
-								break;
-							}
-							case Object::Type::TXT_STOP:
-							{
-								object->setBehaviour(Object::Behaviour::STOP);
-								break;
-							}
-							case Object::Type::TXT_WIN:
-							{
-								object->setBehaviour(Object::Behaviour::WIN);
-								break;
-							}
-							case Object::Type::TXT_YOU:
-							{
-								object->setBehaviour(Object::Behaviour::YOU);
-								break;
-							}
-							default:
-							{
-								break;
-							}
-						}
+					case Object::Type::TXT_DEFEAT:
+					{
+						object->setBehaviour(Object::Behaviour::DEFEAT);
+						break;
+					}
+					case Object::Type::TXT_PUSH:
+					{
+						object->setBehaviour(Object::Behaviour::PUSH);
+						break;
+					}
+					case Object::Type::TXT_STOP:
+					{
+						object->setBehaviour(Object::Behaviour::STOP);
+						break;
+					}
+					case Object::Type::TXT_WIN:
+					{
+						object->setBehaviour(Object::Behaviour::WIN);
+						break;
+					}
+					case Object::Type::TXT_YOU:
+					{
+						object->setBehaviour(Object::Behaviour::YOU);
+						break;
+					}
+					default:
+					{
+						break;
+					}
 					}
 				}
-				break;
 			}
-			default:
-			{
-				break;
-			}
+			break;
+		}
+		default:
+		{
+			break;
+		}
 		}
 	}
 
@@ -382,92 +382,142 @@ void Level::collision(Object* object, Player* player)
 	{
 		switch (object->getBehaviour())
 		{
-			case Object::Behaviour::STOP:
+		case Object::Behaviour::STOP:
+		{
+			switch (player->getAnimation())
 			{
-				switch (player->getAnimation())
-				{
-					case MOVE_FORWARD:
-					{
-						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
-						break;
-					}
-					case MOVE_BACKWARD:
-					{
-						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
-						break;
-					}
-					case MOVE_RIGHT:
-					{
-						player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
-						break;
-					}
-					case MOVE_LEFT:
-					{
-						player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
-						break;
-					}
-					default:
-					{
-						exit(1);
-					}
-				}
+			case MOVE_FORWARD:
+			{
+				player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
 				break;
 			}
-			case Object::Behaviour::OP:
-			case Object::Behaviour::PRE:
-			case Object::Behaviour::POST:
+			case MOVE_BACKWARD:
 			{
-				this->updateBehaviour = true;
-			}
-			case Object::Behaviour::PUSH:
-			{
-				switch (player->getAnimation())
-				{
-					case MOVE_FORWARD:
-					{
-						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
-						break;
-					}
-					case MOVE_BACKWARD:
-					{
-						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
-						break;
-					}
-					case MOVE_RIGHT:
-					{
-						object->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
-						break;
-					}
-					case MOVE_LEFT:
-					{
-						object->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
-						break;
-					}
-					default:
-					{
-						exit(1);
-					}
-				}
+				player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
 				break;
 			}
-			case Object::Behaviour::WIN:
+			case MOVE_RIGHT:
 			{
-				//Recorremos todo el vector de objetos, y en cada posicion hacemos un delete, y luego sacamos ese objeto "nulo" del vector
-				int x = objects.size()-1;
-				for (int x = objects.size() - 1; x >= 0; --x) {
-					delete objects[x];
-					objects.pop_back();
-				}
-				
-				Settings::playing = false; // DEBUG
+				player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+				break;
+			}
+			case MOVE_LEFT:
+			{
+				player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
 				break;
 			}
 			default:
 			{
-				//exit(1);
+				exit(1);
 			}
+			}
+			break;
+		}
+		case Object::Behaviour::OP:
+		case Object::Behaviour::PRE:
+		case Object::Behaviour::POST:
+		{
+			this->updateBehaviour = true;
+		}
+		case Object::Behaviour::PUSH:
+		{
+			switch (player->getAnimation())
+			{
+			case MOVE_FORWARD:
+			{
+				object->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
+				object->setDirection(Object::Direction::FORWARD);
+				break;
+			}
+			case MOVE_BACKWARD:
+			{
+				object->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+				object->setDirection(Object::Direction::BACKWARD);
+				break;
+			}
+			case MOVE_RIGHT:
+			{
+				object->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
+				object->setDirection(Object::Direction::RIGHT);
+				break;
+			}
+			case MOVE_LEFT:
+			{
+				object->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+				object->setDirection(Object::Direction::LEFT);
+				break;
+			}
+			default:
+			{
+				exit(1);
+			}
+			}
+			this->collision(object);
+			break;
+		}
+		case Object::Behaviour::WIN:
+		{
+			//Recorremos todo el vector de objetos, y en cada posicion hacemos un delete, y luego sacamos ese objeto "nulo" del vector
+			int x = objects.size() - 1;
+			for (int x = objects.size() - 1; x >= 0; --x) {
+				delete objects[x];
+				objects.pop_back();
+			}
+
+			Settings::playing = false; // DEBUG
+			break;
+		}
 		}
 	}
+}
+
+bool Level::collision(Object* object)
+{
+	glm::vec2 posObject = object->getPosition();
+
+	for (Object* obj : this->objects)
+	{
+		glm::vec2 posObj = obj->getPosition();
+
+		if (posObj.x == posObject.x && posObj.y == posObject.y && object != obj)
+		{
+			switch (object->getDirection())
+			{
+			case Object::Direction::BACKWARD:
+			{
+				obj->setPosition(glm::vec2(posObj.x, posObj.y - 24));
+				obj->setDirection(Object::Direction::BACKWARD);
+				break;
+			}
+			case Object::Direction::FORWARD:
+			{
+				obj->setPosition(glm::vec2(posObj.x, posObj.y + 24));
+				obj->setDirection(Object::Direction::FORWARD);
+				break;
+			}
+			case Object::Direction::LEFT:
+			{
+				obj->setPosition(glm::vec2(posObj.x - 24, posObj.y));
+				obj->setDirection(Object::Direction::LEFT);
+				break;
+			}
+			case Object::Direction::RIGHT:
+			{
+				obj->setPosition(glm::vec2(posObj.x + 24, posObj.y));
+				obj->setDirection(Object::Direction::RIGHT);
+				break;
+			}
+			default:
+			{
+				std::cerr << "[LEVEL::colision] wrong object direction" << std::endl;
+				exit(EXIT_FAILURE);
+			}
+			}
+			this->collision(obj);
+		}
+	}
+
+	return true;
 }
 
 Object* Level::find(int posX, int posY) const

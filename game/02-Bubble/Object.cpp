@@ -19,14 +19,19 @@ Object* Object::create()
 }
 
 
-Object::Type Object::getType() const
-{
-	return this->type;
-}
-
 Object::Behaviour Object::getBehaviour() const
 {
 	return this->behaviour;
+}
+
+Object::Direction Object::getDirection() const
+{
+	return this->direction;
+}
+
+Object::Type Object::getType() const
+{
+	return this->type;
 }
 
 glm::ivec2 Object::getPosition() const
@@ -38,6 +43,11 @@ glm::ivec2 Object::getPosition() const
 void Object::setBehaviour(Object::Behaviour behaviour)
 {
 	this->behaviour = behaviour;
+}
+
+void Object::setDirection(Object::Direction direction)
+{
+	this->direction = direction;
 }
 
 void Object::setPosition(const glm::vec2& position)
@@ -83,14 +93,6 @@ void Object::setType(Object::Type type)
 			this->format = Settings::FORMAT_ROCK;
 			this->behaviour = Object::Behaviour::NONE;
 			this->color = glm::vec3(0.7f, 0.5f, 0.2f);
-			break;
-		}
-		case Object::Type:: LAVA:
-		{
-			this->path += Settings::IMG_LAVA;
-			this->format = Settings::FORMAT_LAVA;
-			this->behaviour = Object::Behaviour::NONE;
-			this->color = glm::vec3(1.0f, 0.f, 0.f);
 			break;
 		}
 		case Object::Type::TXT_BABA:
@@ -165,22 +167,6 @@ void Object::setType(Object::Type type)
 			this->color = glm::vec3(1.f, 1.f, 0.f);
 			break;
 		}
-		case Object::Type::TXT_LAVA :
-		{
-			this->path += Settings::TXT_LAVA;
-			this->format = Settings::FORMAT_TXTLAVA;
-			this->behaviour = Object::Behaviour::POST;
-			this->color = glm::vec3(1.f, 0.f, 0.f);
-			break;
-		}
-		case Object::Type::TXT_DEFEAT:
-		{
-			this->path += Settings::TXT_DEFEAT;
-			this->format = Settings::FORMAT_TXTDEFEAT;
-			this->behaviour = Object::Behaviour::POST;
-			this->color = glm::vec3(1.f, 0.f, 0.f);
-			break;
-		}
 		default:
 		{
 			std::cout << "[OBJECT::setType] wrong object type" << std::endl;
@@ -193,13 +179,13 @@ void Object::setType(Object::Type type)
 void Object::init()
 {
 	this->texture.loadFromFile(this->path, PixelFormat(this->format));
-	
-	this->sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1.f/3.f, 1.f), &this->texture, &this->shader);
+
+	this->sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1.f / 3.f, 1.f), &this->texture, &this->shader);
 	this->sprite->setNumberAnimations(1);
 	this->sprite->setAnimationSpeed(0, 4);
 	this->sprite->addKeyframe(0, glm::vec2(0.f, 0.f));
-	this->sprite->addKeyframe(0, glm::vec2(1.f/3.f, 0.f));
-	this->sprite->addKeyframe(0, glm::vec2(2.f/3.f, 0.f));
+	this->sprite->addKeyframe(0, glm::vec2(1.f / 3.f, 0.f));
+	this->sprite->addKeyframe(0, glm::vec2(2.f / 3.f, 0.f));
 	this->sprite->changeAnimation(0);
 }
 

@@ -38,7 +38,7 @@ public:
 		TXT_PUSH,
 		TXT_STOP,
 		TXT_WIN,
-		TXT_YOU,
+		TXT_YOU
 	};
 
 	enum class Behaviour
@@ -53,7 +53,15 @@ public:
 
 		PRE,
 		OP,
-		POST,
+		POST
+	};
+
+	enum class Direction
+	{
+		BACKWARD,
+		FORWARD,
+		LEFT,
+		RIGHT,
 	};
 
 public:
@@ -63,11 +71,13 @@ public:
 
 	static Object* create();
 
-	Object::Type getType() const;
 	Object::Behaviour getBehaviour() const;
+	Object::Direction getDirection() const;
+	Object::Type getType() const;
 	glm::ivec2 getPosition() const;
 
 	void setBehaviour(Object::Behaviour behaviour);
+	void setDirection(Object::Direction direction);
 	void setPosition(const glm::vec2& position);
 	void setShader(const ShaderProgram& shader);
 	void setType(Object::Type type);
@@ -83,12 +93,14 @@ private:
 
 	glm::vec3 color;
 
+	Object::Direction direction;
+
 	Sprite* sprite;
 	Texture texture;
 
 	std::string path = Settings::PATH_OBJECTS;
 	Settings::Format format;
-	
+
 	ShaderProgram shader;
 };
 
