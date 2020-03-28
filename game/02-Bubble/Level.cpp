@@ -450,6 +450,13 @@ void Level::collision(Object* object, Player* player)
 			}
 			case Object::Behaviour::WIN:
 			{
+				//Recorremos todo el vector de objetos, y en cada posicion hacemos un delete, y luego sacamos ese objeto "nulo" del vector
+				int x = objects.size()-1;
+				for (int x = objects.size() - 1; x >= 0; --x) {
+					delete objects[x];
+					objects.pop_back();
+				}
+				
 				Settings::playing = false; // DEBUG
 				break;
 			}

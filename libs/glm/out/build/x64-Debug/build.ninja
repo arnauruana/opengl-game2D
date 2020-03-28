@@ -34,7 +34,7 @@ include rules.ninja
 # Utility command for rebuild_cache
 
 build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2503\libs\glm -BC:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2803\libs\glm -BC:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -46,7 +46,7 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -58,7 +58,7 @@ build test: phony CMakeFiles\test.util
 # Utility command for install/local
 
 build CMakeFiles\install\local.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -70,7 +70,7 @@ build install\local: phony CMakeFiles\install\local.util
 # Utility command for install
 
 build CMakeFiles\install.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -82,7 +82,7 @@ build install: phony CMakeFiles\install.util
 # Utility command for edit_cache
 
 build CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -96,7 +96,7 @@ build list_install_components: phony
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/Vikto/source/repos/game2503/libs/glm/CMakeLists.txt
+# C:/Users/Vikto/source/repos/game2803/libs/glm/CMakeLists.txt
 # =============================================================================
 
 
@@ -104,7 +104,7 @@ build list_install_components: phony
 # Utility command for rebuild_cache
 
 build glm\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2503\libs\glm -BC:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2803\libs\glm -BC:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -116,7 +116,7 @@ build glm\rebuild_cache: phony glm\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build glm\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -128,7 +128,7 @@ build glm\test: phony glm\CMakeFiles\test.util
 # Utility command for install/local
 
 build glm\CMakeFiles\install\local.util: CUSTOM_COMMAND glm\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -140,7 +140,7 @@ build glm\install\local: phony glm\CMakeFiles\install\local.util
 # Utility command for install
 
 build glm\CMakeFiles\install.util: CUSTOM_COMMAND glm\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -152,7 +152,7 @@ build glm\install: phony glm\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build glm\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\glm && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -166,7 +166,7 @@ build glm\list_install_components: phony
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/Vikto/source/repos/game2503/libs/glm/CMakeLists.txt
+# C:/Users/Vikto/source/repos/game2803/libs/glm/CMakeLists.txt
 # =============================================================================
 
 
@@ -174,7 +174,7 @@ build glm\list_install_components: phony
 # Utility command for rebuild_cache
 
 build test\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2503\libs\glm -BC:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2803\libs\glm -BC:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -186,7 +186,7 @@ build test\rebuild_cache: phony test\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build test\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -198,7 +198,7 @@ build test\test: phony test\CMakeFiles\test.util
 # Utility command for install/local
 
 build test\CMakeFiles\install\local.util: CUSTOM_COMMAND test\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -210,7 +210,7 @@ build test\install\local: phony test\CMakeFiles\install\local.util
 # Utility command for install
 
 build test\CMakeFiles\install.util: CUSTOM_COMMAND test\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -222,7 +222,7 @@ build test\install: phony test\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build test\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -236,7 +236,7 @@ build test\list_install_components: phony
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/Vikto/source/repos/game2503/libs/glm/test/CMakeLists.txt
+# C:/Users/Vikto/source/repos/game2803/libs/glm/test/CMakeLists.txt
 # =============================================================================
 
 
@@ -244,7 +244,7 @@ build test\list_install_components: phony
 # Utility command for rebuild_cache
 
 build test\bug\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2503\libs\glm -BC:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2803\libs\glm -BC:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -256,7 +256,7 @@ build test\bug\rebuild_cache: phony test\bug\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build test\bug\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -268,7 +268,7 @@ build test\bug\test: phony test\bug\CMakeFiles\test.util
 # Utility command for install/local
 
 build test\bug\CMakeFiles\install\local.util: CUSTOM_COMMAND test\bug\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -280,7 +280,7 @@ build test\bug\install\local: phony test\bug\CMakeFiles\install\local.util
 # Utility command for install
 
 build test\bug\CMakeFiles\install.util: CUSTOM_COMMAND test\bug\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -292,7 +292,7 @@ build test\bug\install: phony test\bug\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build test\bug\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\bug && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -306,7 +306,7 @@ build test\bug\list_install_components: phony
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/Vikto/source/repos/game2503/libs/glm/test/CMakeLists.txt
+# C:/Users/Vikto/source/repos/game2803/libs/glm/test/CMakeLists.txt
 # =============================================================================
 
 
@@ -314,7 +314,7 @@ build test\bug\list_install_components: phony
 # Utility command for rebuild_cache
 
 build test\core\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2503\libs\glm -BC:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2803\libs\glm -BC:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -326,7 +326,7 @@ build test\core\rebuild_cache: phony test\core\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build test\core\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -338,7 +338,7 @@ build test\core\test: phony test\core\CMakeFiles\test.util
 # Utility command for install/local
 
 build test\core\CMakeFiles\install\local.util: CUSTOM_COMMAND test\core\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -350,7 +350,7 @@ build test\core\install\local: phony test\core\CMakeFiles\install\local.util
 # Utility command for install
 
 build test\core\CMakeFiles\install.util: CUSTOM_COMMAND test\core\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -362,7 +362,7 @@ build test\core\install: phony test\core\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build test\core\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\core && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -376,7 +376,7 @@ build test\core\list_install_components: phony
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/Vikto/source/repos/game2503/libs/glm/test/CMakeLists.txt
+# C:/Users/Vikto/source/repos/game2803/libs/glm/test/CMakeLists.txt
 # =============================================================================
 
 
@@ -384,7 +384,7 @@ build test\core\list_install_components: phony
 # Utility command for rebuild_cache
 
 build test\gtc\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2503\libs\glm -BC:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2803\libs\glm -BC:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -396,7 +396,7 @@ build test\gtc\rebuild_cache: phony test\gtc\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build test\gtc\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -408,7 +408,7 @@ build test\gtc\test: phony test\gtc\CMakeFiles\test.util
 # Utility command for install/local
 
 build test\gtc\CMakeFiles\install\local.util: CUSTOM_COMMAND test\gtc\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -420,7 +420,7 @@ build test\gtc\install\local: phony test\gtc\CMakeFiles\install\local.util
 # Utility command for install
 
 build test\gtc\CMakeFiles\install.util: CUSTOM_COMMAND test\gtc\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -432,7 +432,7 @@ build test\gtc\install: phony test\gtc\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build test\gtc\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtc && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -446,7 +446,7 @@ build test\gtc\list_install_components: phony
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# C:/Users/Vikto/source/repos/game2503/libs/glm/test/CMakeLists.txt
+# C:/Users/Vikto/source/repos/game2803/libs/glm/test/CMakeLists.txt
 # =============================================================================
 
 
@@ -454,7 +454,7 @@ build test\gtc\list_install_components: phony
 # Utility command for rebuild_cache
 
 build test\gtx\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2503\libs\glm -BC:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:\Users\Vikto\source\repos\game2803\libs\glm -BC:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -466,7 +466,7 @@ build test\gtx\rebuild_cache: phony test\gtx\CMakeFiles\rebuild_cache.util
 # Utility command for test
 
 build test\gtx\CMakeFiles\test.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe" --force-new-ctest-process "
   DESC = Running tests...
   pool = console
   restat = 1
@@ -478,7 +478,7 @@ build test\gtx\test: phony test\gtx\CMakeFiles\test.util
 # Utility command for install/local
 
 build test\gtx\CMakeFiles\install\local.util: CUSTOM_COMMAND test\gtx\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -490,7 +490,7 @@ build test\gtx\install\local: phony test\gtx\CMakeFiles\install\local.util
 # Utility command for install
 
 build test\gtx\CMakeFiles\install.util: CUSTOM_COMMAND test\gtx\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -502,7 +502,7 @@ build test\gtx\install: phony test\gtx\CMakeFiles\install.util
 # Utility command for edit_cache
 
 build test\gtx\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2503\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Vikto\source\repos\game2803\libs\glm\out\build\x64-Debug\test\gtx && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -523,42 +523,42 @@ build test\gtx\list_install_components: phony
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Vikto/source/repos/game2503/libs/glm/out/build/x64-Debug/glm
+# Folder: C:/Users/Vikto/source/repos/game2803/libs/glm/out/build/x64-Debug/glm
 
 build glm\all: phony
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Vikto/source/repos/game2503/libs/glm/out/build/x64-Debug/test
+# Folder: C:/Users/Vikto/source/repos/game2803/libs/glm/out/build/x64-Debug/test
 
 build test\all: phony test\bug\all test\core\all test\gtc\all test\gtx\all
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Vikto/source/repos/game2503/libs/glm/out/build/x64-Debug/test/bug
+# Folder: C:/Users/Vikto/source/repos/game2803/libs/glm/out/build/x64-Debug/test/bug
 
 build test\bug\all: phony
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Vikto/source/repos/game2503/libs/glm/out/build/x64-Debug/test/core
+# Folder: C:/Users/Vikto/source/repos/game2803/libs/glm/out/build/x64-Debug/test/core
 
 build test\core\all: phony
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Vikto/source/repos/game2503/libs/glm/out/build/x64-Debug/test/gtc
+# Folder: C:/Users/Vikto/source/repos/game2803/libs/glm/out/build/x64-Debug/test/gtc
 
 build test\gtc\all: phony
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Vikto/source/repos/game2503/libs/glm/out/build/x64-Debug/test/gtx
+# Folder: C:/Users/Vikto/source/repos/game2803/libs/glm/out/build/x64-Debug/test/gtx
 
 build test\gtx\all: phony
 
