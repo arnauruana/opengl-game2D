@@ -1,4 +1,5 @@
 #include "Level.h"
+#include "Keyboard.h"
 
 
 Level::Level()
@@ -21,7 +22,6 @@ void Level::setShader(const ShaderProgram& shader)
 void Level::init()
 {
 	glutSetWindowTitle("WINDOW IS GAME");
-
 	if (!this->loadMap())
 	{
 		std::cerr << "[LEVEL::init] error while loading map" << std::endl;
@@ -34,7 +34,13 @@ void Level::init()
 void Level::update(int deltaTime)
 {
 	if (this->updateBehaviour) this->assignBehaviours();
+	if (keyboard::key['r'] || keyboard::key['R']) {
+		this->cleanMap();
+		this->loadMap();
 
+		keyboard::key['r'] == false;
+		keyboard::key['R'] == false;
+	}
 	this->updatePlayer(deltaTime);
 	this->updateObjects(deltaTime);
 }
@@ -48,8 +54,8 @@ void Level::render()
 
 bool Level::loadMap()
 {
-	ifstream fin("levels/1.txt");
-	//ifstream fin("levels/2.txt");
+	//ifstream fin("levels/1.txt");
+	ifstream fin("levels/2.txt");
 
 	if (!fin.is_open())
 	{
@@ -126,6 +132,14 @@ bool Level::loadMap()
 void Level::updatePlayer(int deltaTime)
 {
 	this->player->update(deltaTime);
+}
+
+void Level::cleanMap() {
+	int x = objects.size() - 1;
+	for (int x = objects.size() - 1; x >= 0; --x) {
+		delete objects[x];
+		objects.pop_back();
+	}
 }
 
 void Level::renderPlayer()
@@ -592,12 +606,7 @@ void Level::collision(Object* object, Player* player)
 			}
 			case Object::Behaviour::WIN:
 			{
-				//Recorremos todo el vector de objetos, y en cada posicion hacemos un delete, y luego sacamos ese objeto "nulo" del vector
-				int x = objects.size() - 1;
-				for (int x = objects.size() - 1; x >= 0; --x) {
-					delete objects[x];
-					objects.pop_back();
-				}
+				this->cleanMap();
 				Sounds::instance().playSoundEffect("WIN");
 				Settings::playing = false; // DEBUG
 				break;

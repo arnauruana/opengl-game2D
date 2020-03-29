@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "resource.h"
 
 const float TPF = 1000.f / Game::FPS;
 
@@ -64,6 +64,7 @@ inline void initWindow(int argc, char** argv)
 		(glutGet(GLUT_SCREEN_HEIGHT) - Game::GAME_WINDOW_HEIGHT) / 2);
 	
 	glutCreateWindow("");
+	
 	glutSetCursor(GLUT_CURSOR_NONE);
 }
 

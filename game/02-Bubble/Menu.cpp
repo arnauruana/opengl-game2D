@@ -1,5 +1,5 @@
 #include "Menu.h"
-
+#include "resource.h"
 
 Menu::Menu()
 {
@@ -114,7 +114,12 @@ void Menu::render()
 void Menu::initMenu()
 {
 	glutSetWindowTitle("WINDOW IS MENU");
-
+	//AÑADIR ICONO A VENTANA
+	/************************************************************************************************************/
+	HWND hwnd = FindWindow(NULL, TEXT("WINDOW IS MENU"));
+	HANDLE icon = LoadImage(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 32, 32, LR_COLOR);
+	SendMessage(hwnd, (UINT)WM_SETICON, ICON_BIG, (LPARAM)icon);
+	/************************************************************************************************************/
 	this->textureMenu.loadFromFile(Menu::PATH_MENU, PixelFormat(Settings::FORMAT_MENU));
 
 	this->spriteMenu = Sprite::createSprite(glm::ivec2(Settings::GAME_WINDOW_WIDTH, Settings::GAME_WINDOW_HEIGHT), glm::vec2(1.f, 1.f), &this->textureMenu, &this->shader);

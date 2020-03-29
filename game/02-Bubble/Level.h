@@ -41,6 +41,7 @@ private:
 	bool collision(Object* object);
 	Object* find(int posX, int posY) const;
 
+	void cleanMap();
 private:
 
 	bool updateBehaviour = false;

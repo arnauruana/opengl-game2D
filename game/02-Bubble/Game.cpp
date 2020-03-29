@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "resource.h"
 
 Game::Game() {}
 
@@ -9,6 +9,8 @@ Game::~Game() {}
 void Game::init()
 {
 	glClearColor(0.165f, 0.14f, 0.14f, 1.0f);
+	
+	
 
 	this->exit = false;
 	this->windowF = false;
@@ -32,6 +34,8 @@ void Game::render()
 
 void Game::resize(int width, int height)
 {
+	
+
 	if (this->windowF)
 	{
 		int max = width > height ? width : height;

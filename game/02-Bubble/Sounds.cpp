@@ -5,8 +5,8 @@ ISoundEngine* SoundEngine = createIrrKlangDevice();
 void Sounds::playMusic(bool playing) {
 	stop();
 	if (!muted) {
-		//if (playing) SoundEngine->play2D("audio/play-music.wav", GL_FALSE); //Music by Michorvath
-		//else SoundEngine->play2D("audio/menu-music.wav", GL_TRUE);   //Music by Chizmaster
+		if (playing) SoundEngine->play2D("audio/play-music.wav", GL_FALSE); //Music by Michorvath
+		else SoundEngine->play2D("audio/menu-music.wav", GL_TRUE);   //Music by Chizmaster
 	}
 
 }
