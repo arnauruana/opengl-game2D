@@ -62,6 +62,8 @@ void Object::setShader(const ShaderProgram& shader)
 
 void Object::setType(Object::Type type)
 {
+	this->path = Settings::PATH_OBJECTS;
+
 	this->type = type;
 
 	switch (this->type)

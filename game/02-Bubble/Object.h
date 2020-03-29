@@ -98,7 +98,7 @@ private:
 	Sprite* sprite;
 	Texture texture;
 
-	std::string path = Settings::PATH_OBJECTS;
+	std::string path;
 	Settings::Format format;
 
 	ShaderProgram shader;

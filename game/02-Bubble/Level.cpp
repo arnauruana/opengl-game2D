@@ -197,7 +197,7 @@ void Level::assignBehaviours()
 			}
 
 			Object* post = find(pos.x + 24, pos.y);
-			if (post->getType() != Object::Type::NONE && post->getBehaviour() == Object::Behaviour::POST)
+			if (post->getType() != Object::Type::NONE && (post->getBehaviour() == Object::Behaviour::POST || post->getBehaviour() == Object::Behaviour::PRE))
 			{
 				txt.post = post->getType();
 			}
@@ -222,7 +222,7 @@ void Level::assignBehaviours()
 			}
 
 			Object* post2 = find(pos.x, pos.y + 24);
-			if (post2->getType() != Object::Type::NONE && post2->getBehaviour() == Object::Behaviour::POST)
+			if (post2->getType() != Object::Type::NONE && (post2->getBehaviour() == Object::Behaviour::POST || post2->getBehaviour() == Object::Behaviour::PRE))
 			{
 				txt2.post = post2->getType();
 			}
@@ -233,141 +233,245 @@ void Level::assignBehaviours()
 			}
 		}
 	}
-	cout << texts.size() << endl;
+
 	for (Object* object : this->objects)
 	{
+		glm::vec2 position = object->getPosition();
+
 		switch (object->getType())
 		{
-		case Object::Type::FLAG:
-		{
-			for (Text text : texts)
+			case Object::Type::FLAG:
 			{
-				if (text.pre == Object::Type::TXT_FLAG && text.op == Object::Type::TXT_IS)
+				for (Text text : texts)
 				{
-					switch (text.post)
+					if (text.pre == Object::Type::TXT_FLAG && text.op == Object::Type::TXT_IS)
 					{
-					case Object::Type::TXT_DEFEAT:
-					{
-						object->setBehaviour(Object::Behaviour::DEFEAT);
-						break;
-					}
-					case Object::Type::TXT_PUSH:
-					{
-						object->setBehaviour(Object::Behaviour::PUSH);
-						break;
-					}
-					case Object::Type::TXT_STOP:
-					{
-						object->setBehaviour(Object::Behaviour::STOP);
-						break;
-					}
-					case Object::Type::TXT_WIN:
-					{
-						object->setBehaviour(Object::Behaviour::WIN);
-						break;
-					}
-					case Object::Type::TXT_YOU:
-					{
-						object->setBehaviour(Object::Behaviour::YOU);
-						break;
-					}
-					default:
-					{
-						break;
-					}
+						switch (text.post)
+						{
+							//subjects
+							case Object::Type::TXT_LAVA:
+							{
+								object->setType(Object::Type::LAVA);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WATER:
+							{
+								object->setType(Object::Type::WATER);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_ROCK:
+							{
+								object->setType(Object::Type::ROCK);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setType(Object::Type::WALL);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							// predicates
+							case Object::Type::TXT_DEFEAT:
+							{
+								object->setBehaviour(Object::Behaviour::DEFEAT);
+								break;
+							}
+							case Object::Type::TXT_PUSH:
+							{
+								object->setBehaviour(Object::Behaviour::PUSH);
+								break;
+							}
+							case Object::Type::TXT_STOP:
+							{
+								object->setBehaviour(Object::Behaviour::STOP);
+								break;
+							}
+							case Object::Type::TXT_WIN:
+							{
+								object->setBehaviour(Object::Behaviour::WIN);
+								break;
+							}
+							case Object::Type::TXT_YOU:
+							{
+								object->setBehaviour(Object::Behaviour::YOU);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
 					}
 				}
+				break;
 			}
-			break;
-		}
-		case Object::Type::ROCK:
-		{
-			for (Text text : texts)
+			case Object::Type::ROCK:
 			{
-				if (text.pre == Object::Type::TXT_ROCK && text.op == Object::Type::TXT_IS)
+				for (Text text : texts)
 				{
-					switch (text.post)
+					if (text.pre == Object::Type::TXT_ROCK && text.op == Object::Type::TXT_IS)
 					{
-					case Object::Type::TXT_DEFEAT:
-					{
-						object->setBehaviour(Object::Behaviour::DEFEAT);
-						break;
-					}
-					case Object::Type::TXT_PUSH:
-					{
-						object->setBehaviour(Object::Behaviour::PUSH);
-						break;
-					}
-					case Object::Type::TXT_STOP:
-					{
-						object->setBehaviour(Object::Behaviour::STOP);
-						break;
-					}
-					case Object::Type::TXT_WIN:
-					{
-						object->setBehaviour(Object::Behaviour::WIN);
-						break;
-					}
-					case Object::Type::TXT_YOU:
-					{
-						object->setBehaviour(Object::Behaviour::YOU);
-						break;
-					}
-					default:
-					{
-						break;
-					}
+						switch (text.post)
+						{
+							//subjects
+							case Object::Type::TXT_LAVA:
+							{
+								object->setType(Object::Type::LAVA);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WATER:
+							{
+								object->setType(Object::Type::WATER);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_FLAG:
+							{
+								object->setType(Object::Type::FLAG);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setType(Object::Type::WALL);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							// predicates
+							case Object::Type::TXT_DEFEAT:
+							{
+								object->setBehaviour(Object::Behaviour::DEFEAT);
+								break;
+							}
+							case Object::Type::TXT_PUSH:
+							{
+								object->setBehaviour(Object::Behaviour::PUSH);
+								break;
+							}
+							case Object::Type::TXT_STOP:
+							{
+								object->setBehaviour(Object::Behaviour::STOP);
+								break;
+							}
+							case Object::Type::TXT_WIN:
+							{
+								object->setBehaviour(Object::Behaviour::WIN);
+								break;
+							}
+							case Object::Type::TXT_YOU:
+							{
+								object->setBehaviour(Object::Behaviour::YOU);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
 					}
 				}
+				break;
 			}
-			break;
-		}
-		case Object::Type::WALL:
-		{
-			for (Text text : texts)
+			case Object::Type::WALL:
 			{
-				if (text.pre == Object::Type::TXT_WALL && text.op == Object::Type::TXT_IS)
+				for (Text text : texts)
 				{
-					switch (text.post)
+					if (text.pre == Object::Type::TXT_WALL && text.op == Object::Type::TXT_IS)
 					{
-					case Object::Type::TXT_DEFEAT:
-					{
-						object->setBehaviour(Object::Behaviour::DEFEAT);
-						break;
-					}
-					case Object::Type::TXT_PUSH:
-					{
-						object->setBehaviour(Object::Behaviour::PUSH);
-						break;
-					}
-					case Object::Type::TXT_STOP:
-					{
-						object->setBehaviour(Object::Behaviour::STOP);
-						break;
-					}
-					case Object::Type::TXT_WIN:
-					{
-						object->setBehaviour(Object::Behaviour::WIN);
-						break;
-					}
-					case Object::Type::TXT_YOU:
-					{
-						object->setBehaviour(Object::Behaviour::YOU);
-						break;
-					}
-					default:
-					{
-						break;
-					}
+						switch (text.post)
+						{
+							//subjects
+							case Object::Type::TXT_LAVA:
+							{
+								object->setType(Object::Type::LAVA);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WATER:
+							{
+								object->setType(Object::Type::WATER);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_FLAG:
+							{
+								object->setType(Object::Type::FLAG);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_ROCK:
+							{
+								object->setType(Object::Type::ROCK);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							// predicates
+							case Object::Type::TXT_DEFEAT:
+							{
+								object->setBehaviour(Object::Behaviour::DEFEAT);
+								break;
+							}
+							case Object::Type::TXT_PUSH:
+							{
+								object->setBehaviour(Object::Behaviour::PUSH);
+								break;
+							}
+							case Object::Type::TXT_STOP:
+							{
+								object->setBehaviour(Object::Behaviour::STOP);
+								break;
+							}
+							case Object::Type::TXT_WIN:
+							{
+								object->setBehaviour(Object::Behaviour::WIN);
+								break;
+							}
+							case Object::Type::TXT_YOU:
+							{
+								object->setBehaviour(Object::Behaviour::YOU);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
 					}
 				}
+				break;
 			}
-			break;
-		}
-		default:
-		{
-			break;
-		}
+			default:
+			{
+				break;
+			}
 		}
 	}
 
