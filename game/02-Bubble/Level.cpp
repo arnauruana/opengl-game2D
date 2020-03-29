@@ -48,8 +48,8 @@ void Level::render()
 
 bool Level::loadMap()
 {
-	//ifstream fin("levels/1.txt");
-	ifstream fin("levels/2.txt");
+	ifstream fin("levels/1.txt");
+	//ifstream fin("levels/2.txt");
 
 	if (!fin.is_open())
 	{
@@ -383,91 +383,120 @@ void Level::collision(Object* object, Player* player)
 	{
 		switch (object->getBehaviour())
 		{
-		case Object::Behaviour::STOP:
-		{
-			switch (player->getAnimation())
+			case Object::Behaviour::STOP:
 			{
-			case MOVE_FORWARD:
-			{
-				player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+				switch (player->getAnimation())
+				{
+					case MOVE_FORWARD:
+					{
+						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+						break;
+					}
+					case MOVE_BACKWARD:
+					{
+						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
+						break;
+					}
+					case MOVE_RIGHT:
+					{
+						player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+						break;
+					}
+					case MOVE_LEFT:
+					{
+						player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
+						break;
+					}
+					default:
+					{
+						exit(1);
+					}
+				}
 				break;
 			}
-			case MOVE_BACKWARD:
+			case Object::Behaviour::OP:
+			case Object::Behaviour::PRE:
+			case Object::Behaviour::POST:
 			{
-				player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
-				break;
+				this->updateBehaviour = true;
 			}
-			case MOVE_RIGHT:
+			case Object::Behaviour::PUSH:
 			{
-				player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
-				break;
-			}
-			case MOVE_LEFT:
-			{
-				player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
-				break;
-			}
-			default:
-			{
-				exit(1);
-			}
-			}
-			break;
-		}
-		case Object::Behaviour::OP:
-		case Object::Behaviour::PRE:
-		case Object::Behaviour::POST:
-		{
-			this->updateBehaviour = true;
-		}
-		case Object::Behaviour::PUSH:
-		{
-			switch (player->getAnimation())
-			{
-			case MOVE_FORWARD:
-			{
-				object->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
-				object->setDirection(Object::Direction::FORWARD);
-				break;
-			}
-			case MOVE_BACKWARD:
-			{
-				object->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
-				object->setDirection(Object::Direction::BACKWARD);
-				break;
-			}
-			case MOVE_RIGHT:
-			{
-				object->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
-				object->setDirection(Object::Direction::RIGHT);
-				break;
-			}
-			case MOVE_LEFT:
-			{
-				object->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
-				object->setDirection(Object::Direction::LEFT);
-				break;
-			}
-			default:
-			{
-				exit(1);
-			}
-			}
-			this->collision(object);
-			break;
-		}
-		case Object::Behaviour::WIN:
-		{
-			//Recorremos todo el vector de objetos, y en cada posicion hacemos un delete, y luego sacamos ese objeto "nulo" del vector
-			int x = objects.size() - 1;
-			for (int x = objects.size() - 1; x >= 0; --x) {
-				delete objects[x];
-				objects.pop_back();
-			}
+				switch (player->getAnimation())
+				{
+					case MOVE_FORWARD:
+					{
+						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
+						object->setDirection(Object::Direction::FORWARD);
 
-			Settings::playing = false; // DEBUG
-			break;
-		}
+						if (!this->collision(object))
+						{
+							object->setPosition(posObj);
+							player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+						}
+
+						break;
+					}
+					case MOVE_BACKWARD:
+					{
+						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+						object->setDirection(Object::Direction::BACKWARD);
+
+						if (!this->collision(object))
+						{
+							object->setPosition(posObj);
+							player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
+						}
+
+						break;
+					}
+					case MOVE_RIGHT:
+					{
+						object->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
+						object->setDirection(Object::Direction::RIGHT);
+
+						if (!this->collision(object))
+						{
+							object->setPosition(posObj);
+							player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+						}
+
+						break;
+					}
+					case MOVE_LEFT:
+					{
+						object->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+						object->setDirection(Object::Direction::LEFT);
+						
+						if (!this->collision(object))
+						{
+							object->setPosition(posObj);
+							player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
+						}
+
+						break;
+					}
+					default:
+					{
+						std::cerr << "[LEVEL::collision] wrong player animation" << endl;
+						exit(EXIT_FAILURE);
+					}
+				}
+
+				break;
+			}
+			case Object::Behaviour::WIN:
+			{
+				//Recorremos todo el vector de objetos, y en cada posicion hacemos un delete, y luego sacamos ese objeto "nulo" del vector
+				int x = objects.size() - 1;
+				for (int x = objects.size() - 1; x >= 0; --x) {
+					delete objects[x];
+					objects.pop_back();
+				}
+
+				Settings::playing = false; // DEBUG
+				break;
+			}
 		}
 	}
 }
@@ -476,45 +505,70 @@ bool Level::collision(Object* object)
 {
 	glm::vec2 posObject = object->getPosition();
 
+	if (posObject.x < 0 || posObject.x > 480 - 24 || posObject.y < 0 || posObject.y > 480 - 24)
+	{
+		return false;
+	}
+
+	Object::Behaviour op = Object::Behaviour::OP;
+	Object::Behaviour pre = Object::Behaviour::PRE;
+	Object::Behaviour post = Object::Behaviour::POST;
+	Object::Behaviour push = Object::Behaviour::PUSH;
+
+	Object::Behaviour stop = Object::Behaviour::STOP;
+
 	for (Object* obj : this->objects)
 	{
+		Object::Behaviour behObj = obj->getBehaviour();
 		glm::vec2 posObj = obj->getPosition();
 
 		if (posObj.x == posObject.x && posObj.y == posObject.y && object != obj)
 		{
-			switch (object->getDirection())
+			if (behObj == stop)
 			{
-			case Object::Direction::BACKWARD:
+				return false;
+			}
+			if (behObj == op || behObj == pre || behObj == post || behObj == push)
 			{
-				obj->setPosition(glm::vec2(posObj.x, posObj.y - 24));
-				obj->setDirection(Object::Direction::BACKWARD);
-				break;
+				switch (object->getDirection())
+				{
+					case Object::Direction::BACKWARD:
+					{
+						obj->setPosition(glm::vec2(posObj.x, posObj.y - 24));
+						obj->setDirection(Object::Direction::BACKWARD);
+						break;
+					}
+					case Object::Direction::FORWARD:
+					{
+						obj->setPosition(glm::vec2(posObj.x, posObj.y + 24));
+						obj->setDirection(Object::Direction::FORWARD);
+						break;
+					}
+					case Object::Direction::LEFT:
+					{
+						obj->setPosition(glm::vec2(posObj.x - 24, posObj.y));
+						obj->setDirection(Object::Direction::LEFT);
+						break;
+					}
+					case Object::Direction::RIGHT:
+					{
+						obj->setPosition(glm::vec2(posObj.x + 24, posObj.y));
+						obj->setDirection(Object::Direction::RIGHT);
+						break;
+					}
+					default:
+					{
+						std::cerr << "[LEVEL::collision] wrong object direction" << std::endl;
+						exit(EXIT_FAILURE);
+					}
+				}
+
+				if (!this->collision(obj))
+				{
+					obj->setPosition(posObj);
+					return false;
+				}
 			}
-			case Object::Direction::FORWARD:
-			{
-				obj->setPosition(glm::vec2(posObj.x, posObj.y + 24));
-				obj->setDirection(Object::Direction::FORWARD);
-				break;
-			}
-			case Object::Direction::LEFT:
-			{
-				obj->setPosition(glm::vec2(posObj.x - 24, posObj.y));
-				obj->setDirection(Object::Direction::LEFT);
-				break;
-			}
-			case Object::Direction::RIGHT:
-			{
-				obj->setPosition(glm::vec2(posObj.x + 24, posObj.y));
-				obj->setDirection(Object::Direction::RIGHT);
-				break;
-			}
-			default:
-			{
-				std::cerr << "[LEVEL::colision] wrong object direction" << std::endl;
-				exit(EXIT_FAILURE);
-			}
-			}
-			this->collision(obj);
 		}
 	}
 
