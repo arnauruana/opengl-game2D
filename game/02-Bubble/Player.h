@@ -3,7 +3,7 @@
 
 
 #include "Sprite.h"
-
+#include "Sounds.h"
 
 enum PlayerAnims
 {

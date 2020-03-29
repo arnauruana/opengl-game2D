@@ -61,7 +61,7 @@ void Player::update(int deltaTime)
 		if (this->posPlayer.x == 0) return; // not leave the map
 
 		this->posPlayer.x -= 24;
-
+		Sounds::instance().playSoundEffect("MOVE");
 		keyboard::skey[GLUT_KEY_LEFT] = false;
 	}
 	else if (keyboard::skey[GLUT_KEY_RIGHT])
@@ -74,6 +74,7 @@ void Player::update(int deltaTime)
 		if (this->posPlayer.x == 480 - 24) return; // not leave the map
 
 		this->posPlayer.x += 24;
+		Sounds::instance().playSoundEffect("MOVE");
 
 		keyboard::skey[GLUT_KEY_RIGHT] = false;
 	}
@@ -87,7 +88,8 @@ void Player::update(int deltaTime)
 		if (this->posPlayer.y == 0) return; // not leave the map
 		
 		this->posPlayer.y -= 24;
-		
+		Sounds::instance().playSoundEffect("MOVE");
+
 		keyboard::skey[GLUT_KEY_UP] = false;
 	}
 	else if (keyboard::skey[GLUT_KEY_DOWN])
@@ -100,7 +102,8 @@ void Player::update(int deltaTime)
 		if (this->posPlayer.y == 480 - 24) return; // not leave the map
 		
 		this->posPlayer.y += 24;
-		
+		Sounds::instance().playSoundEffect("MOVE");
+
 		keyboard::skey[GLUT_KEY_DOWN] = false;
 	}
 	

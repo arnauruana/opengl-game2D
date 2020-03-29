@@ -422,6 +422,7 @@ void Level::collision(Object* object, Player* player)
 			}
 			case Object::Behaviour::PUSH:
 			{
+				Sounds::instance().playSoundEffect("PUSH");
 				switch (player->getAnimation())
 				{
 					case MOVE_FORWARD:
@@ -493,7 +494,7 @@ void Level::collision(Object* object, Player* player)
 					delete objects[x];
 					objects.pop_back();
 				}
-
+				Sounds::instance().playSoundEffect("WIN");
 				Settings::playing = false; // DEBUG
 				break;
 			}
