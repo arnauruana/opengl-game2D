@@ -1,1 +1,65 @@
-﻿
+﻿  Game.cpp
+  Level.cpp
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(47,22): warning C4553: "==": el resultado de la expresión no se usa. ¿Quiso decir "="?
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(48,22): warning C4553: "==": el resultado de la expresión no se usa. ¿Quiso decir "="?
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(61,22): warning C4553: "==": el resultado de la expresión no se usa. ¿Quiso decir "="?
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(62,22): warning C4553: "==": el resultado de la expresión no se usa. ¿Quiso decir "="?
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(178,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(187,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,38): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,38): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,38): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,38): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,38): warning C4244:         ]
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,29): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,29): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,29): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,29): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(231,29): warning C4244:         ]
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,39): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,39): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,39): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,39): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,39): warning C4244:         ]
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,30): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,30): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,30): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,30): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(237,30): warning C4244:         ]
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,37): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,37): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,37): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,37): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,37): warning C4244:         ]
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,27): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,27): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,27): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,27): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(256,27): warning C4244:         ]
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,38): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,38): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,38): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,38): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,38): warning C4244:         ]
+  main.cpp
+  Menu.cpp
+  Play.cpp
+  Player.cpp
+  Scene.cpp
+  Shader.cpp
+  ShaderProgram.cpp
+  Object.cpp
+  Sounds.cpp
+  Sprite.cpp
+  Texture.cpp
+  Generando código...
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,28): warning C4244: 'argumento': conversión de 'T' a 'int'; posible pérdida de datos
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,28): warning C4244:         with
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,28): warning C4244:         [
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,28): warning C4244:             T=float
+C:\Users\Vikto\source\repos\game3003\game\02-Bubble\Level.cpp(262,28): warning C4244:         ]
+SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'C:\Users\Vikto\Source\Repos\game3003\game\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(image_helper.obj)' o en 'C:\Users\Vikto\Source\Repos\game3003\game\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(SOIL.obj)' o en 'C:\Users\Vikto\Source\Repos\game3003\game\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'C:\Users\Vikto\Source\Repos\game3003\game\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  02-Bubble.vcxproj -> C:\Users\Vikto\Source\Repos\game3003\game\Debug\02-Bubble.exe
