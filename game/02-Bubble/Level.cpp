@@ -77,6 +77,8 @@ bool Level::loadMap()
 {
 	glutSetWindowTitle("WINDOW IS LOADING");
 
+	this->cleanMap();
+
 	ifstream fin(this->path);
 
 	if (!fin.is_open())
@@ -706,9 +708,9 @@ void Level::collision(Object* object, Player* player)
 			case Object::Behaviour::WIN:
 			{
 				Sounds::instance().playSoundEffect("WIN");
+				this->cleanMap();
 				++Settings::level;
 				Settings::changeLevel = true;
-				this->cleanMap();
 				break;
 			}
 			case Object::Behaviour::DEFEAT:

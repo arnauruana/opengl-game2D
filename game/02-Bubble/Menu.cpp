@@ -1,12 +1,14 @@
 #include "Menu.h"
 #include "resource.h"
 
+
 Menu::Menu()
 {
 	this->spriteMenu = NULL;
 	this->spriteSelector = NULL;
 	this->spriteControls = NULL;
 	this->spriteCredits = NULL;
+	this->spriteCongrats = NULL;
 }
 
 Menu::~Menu()
@@ -15,6 +17,7 @@ Menu::~Menu()
 	if (this->spriteSelector != NULL) delete this->spriteSelector;
 	if (this->spriteControls != NULL) delete this->spriteControls;
 	if (this->spriteCredits != NULL) delete this->spriteCredits;
+	if (this->spriteCongrats != NULL) delete this->spriteCongrats;
 }
 
 
@@ -39,6 +42,11 @@ void Menu::init()
 			this->initCredits();
 			break;
 		}
+		case Menu::State::CONG:
+		{
+			this->initCongrats();
+			break;
+		}
 		default:
 		{
 			std::cout << "[MENU::init] wrong menu state: " << std::endl;
@@ -49,6 +57,13 @@ void Menu::init()
 
 void Menu::update(int deltaTime)
 {
+	if (Settings::finish)
+	{
+		this->state = Menu::State::CONG;
+		this->init();
+		Settings::finish = false;
+	}
+
 	switch (this->state)
 	{
 		case Menu::State::MENU:
@@ -64,6 +79,11 @@ void Menu::update(int deltaTime)
 		case Menu::State::CRED:
 		{
 			this->updateCredits(deltaTime);
+			break;
+		}
+		case Menu::State::CONG:
+		{
+			this->updateCongrats(deltaTime);
 			break;
 		}
 		default:
@@ -100,6 +120,11 @@ void Menu::render()
 		case Menu::State::CRED:
 		{
 			this->renderCredits();
+			break;
+		}
+		case Menu::State::CONG:
+		{
+			this->renderCongrats();
 			break;
 		}
 		default:
@@ -158,6 +183,17 @@ void Menu::initCredits()
 	this->spriteCredits = Sprite::createSprite(glm::ivec2(Settings::GAME_WINDOW_WIDTH, Settings::GAME_WINDOW_HEIGHT), glm::vec2(1.f, 1.f), &this->textureCredits, &this->shader);
 	this->spriteCredits->setNumberAnimations(0);
 	this->spriteCredits->setPosition(glm::vec2(0.f, 0.f));
+}
+
+void Menu::initCongrats()
+{
+	glutSetWindowTitle("WINDOW IS CONGRATS");
+
+	this->textureCongrats.loadFromFile(Menu::PATH_CONG, PixelFormat(Settings::FORMAT_CONG));
+
+	this->spriteCongrats = Sprite::createSprite(glm::ivec2(Settings::GAME_WINDOW_WIDTH, Settings::GAME_WINDOW_HEIGHT), glm::vec2(1.f, 1.f), &this->textureCongrats, &this->shader);
+	this->spriteCongrats->setNumberAnimations(0);
+	this->spriteCongrats->setPosition(glm::vec2(0.f, 0.f));
 }
 
 
@@ -269,6 +305,17 @@ void Menu::updateCredits(int deltaTime)
 	}
 }
 
+void Menu::updateCongrats(int deltaTime)
+{
+	this->spriteCongrats->update(deltaTime);
+
+	if (keyboard::key['B'] || keyboard::key['b'])
+	{
+		this->state = Menu::State::MENU;
+		this->init();
+	}
+}
+
 
 void Menu::renderMenu()
 {
@@ -284,6 +331,11 @@ void Menu::renderControls()
 void Menu::renderCredits()
 {
 	this->spriteCredits->render();
+}
+
+void Menu::renderCongrats()
+{
+	this->spriteCongrats->render();
 }
 
 

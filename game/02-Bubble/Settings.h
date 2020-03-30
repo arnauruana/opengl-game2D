@@ -14,9 +14,10 @@
 
 struct Settings
 {
-	inline static bool playing = false;
 	inline static int level = 1;
+	inline static bool playing = false;
 	inline static bool changeLevel = false;
+	inline static bool finish = false;
 
 	inline static const int GAME_WINDOW_WIDTH  = 480;
 	inline static const int GAME_WINDOW_HEIGHT = 480;
@@ -27,6 +28,7 @@ struct Settings
 	inline static const std::string IMG_SELE = "selector.jpg";
 	inline static const std::string IMG_CONT = "controls.jpg";
 	inline static const std::string IMG_CRED = "credits.jpg";
+	inline static const std::string IMG_CONG = "end.jpg";
 
 	inline static const std::string PATH_LEVEL1 = "levels/1.txt";
 	inline static const std::string PATH_LEVEL2 = "levels/2.txt";
@@ -64,6 +66,7 @@ struct Settings
 	inline static const Format FORMAT_SELE = Format::RGBA;
 	inline static const Format FORMAT_CONT = Format::RGB;
 	inline static const Format FORMAT_CRED = Format::RGB;
+	inline static const Format FORMAT_CONG = Format::RGB;
 
 	inline static const Format FORMAT_FLAG  = Format::RGBA;
 	inline static const Format FORMAT_FLOOR = Format::RGBA;

@@ -38,6 +38,13 @@ void Play::init()
 			this->state = Play::State::LEVEL5;
 			break;
 		}
+		case 6:
+		{
+			Settings::level = 1;
+			Settings::playing = false;
+			Settings::finish = true;
+			break;
+		}
 		default:
 		{
 			std::cerr << "[PLAY::init] wrong level number" << std::endl;

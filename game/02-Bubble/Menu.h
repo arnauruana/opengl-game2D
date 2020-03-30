@@ -20,12 +20,13 @@ class Menu
 {
 public:
 
-	enum class State { MENU, CONT, CRED };
+	enum class State { MENU, CONT, CRED, CONG };
 
 	inline static const std::string PATH_MENU = Settings::PATH_MENU + Settings::IMG_MENU;
 	inline static const std::string PATH_SELE = Settings::PATH_MENU + Settings::IMG_SELE;
 	inline static const std::string PATH_CONT = Settings::PATH_MENU + Settings::IMG_CONT;
 	inline static const std::string PATH_CRED = Settings::PATH_MENU + Settings::IMG_CRED;
+	inline static const std::string PATH_CONG = Settings::PATH_MENU + Settings::IMG_CONG;
 
 public:
 
@@ -52,6 +53,10 @@ private:
 	void updateCredits(int deltaTime);
 	void renderCredits();
 
+	void initCongrats();
+	void updateCongrats(int deltaTime);
+	void renderCongrats();
+
 	void initShader();
 
 private:
@@ -62,11 +67,13 @@ private:
 	Sprite* spriteSelector;
 	Sprite* spriteControls;
 	Sprite* spriteCredits;
+	Sprite* spriteCongrats;
 
 	Texture textureMenu;
 	Texture textureSelector;
 	Texture textureControls;
 	Texture textureCredits;
+	Texture textureCongrats;
 
 	ShaderProgram shader;
 
