@@ -10,38 +10,67 @@ void Play::init()
 {
 	this->initShader();
 
-	this->state = Play::State::LEVEL1;
+	int level = Settings::level;
+	switch (level)
+	{
+		case 1:
+		{
+			this->state = Play::State::LEVEL1;
+			break;
+		}
+		case 2:
+		{
+			this->state = Play::State::LEVEL2;
+			break;
+		}
+		case 3:
+		{
+			this->state = Play::State::LEVEL3;
+			break;
+		}
+		case 4:
+		{
+			this->state = Play::State::LEVEL4;
+			break;
+		}
+		case 5:
+		{
+			this->state = Play::State::LEVEL5;
+			break;
+		}
+		default:
+		{
+			std::cerr << "[PLAY::init] wrong level number" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
 
+	this->level.setShader(this->shader);
 	switch (this->state)
 	{
 		case Play::State::LEVEL1:
 		{
-			this->level1.setShader(this->shader);
-			this->level1.init();
+			this->level.setPath(Settings::PATH_LEVEL1);
 			break;
 		}
 		case Play::State::LEVEL2:
 		{
-			this->level2.setShader(this->shader);
-			this->level2.init();
+			this->level.setPath(Settings::PATH_LEVEL2);
 			break;
 		}
 		case Play::State::LEVEL3:
 		{
-			this->level3.setShader(this->shader);
-			this->level3.init();
+			this->level.setPath(Settings::PATH_LEVEL3);
 			break;
 		}
 		case Play::State::LEVEL4:
 		{
-			this->level4.setShader(this->shader);
-			this->level4.init();
+			this->level.setPath(Settings::PATH_LEVEL4);
 			break;
 		}
 		case Play::State::LEVEL5:
 		{
-			this->level5.setShader(this->shader);
-			this->level5.init();
+			this->level.setPath(Settings::PATH_LEVEL5);
 			break;
 		}
 		default:
@@ -50,43 +79,18 @@ void Play::init()
 			exit(EXIT_FAILURE);
 		}
 	}
+	this->level.init();
 }
 
 void Play::update(int deltaTime)
 {
-	switch (this->state)
+	if (Settings::changeLevel)
 	{
-		case Play::State::LEVEL1:
-		{
-			this->level1.update(deltaTime);
-			break;
-		}
-		case Play::State::LEVEL2:
-		{
-			this->level2.update(deltaTime);
-			break;
-		}
-		case Play::State::LEVEL3:
-		{
-			this->level3.update(deltaTime);
-			break;
-		}
-		case Play::State::LEVEL4:
-		{
-			this->level4.update(deltaTime);
-			break;
-		}
-		case Play::State::LEVEL5:
-		{
-			this->level5.update(deltaTime);
-			break;
-		}
-		default:
-		{
-			std::cout << "[PLAY::update] wrong play state" << std::endl;
-			exit(EXIT_FAILURE);
-		}
+		this->init();
+		Settings::changeLevel = false;
 	}
+
+	this->level.update(deltaTime);
 }
 
 void Play::render()
@@ -100,39 +104,7 @@ void Play::render()
 	this->shader.setUniformMatrix4f("modelview", modelview);
 	this->shader.setUniform2f("texCoordDispl", 0.f, 0.f);
 
-	switch (this->state)
-	{
-		case Play::State::LEVEL1:
-		{
-			this->level1.render();
-			break;
-		}
-		case Play::State::LEVEL2:
-		{
-			this->level2.render();
-			break;
-		}
-		case Play::State::LEVEL3:
-		{
-			this->level3.render();
-			break;
-		}
-		case Play::State::LEVEL4:
-		{
-			this->level4.render();
-			break;
-		}
-		case Play::State::LEVEL5:
-		{
-			this->level5.render();
-			break;
-		}
-		default:
-		{
-			std::cout << "[PLAY::render] wrong play state" << std::endl;
-			exit(EXIT_FAILURE);
-		}
-	}
+	this->level.render();
 }
 
 

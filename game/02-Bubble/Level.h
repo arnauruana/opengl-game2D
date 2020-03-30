@@ -20,6 +20,7 @@ public:
 	Level();
 	~Level();
 
+	void setPath(const std::string& path);
 	void setShader(const ShaderProgram& shader);
 
 	void init();
@@ -45,6 +46,8 @@ private:
 private:
 
 	bool updateBehaviour = false;
+
+	std::string path;
 
 	Player* player;
 	std::vector<Object*> objects;

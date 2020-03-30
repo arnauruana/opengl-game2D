@@ -15,6 +15,8 @@
 struct Settings
 {
 	inline static bool playing = false;
+	inline static int level = 1;
+	inline static bool changeLevel = false;
 
 	inline static const int GAME_WINDOW_WIDTH  = 480;
 	inline static const int GAME_WINDOW_HEIGHT = 480;
@@ -25,6 +27,12 @@ struct Settings
 	inline static const std::string IMG_SELE = "selector.jpg";
 	inline static const std::string IMG_CONT = "controls.jpg";
 	inline static const std::string IMG_CRED = "credits.jpg";
+
+	inline static const std::string PATH_LEVEL1 = "levels/1.txt";
+	inline static const std::string PATH_LEVEL2 = "levels/2.txt";
+	inline static const std::string PATH_LEVEL3 = "levels/3.txt";
+	inline static const std::string PATH_LEVEL4 = "levels/4.txt";
+	inline static const std::string PATH_LEVEL5 = "levels/5.txt";
 
 	inline static const std::string PATH_OBJECTS = "images/object/";
 
@@ -41,7 +49,6 @@ struct Settings
 	inline static const std::string TXT_WALL = "word-wall.png";
 	inline static const std::string TXT_LAVA = "word-lava.png";
 	inline static const std::string TXT_DEFEAT = "word-defeat.png";
-
 
 	inline static const std::string TXT_IS = "word-is.png";
 	inline static const std::string TXT_NEAR = "word-near.png";

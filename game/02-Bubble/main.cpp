@@ -62,10 +62,10 @@ inline void initWindow(int argc, char** argv)
 	glutInitWindowSize(Game::GAME_WINDOW_WIDTH, Game::GAME_WINDOW_HEIGHT);
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - Game::GAME_WINDOW_WIDTH) / 2,
 		(glutGet(GLUT_SCREEN_HEIGHT) - Game::GAME_WINDOW_HEIGHT) / 2);
-	
 	glutCreateWindow("");
 	
 	glutSetCursor(GLUT_CURSOR_NONE);
+	glutSetWindowTitle("WINDOW IS LOADING");
 }
 
 inline void initFunctions()

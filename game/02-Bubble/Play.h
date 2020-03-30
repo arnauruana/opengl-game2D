@@ -3,7 +3,6 @@
 
 
 #include "Level.h"
-//#include "Settings.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -33,11 +32,7 @@ private:
 
 	Play::State state;
 
-	Level level1;
-	Level level2;
-	Level level3;
-	Level level4;
-	Level level5;
+	Level level;
 
 	ShaderProgram shader;
 };

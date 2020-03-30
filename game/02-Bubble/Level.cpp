@@ -13,6 +13,11 @@ Level::~Level()
 }
 
 
+void Level::setPath(const std::string& path)
+{
+	this->path = path;
+}
+
 void Level::setShader(const ShaderProgram& shader)
 {
 	this->shader = shader;
@@ -21,26 +26,42 @@ void Level::setShader(const ShaderProgram& shader)
 
 void Level::init()
 {
-	glutSetWindowTitle("WINDOW IS GAME");
 	if (!this->loadMap())
 	{
 		std::cerr << "[LEVEL::init] error while loading map" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 	Sounds::instance().playMusic(true);
-	this->assignBehaviours();
+	glutSetWindowTitle("WINDOW IS GAME");
 }
 
 void Level::update(int deltaTime)
 {
 	if (this->updateBehaviour) this->assignBehaviours();
-	if (keyboard::key['r'] || keyboard::key['R']) {
+
+	if (keyboard::key['r'] || keyboard::key['R'])
+	{
 		this->cleanMap();
 		this->loadMap();
 
 		keyboard::key['r'] == false;
 		keyboard::key['R'] == false;
+
+		glutSetWindowTitle("WINDOW IS GAME");
 	}
+
+	if (keyboard::key['b'] || keyboard::key['B'])
+	{
+		this->cleanMap();
+
+		Settings::playing = false;
+		Settings::level = 1;
+		Settings::changeLevel = false;
+
+		keyboard::key['b'] == false;
+		keyboard::key['B'] == false;
+	}
+
 	this->updatePlayer(deltaTime);
 	this->updateObjects(deltaTime);
 }
@@ -54,8 +75,9 @@ void Level::render()
 
 bool Level::loadMap()
 {
-	//ifstream fin("levels/1.txt");
-	ifstream fin("levels/2.txt");
+	glutSetWindowTitle("WINDOW IS LOADING");
+
+	ifstream fin(this->path);
 
 	if (!fin.is_open())
 	{
@@ -124,6 +146,8 @@ bool Level::loadMap()
 			}
 		}
 	}
+
+	this->assignBehaviours();
 
 	return true;
 }
@@ -601,14 +625,19 @@ void Level::collision(Object* object, Player* player)
 						exit(EXIT_FAILURE);
 					}
 				}
-
 				break;
 			}
 			case Object::Behaviour::WIN:
 			{
-				this->cleanMap();
 				Sounds::instance().playSoundEffect("WIN");
-				Settings::playing = false; // DEBUG
+				++Settings::level;
+				Settings::changeLevel = true;
+				this->cleanMap();
+				break;
+			}
+			case Object::Behaviour::DEFEAT:
+			{
+				Sounds::instance().playSoundEffect("DEFEAT");
 				break;
 			}
 		}
