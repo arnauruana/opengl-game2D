@@ -506,6 +506,82 @@ void Level::assignBehaviours()
 				}
 				break;
 			}
+			case Object::Type::LAVA:
+			{
+				for (Text text : texts)
+				{
+					if (text.pre == Object::Type::TXT_LAVA && text.op == Object::Type::TXT_IS)
+					{
+						switch (text.post)
+						{
+							//subjects
+							case Object::Type::TXT_FLAG:
+							{
+								object->setType(Object::Type::LAVA);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WATER:
+							{
+								object->setType(Object::Type::WATER);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_ROCK:
+							{
+								object->setType(Object::Type::ROCK);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setType(Object::Type::WALL);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							// predicates
+							case Object::Type::TXT_DEFEAT:
+							{
+								object->setBehaviour(Object::Behaviour::DEFEAT);
+								break;
+							}
+							case Object::Type::TXT_PUSH:
+							{
+								object->setBehaviour(Object::Behaviour::PUSH);
+								break;
+							}
+							case Object::Type::TXT_STOP:
+							{
+								object->setBehaviour(Object::Behaviour::STOP);
+								break;
+							}
+							case Object::Type::TXT_WIN:
+							{
+								object->setBehaviour(Object::Behaviour::WIN);
+								break;
+							}
+							case Object::Type::TXT_YOU:
+							{
+								object->setBehaviour(Object::Behaviour::YOU);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
+				}
+				break;
+			}
 			default:
 			{
 				break;
@@ -637,7 +713,7 @@ void Level::collision(Object* object, Player* player)
 			}
 			case Object::Behaviour::DEFEAT:
 			{
-				Sounds::instance().playSoundEffect("DEFEAT");
+				Sounds::instance().playSoundEffect("DIE");
 				break;
 			}
 		}

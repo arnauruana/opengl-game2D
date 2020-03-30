@@ -181,7 +181,7 @@ void Object::setType(Object::Type type)
 		{
 			this->path += Settings::TXT_LAVA;
 			this->format = Settings::FORMAT_TXTLAVA;
-			this->behaviour = Object::Behaviour::POST;
+			this->behaviour = Object::Behaviour::PRE;
 			this->color = glm::vec3(1.f, 0.f, 0.f);
 			break;
 		}
