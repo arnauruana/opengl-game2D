@@ -1,23 +1,23 @@
 MAP
 20 20
 24
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
-none none none none none none none none none none none none none none none none none none none
+none none none none none none none none none none none none none none none none wall WALL  IS  STOP
+none none none none none none none none none none none none none none none none wall BABA  IS  YOU 
+none none none none none none none none none none none none none none none none wall wall wall wall 
+none none lava lava lava none none none none none none none none none none none none none none none
+lava lava lava lava lava none none none none none none none none none none none none none none none
+lava lava lava wall wall wall wall wall none wall wall wall wall none none none none none none none
+lava lava lava wall none none none none none none none none wall none none none none none none none 
+lava lava lava wall none BABA none none none baba ROCK none wall none none none none none none none
+lava none none wall none  IS  none none flag none none none wall none none none none none none none
+none none none wall none none none none none none  IS  none wall none none none none none none none 
+none none none wall none none none none none none none none wall none none none none none none lava
+none none none wall wall wall wall wall wall wall wall wall wall none none none none none none lava
+none none none none none none none none none none none none none none none none none none lava lava
+none none none none none none none none none none none none none none none lava lava lava lava lava
+none none none none none none none none none none none none none none lava lava lava lava lava lava
+lava none none none none none none none none none none none none none lava lava lava lava wall wall
+lava lava lava none none none none none none none none none none none none lava lava lava none none
+lava lava lava lava none none none none none none none none none none none lava wall wall wall WIN
+lava lava lava lava none none none none none none none none none none none none wall FLAG IS DEFEAT
+lava lava lava lava lava none none none none none none none none none none none wall LAVA IS  none
