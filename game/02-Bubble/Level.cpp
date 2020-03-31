@@ -62,7 +62,10 @@ void Level::update(int deltaTime)
 		keyboard::key['B'] == false;
 	}
 
-	this->updatePlayer(deltaTime);
+	if (this->babaIsYou)
+	{
+		this->updatePlayer(deltaTime);
+	}
 	this->updateObjects(deltaTime);
 }
 
@@ -274,6 +277,23 @@ void Level::assignBehaviours()
 		}
 	}
 
+	// check BABA IS YOU
+	for (Text text : texts)
+	{
+		Object::Type baba = Object::Type::TXT_BABA;
+		Object::Type is = Object::Type::TXT_IS;
+		Object::Type you = Object::Type::TXT_YOU;
+		
+		if (text.pre == baba && text.op == is && text.post == you)
+		{
+			this->babaIsYou = true;
+			break;
+		}
+
+		this->babaIsYou = false;
+	}
+
+	// check the others
 	for (Object* object : this->objects)
 	{
 		glm::vec2 position = object->getPosition();
