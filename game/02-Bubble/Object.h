@@ -2,10 +2,13 @@
 #define _OBJECT_INCLUDE
 
 
+#include "Keyboard.h"
 #include "Settings.h"
 #include "ShaderProgram.h"
 #include "Sprite.h"
 #include "Texture.h"
+
+#include <GL/glut.h>
 
 #include <iostream>
 
@@ -18,6 +21,7 @@ public:
 	{
 		NONE,
 
+		BABA,
 		FLAG,
 		LAVA,
 		ROCK,
@@ -53,7 +57,7 @@ public:
 
 		PRE,
 		OP,
-		POST
+		POST,
 	};
 
 	enum class Direction
@@ -62,6 +66,14 @@ public:
 		FORWARD,
 		LEFT,
 		RIGHT,
+	};
+
+	enum Baba
+	{
+		MOVE_BACKWARD,
+		MOVE_FORWARD,
+		MOVE_LEFT,
+		MOVE_RIGHT,
 	};
 
 public:

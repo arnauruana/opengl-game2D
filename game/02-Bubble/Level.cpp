@@ -206,9 +206,9 @@ void Level::assignBehaviours()
 		Object::Type lava = Object::Type::LAVA;
 		Object::Type rock = Object::Type::ROCK;
 		Object::Type wall = Object::Type::WALL;
-		Object::Type water = Object::Type::WATER;
+		Object::Type baba = Object::Type::BABA;
 
-		if (type == flag || type == lava || type == rock || type == wall || type == water)
+		if (type == flag || type == lava || type == rock || type == wall || type == baba)
 		{
 			object->setBehaviour(Object::Behaviour::NONE);
 		}
@@ -317,9 +317,9 @@ void Level::assignBehaviours()
 								this->assignBehaviours();
 								break;
 							}
-							case Object::Type::TXT_WATER:
+							case Object::Type::TXT_BABA:
 							{
-								object->setType(Object::Type::WATER);
+								object->setType(Object::Type::BABA);
 								object->init();
 								object->setPosition(position);
 								this->assignBehaviours();
@@ -393,9 +393,9 @@ void Level::assignBehaviours()
 								this->assignBehaviours();
 								break;
 							}
-							case Object::Type::TXT_WATER:
+							case Object::Type::TXT_BABA:
 							{
-								object->setType(Object::Type::WATER);
+								object->setType(Object::Type::BABA);
 								object->init();
 								object->setPosition(position);
 								this->assignBehaviours();
@@ -469,9 +469,9 @@ void Level::assignBehaviours()
 								this->assignBehaviours();
 								break;
 							}
-							case Object::Type::TXT_WATER:
+							case Object::Type::TXT_BABA:
 							{
-								object->setType(Object::Type::WATER);
+								object->setType(Object::Type::BABA);
 								object->init();
 								object->setPosition(position);
 								this->assignBehaviours();
@@ -545,9 +545,9 @@ void Level::assignBehaviours()
 								this->assignBehaviours();
 								break;
 							}
-							case Object::Type::TXT_WATER:
+							case Object::Type::TXT_BABA:
 							{
-								object->setType(Object::Type::WATER);
+								object->setType(Object::Type::BABA);
 								object->init();
 								object->setPosition(position);
 								this->assignBehaviours();

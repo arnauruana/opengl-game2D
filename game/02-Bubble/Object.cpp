@@ -73,6 +73,14 @@ void Object::setType(Object::Type type)
 			this->behaviour = Object::Behaviour::NONE;
 			break;
 		}
+		case Object::Type::BABA:
+		{
+			this->path += Settings::IMG_BABA;
+			this->format = Settings::FORMAT_BABA;
+			this->behaviour = Object::Behaviour::NONE;
+			this->color = glm::vec3(1.f, 1.f, 1.f);
+			break;
+		}
 		case Object::Type::FLAG:
 		{
 			this->path += Settings::IMG_FLAG;
@@ -205,19 +213,90 @@ void Object::setType(Object::Type type)
 void Object::init()
 {
 	this->texture.loadFromFile(this->path, PixelFormat(this->format));
+	
+	if (this->type == Object::Type::BABA)
+	{
+		this->sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(0.20, 0.25), &this->texture, &this->shader);
+		this->sprite->setNumberAnimations(4);
 
-	this->sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1.f / 3.f, 1.f), &this->texture, &this->shader);
-	this->sprite->setNumberAnimations(1);
-	this->sprite->setAnimationSpeed(0, 4);
-	this->sprite->addKeyframe(0, glm::vec2(0.f, 0.f));
-	this->sprite->addKeyframe(0, glm::vec2(1.f / 3.f, 0.f));
-	this->sprite->addKeyframe(0, glm::vec2(2.f / 3.f, 0.f));
+		this->sprite->setAnimationSpeed(Object::Baba::MOVE_BACKWARD, 8);
+		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.2f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.4f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.6f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.8f, 0.25f));
+
+		this->sprite->setAnimationSpeed(Object::Baba::MOVE_FORWARD, 8);
+		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.2f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.4f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.6f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.8f, 0.25f));
+
+		this->sprite->setAnimationSpeed(Object::Baba::MOVE_LEFT, 8);
+		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.2f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.4f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.6f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.8f, 0.25f));
+		
+		this->sprite->setAnimationSpeed(Object::Baba::MOVE_RIGHT, 8);
+		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.2f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.4f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.6f, 0.25f));
+		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.8f, 0.25f));
+	}
+	else
+	{
+		this->sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1.f / 3.f, 1.f), &this->texture, &this->shader);
+		this->sprite->setNumberAnimations(1);
+		
+		this->sprite->setAnimationSpeed(0, 5);
+		this->sprite->addKeyframe(0, glm::vec2(0.f, 0.f));
+		this->sprite->addKeyframe(0, glm::vec2(1.f / 3.f, 0.f));
+		this->sprite->addKeyframe(0, glm::vec2(2.f / 3.f, 0.f));
+	}
+	
 	this->sprite->changeAnimation(0);
 }
 
 void Object::update(int deltaTime)
 {
 	this->sprite->update(deltaTime);
+
+	if (this->type == Object::Type::BABA)
+	{
+		cout << "hola" << endl;
+		if (keyboard::skey[GLUT_KEY_LEFT])
+		{
+			if (this->sprite->animation() != MOVE_LEFT)
+			{
+				this->sprite->changeAnimation(MOVE_LEFT);
+			}
+		}
+		else if (keyboard::skey[GLUT_KEY_RIGHT])
+		{
+			if (this->sprite->animation() != MOVE_RIGHT)
+			{
+				this->sprite->changeAnimation(MOVE_RIGHT);
+			}
+		}
+		else if (keyboard::skey[GLUT_KEY_UP])
+		{
+			if (this->sprite->animation() != MOVE_BACKWARD)
+			{
+				this->sprite->changeAnimation(MOVE_BACKWARD);
+			}
+		}
+		else if (keyboard::skey[GLUT_KEY_DOWN])
+		{
+			if (this->sprite->animation() != MOVE_FORWARD)
+			{
+				this->sprite->changeAnimation(MOVE_FORWARD);
+			}
+		}
+	}
 }
 
 void Object::render()
