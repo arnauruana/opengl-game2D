@@ -716,8 +716,7 @@ void Level::collision(Object* object, Player* player)
 			case Object::Behaviour::DEFEAT:
 			{
 				Sounds::instance().playSoundEffect("DIE");
-				this->cleanMap();
-				this->loadMap();
+				this->init();
 				break;
 			}
 		}
