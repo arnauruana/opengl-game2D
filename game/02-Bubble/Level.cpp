@@ -66,7 +66,7 @@ void Level::update(int deltaTime)
 	{
 		object->update(deltaTime);
 
-		if (object->getType() == Object::Type::BABA)
+		if (object->getBehaviour() == Object::Behaviour::YOU)
 		{
 			for (Object* obj : this->objects)
 			{
@@ -245,22 +245,6 @@ void Level::assignBehaviours()
 				texts.push_back(txt2);
 			}
 		}
-	}
-
-	// check BABA IS YOU
-	for (Text text : texts)
-	{
-		Object::Type baba = Object::Type::TXT_BABA;
-		Object::Type is = Object::Type::TXT_IS;
-		Object::Type you = Object::Type::TXT_YOU;
-		
-		if (text.pre == baba && text.op == is && text.post == you)
-		{
-			this->babaIsYou = true;
-			break;
-		}
-
-		this->babaIsYou = false;
 	}
 
 	// check the others
@@ -509,7 +493,7 @@ void Level::assignBehaviours()
 							//subjects
 							case Object::Type::TXT_FLAG:
 							{
-								object->setType(Object::Type::LAVA);
+								object->setType(Object::Type::FLAG);
 								object->init();
 								object->setPosition(position);
 								this->assignBehaviours();
@@ -518,6 +502,82 @@ void Level::assignBehaviours()
 							case Object::Type::TXT_BABA:
 							{
 								object->setType(Object::Type::BABA);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_ROCK:
+							{
+								object->setType(Object::Type::ROCK);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setType(Object::Type::WALL);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							// predicates
+							case Object::Type::TXT_DEFEAT:
+							{
+								object->setBehaviour(Object::Behaviour::DEFEAT);
+								break;
+							}
+							case Object::Type::TXT_PUSH:
+							{
+								object->setBehaviour(Object::Behaviour::PUSH);
+								break;
+							}
+							case Object::Type::TXT_STOP:
+							{
+								object->setBehaviour(Object::Behaviour::STOP);
+								break;
+							}
+							case Object::Type::TXT_WIN:
+							{
+								object->setBehaviour(Object::Behaviour::WIN);
+								break;
+							}
+							case Object::Type::TXT_YOU:
+							{
+								object->setBehaviour(Object::Behaviour::YOU);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
+				}
+				break;
+			}
+			case Object::Type::BABA:
+			{
+				for (Text text : texts)
+				{
+					if (text.pre == Object::Type::TXT_BABA && text.op == Object::Type::TXT_IS)
+					{
+						switch (text.post)
+						{
+							//subjects
+							case Object::Type::TXT_FLAG:
+							{
+								object->setType(Object::Type::FLAG);
+								object->init();
+								object->setPosition(position);
+								this->assignBehaviours();
+								break;
+							}
+							case Object::Type::TXT_LAVA:
+							{
+								object->setType(Object::Type::LAVA);
 								object->init();
 								object->setPosition(position);
 								this->assignBehaviours();
@@ -780,6 +840,7 @@ bool Level::collision(Object* object)
 					obj->setPosition(posObj);
 					return false;
 				}
+				else this->updateBehaviour = true;
 			}
 		}
 	}

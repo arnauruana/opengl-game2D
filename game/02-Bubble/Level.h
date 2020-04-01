@@ -40,7 +40,6 @@ private:
 private:
 
 	bool updateBehaviour = false;
-	bool babaIsYou;
 
 	std::string path;
 

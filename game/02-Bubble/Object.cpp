@@ -274,7 +274,7 @@ void Object::update(int deltaTime)
 
 	this->sprite->update(deltaTime);
 
-	if (this->type == Object::Type::BABA)
+	if (this->behaviour == Object::Behaviour::YOU)
 	{
 		glm::vec2 pos = this->sprite->getPosition();
 
