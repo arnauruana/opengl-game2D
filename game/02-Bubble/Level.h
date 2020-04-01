@@ -3,7 +3,6 @@
 
 
 #include "Object.h"
-#include "Player.h"
 #include "Sounds.h"
 
 #include <GL/glut.h>
@@ -43,7 +42,6 @@ private:
 
 	std::string path;
 
-	Player* player;
 	std::vector<Object*> objects;
 
 	ShaderProgram shader;

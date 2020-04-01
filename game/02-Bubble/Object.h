@@ -98,6 +98,8 @@ public:
 	void setShader(const ShaderProgram& shader);
 	void setType(Object::Type type);
 
+	void move(Object::Direction direction);
+
 	void init();
 	void update(int deltaTime);
 	void render();

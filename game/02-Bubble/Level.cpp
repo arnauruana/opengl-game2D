@@ -2,15 +2,9 @@
 #include "Keyboard.h"
 
 
-Level::Level()
-{
-	this->player = NULL;
-}
+Level::Level() {}
 
-Level::~Level()
-{
-	if (this->player != NULL) delete this->player;
-}
+Level::~Level() {}
 
 
 void Level::setPath(const std::string& path)
@@ -62,18 +56,46 @@ void Level::update(int deltaTime)
 		keyboard::key['B'] == false;
 	}
 
+	bool up = keyboard::skey[GLUT_KEY_UP];
+	bool down = keyboard::skey[GLUT_KEY_DOWN];
+	bool left = keyboard::skey[GLUT_KEY_LEFT];
+	bool right = keyboard::skey[GLUT_KEY_RIGHT];
+
 	for (Object* object : this->objects)
 	{
 		object->update(deltaTime);
 
 		if (object->getBehaviour() == Object::Behaviour::YOU)
 		{
+			if (up)
+			{
+				object->move(Object::Direction::BACKWARD);
+			}
+			else if (down)
+			{
+				object->move(Object::Direction::FORWARD);
+			}
+			else if (left)
+			{
+				object->move(Object::Direction::LEFT);
+			}
+			else if (right)
+			{
+				object->move(Object::Direction::RIGHT);
+			}
+
 			for (Object* obj : this->objects)
 			{
 				this->collision(obj, object);
 			}
 		}
+		
 	}
+
+	keyboard::skey[GLUT_KEY_UP] = false;
+	keyboard::skey[GLUT_KEY_DOWN] = false;
+	keyboard::skey[GLUT_KEY_LEFT] = false;
+	keyboard::skey[GLUT_KEY_RIGHT] = false;
 }
 
 void Level::render()

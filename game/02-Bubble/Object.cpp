@@ -215,6 +215,81 @@ void Object::setType(Object::Type type)
 }
 
 
+void Object::move(Object::Direction direction)
+{
+	this->direction = direction;
+
+	glm::vec2 pos = this->sprite->getPosition();
+
+	switch (this->direction)
+	{
+		case Object::Direction::BACKWARD:
+		{
+			if (pos.y == 0) return;
+
+			if (this->getAnimation() != Object::Animation::MOVE_BACKWARD)
+			{
+				this->sprite->changeAnimation(Object::Animation::MOVE_BACKWARD);
+			}
+
+			pos.y -= 24;
+			this->sprite->setPosition(pos);
+
+			break;
+		}
+		case Object::Direction::FORWARD:
+		{
+			if (pos.y == 480 - 24) return;
+
+			if (this->getAnimation() != Object::Animation::MOVE_FORWARD)
+			{
+				this->sprite->changeAnimation(Object::Animation::MOVE_FORWARD);
+			}
+
+			pos.y += 24;
+			this->sprite->setPosition(pos);
+
+			break;
+		}
+		case Object::Direction::LEFT:
+		{
+			if (pos.x == 0) return;
+
+			if (this->getAnimation() != Object::Animation::MOVE_LEFT)
+			{
+				this->sprite->changeAnimation(Object::Animation::MOVE_LEFT);
+			}
+
+			pos.x -= 24;
+			this->sprite->setPosition(pos);
+
+			break;
+		}
+		case Object::Direction::RIGHT:
+		{
+			if (pos.x == 480 - 24) return;
+
+			if (this->getAnimation() != Object::Animation::MOVE_RIGHT)
+			{
+				this->sprite->changeAnimation(Object::Animation::MOVE_RIGHT);
+			}
+
+			pos.x += 24;
+			this->sprite->setPosition(pos);
+
+			break;
+		}
+		default:
+		{
+			std::cerr << "[OBJECT::move] wrong object move direction" << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	Sounds::instance().playSoundEffect("MOVE");
+}
+
+
 void Object::init()
 {
 	this->texture.loadFromFile(this->path, PixelFormat(this->format));
@@ -273,84 +348,6 @@ void Object::update(int deltaTime)
 	if (this->dead) return;
 
 	this->sprite->update(deltaTime);
-
-	if (this->behaviour == Object::Behaviour::YOU)
-	{
-		glm::vec2 pos = this->sprite->getPosition();
-
-		if (keyboard::skey[GLUT_KEY_LEFT])
-		{
-			this->direction = Object::Direction::LEFT;
-
-			if (this->sprite->animation() != MOVE_LEFT)
-			{
-				this->sprite->changeAnimation(MOVE_LEFT);
-			}
-
-			if (pos.x == 0) return; // not leave the map
-
-			pos.x -= 24;
-			this->sprite->setPosition(pos);
-
-			keyboard::skey[GLUT_KEY_LEFT] = false;
-
-			Sounds::instance().playSoundEffect("MOVE");
-		}
-		else if (keyboard::skey[GLUT_KEY_RIGHT])
-		{
-			this->direction = Object::Direction::RIGHT;
-
-			if (this->sprite->animation() != MOVE_RIGHT)
-			{
-				this->sprite->changeAnimation(MOVE_RIGHT);
-			}
-
-			if (pos.x == 480 - 24) return; // not leave the map
-
-			pos.x += 24;
-			this->sprite->setPosition(pos);
-
-			keyboard::skey[GLUT_KEY_RIGHT] = false;
-
-			Sounds::instance().playSoundEffect("MOVE");
-		}
-		else if (keyboard::skey[GLUT_KEY_UP])
-		{
-			this->direction = Object::Direction::BACKWARD;
-
-			if (this->sprite->animation() != MOVE_BACKWARD)
-			{
-				this->sprite->changeAnimation(MOVE_BACKWARD);
-			}
-
-			if (pos.y == 0) return; // not leave the map
-
-			pos.y -= 24;
-			this->sprite->setPosition(pos);
-
-			keyboard::skey[GLUT_KEY_UP] = false;
-
-			Sounds::instance().playSoundEffect("MOVE");
-		}
-		else if (keyboard::skey[GLUT_KEY_DOWN])
-		{
-			this->direction = Object::Direction::FORWARD;
-
-			if (this->sprite->animation() != MOVE_FORWARD)
-			{
-				this->sprite->changeAnimation(MOVE_FORWARD);
-			}
-
-			if (pos.y == 480 - 24) return; // not leave the map
-
-			pos.y += 24;
-			this->sprite->setPosition(pos);
-
-			keyboard::skey[GLUT_KEY_DOWN] = false;
-
-			Sounds::instance().playSoundEffect("MOVE");
-		}
-	}
 }
 
 void Object::render()
