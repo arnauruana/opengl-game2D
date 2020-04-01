@@ -280,6 +280,8 @@ void Object::update(int deltaTime)
 
 		if (keyboard::skey[GLUT_KEY_LEFT])
 		{
+			this->direction = Object::Direction::LEFT;
+
 			if (this->sprite->animation() != MOVE_LEFT)
 			{
 				this->sprite->changeAnimation(MOVE_LEFT);
@@ -296,6 +298,8 @@ void Object::update(int deltaTime)
 		}
 		else if (keyboard::skey[GLUT_KEY_RIGHT])
 		{
+			this->direction = Object::Direction::RIGHT;
+
 			if (this->sprite->animation() != MOVE_RIGHT)
 			{
 				this->sprite->changeAnimation(MOVE_RIGHT);
@@ -312,6 +316,8 @@ void Object::update(int deltaTime)
 		}
 		else if (keyboard::skey[GLUT_KEY_UP])
 		{
+			this->direction = Object::Direction::BACKWARD;
+
 			if (this->sprite->animation() != MOVE_BACKWARD)
 			{
 				this->sprite->changeAnimation(MOVE_BACKWARD);
@@ -328,6 +334,8 @@ void Object::update(int deltaTime)
 		}
 		else if (keyboard::skey[GLUT_KEY_DOWN])
 		{
+			this->direction = Object::Direction::FORWARD;
+
 			if (this->sprite->animation() != MOVE_FORWARD)
 			{
 				this->sprite->changeAnimation(MOVE_FORWARD);

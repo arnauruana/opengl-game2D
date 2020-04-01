@@ -655,24 +655,24 @@ void Level::collision(Object* object, Object* player)
 		{
 			case Object::Behaviour::STOP:
 			{
-				switch (player->getAnimation())
+				switch (player->getDirection())
 				{
-					case 1:
+					case Object::Direction::FORWARD:
 					{
 						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
 						break;
 					}
-					case 0:
+					case Object::Direction::BACKWARD:
 					{
 						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
 						break;
 					}
-					case 3:
+					case Object::Direction::RIGHT:
 					{
 						player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
 						break;
 					}
-					case 2:
+					case Object::Direction::LEFT:
 					{
 						player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
 						break;
@@ -693,9 +693,9 @@ void Level::collision(Object* object, Object* player)
 			case Object::Behaviour::PUSH:
 			{
 				Sounds::instance().playSoundEffect("PUSH");
-				switch (player->getAnimation())
+				switch (player->getDirection())
 				{
-					case 1:
+					case Object::Direction::FORWARD:
 					{
 						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
 						object->setDirection(Object::Direction::FORWARD);
@@ -708,7 +708,7 @@ void Level::collision(Object* object, Object* player)
 
 						break;
 					}
-					case 0:
+					case Object::Direction::BACKWARD:
 					{
 						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
 						object->setDirection(Object::Direction::BACKWARD);
@@ -721,7 +721,7 @@ void Level::collision(Object* object, Object* player)
 
 						break;
 					}
-					case 3:
+					case Object::Direction::RIGHT:
 					{
 						object->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
 						object->setDirection(Object::Direction::RIGHT);
@@ -734,7 +734,7 @@ void Level::collision(Object* object, Object* player)
 
 						break;
 					}
-					case 2:
+					case Object::Direction::LEFT:
 					{
 						object->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
 						object->setDirection(Object::Direction::LEFT);
