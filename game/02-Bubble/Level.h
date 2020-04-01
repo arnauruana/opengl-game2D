@@ -30,19 +30,12 @@ public:
 private:
 
 	bool loadMap();
-
-	void updatePlayer(int deltaTime);
-	void renderPlayer();
-
-	void updateObjects(int deltaTime);
-	void renderObjects();
+	void cleanMap();
 
 	void assignBehaviours();
-	void collision(Object* object, Player* player);
+	void collision(Object* object, Object* player);
 	bool collision(Object* object);
 	Object* find(int posX, int posY) const;
-
-	void cleanMap();
 
 private:
 

@@ -19,6 +19,11 @@ Object* Object::create()
 }
 
 
+int Object::getAnimation() const
+{
+	return this->sprite->animation();
+}
+
 Object::Behaviour Object::getBehaviour() const
 {
 	return this->behaviour;
@@ -219,33 +224,35 @@ void Object::init()
 		this->sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(0.20, 0.25), &this->texture, &this->shader);
 		this->sprite->setNumberAnimations(4);
 
-		this->sprite->setAnimationSpeed(Object::Baba::MOVE_BACKWARD, 8);
-		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.2f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.4f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.6f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_BACKWARD, glm::vec2(0.8f, 0.25f));
+		this->sprite->setAnimationSpeed(Object::Animation::MOVE_BACKWARD, 8);
+		this->sprite->addKeyframe(Object::Animation::MOVE_BACKWARD, glm::vec2(0.f, 0.25f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_BACKWARD, glm::vec2(0.2f, 0.25f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_BACKWARD, glm::vec2(0.4f, 0.25f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_BACKWARD, glm::vec2(0.6f, 0.25f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_BACKWARD, glm::vec2(0.8f, 0.25f));
 
-		this->sprite->setAnimationSpeed(Object::Baba::MOVE_FORWARD, 8);
-		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.2f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.4f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.6f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_FORWARD, glm::vec2(0.8f, 0.25f));
+		this->sprite->setAnimationSpeed(Object::Animation::MOVE_FORWARD, 8);
+		this->sprite->addKeyframe(Object::Animation::MOVE_FORWARD, glm::vec2(0.f, 0.75f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_FORWARD, glm::vec2(0.2f, 0.75f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_FORWARD, glm::vec2(0.4f, 0.75f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_FORWARD, glm::vec2(0.6f, 0.75f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_FORWARD, glm::vec2(0.8f, 0.75f));
 
-		this->sprite->setAnimationSpeed(Object::Baba::MOVE_LEFT, 8);
-		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.2f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.4f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.6f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_LEFT, glm::vec2(0.8f, 0.25f));
+		this->sprite->setAnimationSpeed(Object::Animation::MOVE_LEFT, 8);
+		this->sprite->addKeyframe(Object::Animation::MOVE_LEFT, glm::vec2(0.f, 0.5f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_LEFT, glm::vec2(0.2f, 0.5f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_LEFT, glm::vec2(0.4f, 0.5f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_LEFT, glm::vec2(0.6f, 0.5f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_LEFT, glm::vec2(0.8f, 0.5f));
 		
-		this->sprite->setAnimationSpeed(Object::Baba::MOVE_RIGHT, 8);
-		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.2f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.4f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.6f, 0.25f));
-		this->sprite->addKeyframe(Object::Baba::MOVE_RIGHT, glm::vec2(0.8f, 0.25f));
+		this->sprite->setAnimationSpeed(Object::Animation::MOVE_RIGHT, 8);
+		this->sprite->addKeyframe(Object::Animation::MOVE_RIGHT, glm::vec2(0.f, 0.0f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_RIGHT, glm::vec2(0.2f, 0.0f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_RIGHT, glm::vec2(0.4f, 0.0f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_RIGHT, glm::vec2(0.6f, 0.0f));
+		this->sprite->addKeyframe(Object::Animation::MOVE_RIGHT, glm::vec2(0.8f, 0.0f));
+
+		this->sprite->changeAnimation(Object::Animation::MOVE_FORWARD);
 	}
 	else
 	{
@@ -256,24 +263,36 @@ void Object::init()
 		this->sprite->addKeyframe(0, glm::vec2(0.f, 0.f));
 		this->sprite->addKeyframe(0, glm::vec2(1.f / 3.f, 0.f));
 		this->sprite->addKeyframe(0, glm::vec2(2.f / 3.f, 0.f));
+		
+		this->sprite->changeAnimation(0);
 	}
-	
-	this->sprite->changeAnimation(0);
 }
 
 void Object::update(int deltaTime)
 {
+	if (this->dead) return;
+
 	this->sprite->update(deltaTime);
 
 	if (this->type == Object::Type::BABA)
 	{
-		cout << "hola" << endl;
+		glm::vec2 pos = this->sprite->getPosition();
+
 		if (keyboard::skey[GLUT_KEY_LEFT])
 		{
 			if (this->sprite->animation() != MOVE_LEFT)
 			{
 				this->sprite->changeAnimation(MOVE_LEFT);
 			}
+
+			if (pos.x == 0) return; // not leave the map
+
+			pos.x -= 24;
+			this->sprite->setPosition(pos);
+
+			keyboard::skey[GLUT_KEY_LEFT] = false;
+
+			Sounds::instance().playSoundEffect("MOVE");
 		}
 		else if (keyboard::skey[GLUT_KEY_RIGHT])
 		{
@@ -281,6 +300,15 @@ void Object::update(int deltaTime)
 			{
 				this->sprite->changeAnimation(MOVE_RIGHT);
 			}
+
+			if (pos.x == 480 - 24) return; // not leave the map
+
+			pos.x += 24;
+			this->sprite->setPosition(pos);
+
+			keyboard::skey[GLUT_KEY_RIGHT] = false;
+
+			Sounds::instance().playSoundEffect("MOVE");
 		}
 		else if (keyboard::skey[GLUT_KEY_UP])
 		{
@@ -288,6 +316,15 @@ void Object::update(int deltaTime)
 			{
 				this->sprite->changeAnimation(MOVE_BACKWARD);
 			}
+
+			if (pos.y == 0) return; // not leave the map
+
+			pos.y -= 24;
+			this->sprite->setPosition(pos);
+
+			keyboard::skey[GLUT_KEY_UP] = false;
+
+			Sounds::instance().playSoundEffect("MOVE");
 		}
 		else if (keyboard::skey[GLUT_KEY_DOWN])
 		{
@@ -295,12 +332,23 @@ void Object::update(int deltaTime)
 			{
 				this->sprite->changeAnimation(MOVE_FORWARD);
 			}
+
+			if (pos.y == 480 - 24) return; // not leave the map
+
+			pos.y += 24;
+			this->sprite->setPosition(pos);
+
+			keyboard::skey[GLUT_KEY_DOWN] = false;
+
+			Sounds::instance().playSoundEffect("MOVE");
 		}
 	}
 }
 
 void Object::render()
 {
+	if (this->dead) return;
+
 	this->shader.setUniform4f("color", this->color.x, this->color.y, this->color.z, 1.0f);
 	this->sprite->render();
 }

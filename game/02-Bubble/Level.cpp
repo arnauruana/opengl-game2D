@@ -62,17 +62,26 @@ void Level::update(int deltaTime)
 		keyboard::key['B'] == false;
 	}
 
-	if (this->babaIsYou)
+	for (Object* object : this->objects)
 	{
-		this->updatePlayer(deltaTime);
+		object->update(deltaTime);
+
+		if (object->getType() == Object::Type::BABA)
+		{
+			for (Object* obj : this->objects)
+			{
+				this->collision(obj, object);
+			}
+		}
 	}
-	this->updateObjects(deltaTime);
 }
 
 void Level::render()
 {
-	this->renderObjects();
-	this->renderPlayer();
+	for (Object* object : this->objects)
+	{
+		object->render();
+	}
 }
 
 
@@ -111,43 +120,34 @@ bool Level::loadMap()
 
 			if (obj != "none")
 			{
-				if (obj == "baba")
-				{
-					this->player = new Player();
-					this->player->init(glm::ivec2(0, 0), this->shader);
-					this->player->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
-				}
-				else
-				{
-					Object* object = Object::create();
-					this->objects.push_back(object);
 
-					if (obj == "flag") object->setType(Object::Type::FLAG);
-					if (obj == "lava") object->setType(Object::Type::LAVA);
-					if (obj == "rock") object->setType(Object::Type::ROCK);
-					if (obj == "wall") object->setType(Object::Type::WALL);
-					if (obj == "water") object->setType(Object::Type::WATER);
+				Object* object = Object::create();
+				this->objects.push_back(object);
 
-					if (obj == "BABA") object->setType(Object::Type::TXT_BABA);
-					if (obj == "FLAG") object->setType(Object::Type::TXT_FLAG);
-					if (obj == "LAVA") object->setType(Object::Type::TXT_LAVA);
-					if (obj == "ROCK") object->setType(Object::Type::TXT_ROCK);
-					if (obj == "WALL") object->setType(Object::Type::TXT_WALL);
+				if (obj == "baba") object->setType(Object::Type::BABA);
+				if (obj == "flag") object->setType(Object::Type::FLAG);
+				if (obj == "lava") object->setType(Object::Type::LAVA);
+				if (obj == "rock") object->setType(Object::Type::ROCK);
+				if (obj == "wall") object->setType(Object::Type::WALL);
 
-					if (obj == "IS") object->setType(Object::Type::TXT_IS);
-					if (obj == "NEAR") object->setType(Object::Type::TXT_NEAR);
+				if (obj == "BABA") object->setType(Object::Type::TXT_BABA);
+				if (obj == "FLAG") object->setType(Object::Type::TXT_FLAG);
+				if (obj == "LAVA") object->setType(Object::Type::TXT_LAVA);
+				if (obj == "ROCK") object->setType(Object::Type::TXT_ROCK);
+				if (obj == "WALL") object->setType(Object::Type::TXT_WALL);
 
-					if (obj == "DEFEAT") object->setType(Object::Type::TXT_DEFEAT);
-					if (obj == "PUSH") object->setType(Object::Type::TXT_PUSH);
-					if (obj == "STOP") object->setType(Object::Type::TXT_STOP);
-					if (obj == "WATER") object->setType(Object::Type::TXT_WATER);
-					if (obj == "WIN") object->setType(Object::Type::TXT_WIN);
-					if (obj == "YOU") object->setType(Object::Type::TXT_YOU);
+				if (obj == "IS") object->setType(Object::Type::TXT_IS);
+				if (obj == "MAKE") object->setType(Object::Type::TXT_MAKE);
 
-					object->setShader(this->shader);
-					object->init();
-					object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
-				}
+				if (obj == "DEFEAT") object->setType(Object::Type::TXT_DEFEAT);
+				if (obj == "PUSH") object->setType(Object::Type::TXT_PUSH);
+				if (obj == "STOP") object->setType(Object::Type::TXT_STOP);
+				if (obj == "WIN") object->setType(Object::Type::TXT_WIN);
+				if (obj == "YOU") object->setType(Object::Type::TXT_YOU);
+
+				object->setShader(this->shader);
+				object->init();
+				object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
 			}
 		}
 	}
@@ -157,41 +157,11 @@ bool Level::loadMap()
 	return true;
 }
 
-
-void Level::updatePlayer(int deltaTime)
-{
-	this->player->update(deltaTime);
-}
-
 void Level::cleanMap() {
 	int x = objects.size() - 1;
 	for (int x = objects.size() - 1; x >= 0; --x) {
 		delete objects[x];
 		objects.pop_back();
-	}
-}
-
-void Level::renderPlayer()
-{
-	this->shader.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
-	this->player->render();
-}
-
-
-void Level::updateObjects(int deltaTime)
-{
-	for (int i = 0; i < objects.size(); ++i)
-	{
-		objects[i]->update(deltaTime);
-		collision(objects[i], player);
-	}
-}
-
-void Level::renderObjects()
-{
-	for (int i = 0; i < objects.size(); ++i)
-	{
-		objects[i]->render();
 	}
 }
 
@@ -614,7 +584,7 @@ void Level::assignBehaviours()
 	this->updateBehaviour = false;
 }
 
-void Level::collision(Object* object, Player* player)
+void Level::collision(Object* object, Object* player)
 {
 	glm::vec2 posObj = object->getPosition();
 	glm::vec2 posPlayer = player->getPosition();
@@ -627,22 +597,22 @@ void Level::collision(Object* object, Player* player)
 			{
 				switch (player->getAnimation())
 				{
-					case MOVE_FORWARD:
+					case 1:
 					{
 						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
 						break;
 					}
-					case MOVE_BACKWARD:
+					case 0:
 					{
 						player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
 						break;
 					}
-					case MOVE_RIGHT:
+					case 3:
 					{
 						player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
 						break;
 					}
-					case MOVE_LEFT:
+					case 2:
 					{
 						player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
 						break;
@@ -665,7 +635,7 @@ void Level::collision(Object* object, Player* player)
 				Sounds::instance().playSoundEffect("PUSH");
 				switch (player->getAnimation())
 				{
-					case MOVE_FORWARD:
+					case 1:
 					{
 						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
 						object->setDirection(Object::Direction::FORWARD);
@@ -678,7 +648,7 @@ void Level::collision(Object* object, Player* player)
 
 						break;
 					}
-					case MOVE_BACKWARD:
+					case 0:
 					{
 						object->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
 						object->setDirection(Object::Direction::BACKWARD);
@@ -691,7 +661,7 @@ void Level::collision(Object* object, Player* player)
 
 						break;
 					}
-					case MOVE_RIGHT:
+					case 3:
 					{
 						object->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
 						object->setDirection(Object::Direction::RIGHT);
@@ -704,7 +674,7 @@ void Level::collision(Object* object, Player* player)
 
 						break;
 					}
-					case MOVE_LEFT:
+					case 2:
 					{
 						object->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
 						object->setDirection(Object::Direction::LEFT);
@@ -728,7 +698,6 @@ void Level::collision(Object* object, Player* player)
 			case Object::Behaviour::WIN:
 			{
 				Sounds::instance().playSoundEffect("WIN");
-				this->cleanMap();
 				++Settings::level;
 				Settings::changeLevel = true;
 				break;
@@ -736,7 +705,8 @@ void Level::collision(Object* object, Player* player)
 			case Object::Behaviour::DEFEAT:
 			{
 				Sounds::instance().playSoundEffect("DIE");
-				this->init();
+				player->setPosition(glm::vec2(480, 480));
+				player->dead = true;
 				break;
 			}
 		}

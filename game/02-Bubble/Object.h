@@ -5,6 +5,7 @@
 #include "Keyboard.h"
 #include "Settings.h"
 #include "ShaderProgram.h"
+#include "Sounds.h"
 #include "Sprite.h"
 #include "Texture.h"
 
@@ -16,6 +17,8 @@
 class Object
 {
 public:
+
+	bool dead = false;
 
 	enum class Type
 	{
@@ -36,7 +39,7 @@ public:
 		TXT_WATER,
 
 		TXT_IS,
-		TXT_NEAR,
+		TXT_MAKE,
 
 		TXT_DEFEAT,
 		TXT_PUSH,
@@ -62,13 +65,13 @@ public:
 
 	enum class Direction
 	{
-		BACKWARD,
 		FORWARD,
+		BACKWARD,
 		LEFT,
 		RIGHT,
 	};
 
-	enum Baba
+	enum Animation
 	{
 		MOVE_BACKWARD,
 		MOVE_FORWARD,
@@ -83,6 +86,7 @@ public:
 
 	static Object* create();
 
+	int getAnimation() const;
 	Object::Behaviour getBehaviour() const;
 	Object::Direction getDirection() const;
 	Object::Type getType() const;
@@ -100,12 +104,10 @@ public:
 
 private:
 
-	Object::Type type;
 	Object::Behaviour behaviour;
-
-	glm::vec3 color;
-
 	Object::Direction direction;
+	Object::Type type;
+	glm::vec3 color;
 
 	Sprite* sprite;
 	Texture texture;
