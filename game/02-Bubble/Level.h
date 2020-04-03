@@ -30,7 +30,7 @@ private:
 
 	bool loadMap();
 	void cleanMap();
-
+	void updateLava();
 	void assignBehaviours();
 	void collision(Object* object, Object* player);
 	bool collision(Object* object);

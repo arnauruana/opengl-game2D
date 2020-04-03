@@ -28,9 +28,110 @@ void Level::init()
 	Sounds::instance().playMusic(true);
 	glutSetWindowTitle("WINDOW IS GAME");
 }
+void Level::updateLava() {
+	int total,column,row;
+	for (int i = 0; i < objects.size() - 1; ++i) {
+		if (objects[i]->isFluid) {
+			total = 0;
+			column = i % 20;
+			row = i / 20;
 
+			if (column != 19) {
+				if (objects[i + 1]->isFluid) total += 1;
+			}
+			else total +=1;
+			
+			if (column != 0) {
+				if (objects[i - 1]->isFluid) total += 2;
+			}
+			else total += 2;
+
+			if (row != 0) {
+				if (objects[i - 20]->isFluid) total += 8;
+			}
+			else total += 8;
+
+			if (row != 19) {
+				if (objects[i + 20]->isFluid) total += 4;
+			}
+			else total += 4;
+
+			objects[i]->setTexture(total + 1);
+			objects[i]->setShader(this->shader);
+			objects[i]->init();
+			objects[i]->setPosition(glm::vec2(column * 24, row * 24));
+
+		}
+	}
+}
 void Level::update(int deltaTime)
 {
+	/*bool r, l, u, d;
+	r = l = u = d = true;
+	for (int i = 0; i < objects.size() - 1; ++i) {
+		if (objects[i]->isFluid) {
+			int column, row;
+			column = i % 20;
+			row = i / 20;
+			if (column != 19) r = objects[i + 1]->isFluid;
+			if (column != 0) l = objects[i - 1]->isFluid;
+			if (row != 0) u = objects[i - 20]->isFluid;
+			if (row != 19) d = objects[i + 20]->isFluid;
+			if (r && l && u && d) { //16
+				objects[i]->setTexture(16);
+			}
+			else if (l && u && d) { //15
+				objects[i]->setTexture(15);
+
+			}
+			else if (r && u && d) { //14
+				objects[i]->setTexture(14);
+			}
+			else if (r && l && d) { //13
+				objects[i]->setTexture(13);
+			}
+			else if (r && u && l) { //12
+				objects[i]->setTexture(12);
+			}
+			else if (u && d) { //11
+				objects[i]->setTexture(11);
+			}
+			else if (l && d) { //10
+				objects[i]->setTexture(10);
+			}
+			else if (u && l) { //9
+				objects[i]->setTexture(9);
+			}
+			else if (r && d) { //8
+				objects[i]->setTexture(8);
+			}
+			else if (u && r) { //7
+				objects[i]->setTexture(7);
+			}
+			else if (r && l) { //6
+				objects[i]->setTexture(6);
+			}
+			else if (d) { //5
+				objects[i]->setTexture(5);
+			}
+			else if (u) { //4
+				objects[i]->setTexture(4);
+			}
+			else if (l) { //3
+				objects[i]->setTexture(3);
+			}
+			else if (r) { //2
+				objects[i]->setTexture(2);
+			}
+			else {
+				objects[i]->setTexture(1);
+			}
+
+			objects[i]->setShader(this->shader);
+			objects[i]->init();
+		}
+	}
+	*/
 	if (this->updateBehaviour) this->assignBehaviours();
 
 	if (keyboard::key['r'] || keyboard::key['R'])
@@ -145,7 +246,6 @@ bool Level::loadMap()
 
 				Object* object = Object::create();
 				this->objects.push_back(object);
-
 				if (obj == "baba") object->setType(Object::Type::BABA);
 				if (obj == "flag") object->setType(Object::Type::FLAG);
 				if (obj == "lava") object->setType(Object::Type::LAVA);
@@ -171,10 +271,20 @@ bool Level::loadMap()
 				object->init();
 				object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
 			}
+			else
+			{
+				Object* object = Object::create();
+				this->objects.push_back(object);
+				object->setType(Object::Type::NONE);
+				object->init();
+				object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
+
+			}
 		}
 	}
 
 	this->assignBehaviours();
+	updateLava();
 
 	return true;
 }
@@ -668,6 +778,7 @@ void Level::assignBehaviours()
 
 void Level::collision(Object* object, Object* player)
 {
+
 	glm::vec2 posObj = object->getPosition();
 	glm::vec2 posPlayer = player->getPosition();
 
@@ -793,6 +904,7 @@ void Level::collision(Object* object, Object* player)
 			}
 		}
 	}
+
 }
 
 bool Level::collision(Object* object)

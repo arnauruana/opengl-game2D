@@ -40,7 +40,23 @@ struct Settings
 
 	inline static const std::string IMG_BABA = "baba.png";
 	inline static const std::string IMG_FLAG = "flag.png";
-	inline static const std::string IMG_LAVA = "fluid.png";
+	inline static const std::string IMG_LAVA1 = "fluid/fluid1.png";
+	inline static const std::string IMG_LAVA2 = "fluid/fluid2.png";
+	inline static const std::string IMG_LAVA3 = "fluid/fluid3.png";
+	inline static const std::string IMG_LAVA4 = "fluid/fluid4.png";
+	inline static const std::string IMG_LAVA5 = "fluid/fluid5.png";
+	inline static const std::string IMG_LAVA6 = "fluid/fluid6.png";
+	inline static const std::string IMG_LAVA7 = "fluid/fluid7.png";
+	inline static const std::string IMG_LAVA8 = "fluid/fluid8.png";
+	inline static const std::string IMG_LAVA9 = "fluid/fluid9.png";
+	inline static const std::string IMG_LAVA10 = "fluid/fluid10.png";
+	inline static const std::string IMG_LAVA11 = "fluid/fluid11.png";
+	inline static const std::string IMG_LAVA12 = "fluid/fluid12.png";
+	inline static const std::string IMG_LAVA13 = "fluid/fluid13.png";
+	inline static const std::string IMG_LAVA14 = "fluid/fluid14.png";
+	inline static const std::string IMG_LAVA15 = "fluid/fluid15.png";
+	inline static const std::string IMG_LAVA16 = "fluid/fluid16.png";
+
 	inline static const std::string IMG_ROCK = "rock.png";
 	inline static const std::string IMG_WALL = "wall.png";
 

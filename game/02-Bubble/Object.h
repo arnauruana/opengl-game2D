@@ -19,6 +19,7 @@ class Object
 public:
 
 	bool dead = false;
+	bool isFluid = false;
 
 	enum class Type
 	{
@@ -97,7 +98,7 @@ public:
 	void setPosition(const glm::vec2& position);
 	void setShader(const ShaderProgram& shader);
 	void setType(Object::Type type);
-
+	void setTexture(int caso);
 	void move(Object::Direction direction);
 
 	void init();
@@ -105,7 +106,6 @@ public:
 	void render();
 
 private:
-
 	Object::Behaviour behaviour;
 	Object::Direction direction;
 	Object::Type type;

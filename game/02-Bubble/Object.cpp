@@ -96,7 +96,7 @@ void Object::setType(Object::Type type)
 		}
 		case Object::Type::LAVA:
 		{
-			this->path += Settings::IMG_LAVA;
+			this->isFluid = true;
 			this->format = Settings::FORMAT_LAVA;
 			this->behaviour = Object::Behaviour::NONE;
 			this->color = glm::vec3(1.0f, 0.f, 0.f);
@@ -214,6 +214,107 @@ void Object::setType(Object::Type type)
 	}
 }
 
+void Object::setTexture(int caso) {
+	this->path = Settings::PATH_OBJECTS;
+	switch (caso)
+	{
+		case 1:
+		{
+			this->path += Settings::IMG_LAVA1;
+			break;
+		}
+		case 2:
+		{
+			this->path += Settings::IMG_LAVA2;
+			break;
+
+		}
+		case 3:
+		{
+			this->path += Settings::IMG_LAVA3;
+			break;
+
+
+		}
+		case 4:
+		{
+			this->path += Settings::IMG_LAVA4;
+			break;
+
+		}
+		case 5:
+		{
+			this->path += Settings::IMG_LAVA5;
+			break;
+
+		}
+		case 6:
+		{
+			this->path += Settings::IMG_LAVA6;
+			break;
+
+		}
+		case 7:
+		{
+			this->path += Settings::IMG_LAVA7;
+			break;
+
+		}
+		case 8:
+		{
+			this->path += Settings::IMG_LAVA8;
+			break;
+
+		}
+		case 9:
+		{
+			this->path += Settings::IMG_LAVA9;
+			break;
+
+		}
+		case 10:
+		{
+			this->path += Settings::IMG_LAVA10;
+			break;
+
+		}
+		case 11:
+		{
+			this->path += Settings::IMG_LAVA11;
+			break;
+
+		}
+		case 12:
+		{
+			this->path += Settings::IMG_LAVA12;
+			break;
+
+		}case 13:
+		{
+			this->path += Settings::IMG_LAVA13;
+			break;
+
+		}
+		case 14:
+		{
+			this->path += Settings::IMG_LAVA14;
+			break;
+
+		}
+		case 15:
+		{
+			this->path += Settings::IMG_LAVA15;
+			break;
+
+		}
+		case 16:
+		{
+			this->path += Settings::IMG_LAVA16;
+			break;
+
+		}
+	}
+}
 
 void Object::move(Object::Direction direction)
 {
