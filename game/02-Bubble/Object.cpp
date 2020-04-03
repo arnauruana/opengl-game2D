@@ -318,6 +318,8 @@ void Object::setTexture(int caso) {
 
 void Object::move(Object::Direction direction)
 {
+	if (this->dead) return;
+
 	this->direction = direction;
 
 	glm::vec2 pos = this->sprite->getPosition();
@@ -387,7 +389,11 @@ void Object::move(Object::Direction direction)
 		}
 	}
 
-	Sounds::instance().playSoundEffect("MOVE");
+	if (!Object::moved)
+	{
+		Sounds::instance().playSoundEffect("MOVE");
+		Object::moved = true;
+	}
 }
 
 

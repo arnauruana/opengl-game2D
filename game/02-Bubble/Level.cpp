@@ -20,14 +20,18 @@ void Level::setShader(const ShaderProgram& shader)
 
 void Level::init()
 {
+	this->win = false;
+
 	if (!this->loadMap())
 	{
 		std::cerr << "[LEVEL::init] error while loading map" << std::endl;
 		exit(EXIT_FAILURE);
 	}
+
 	Sounds::instance().playMusic(true);
 	glutSetWindowTitle("WINDOW IS GAME");
 }
+
 void Level::updateLava() {
 	int total,column,row;
 	for (int i = 0; i < objects.size() - 1; ++i) {
@@ -64,6 +68,7 @@ void Level::updateLava() {
 		}
 	}
 }
+
 void Level::update(int deltaTime)
 {
 	/*bool r, l, u, d;
@@ -190,20 +195,84 @@ void Level::update(int deltaTime)
 				this->collision(obj, object);
 			}
 		}
-		
 	}
 
 	keyboard::skey[GLUT_KEY_UP] = false;
 	keyboard::skey[GLUT_KEY_DOWN] = false;
 	keyboard::skey[GLUT_KEY_LEFT] = false;
 	keyboard::skey[GLUT_KEY_RIGHT] = false;
+
+	Object::moved = false;
 }
 
 void Level::render()
 {
-	for (Object* object : this->objects)
+	Object::Type BABA = Object::Type::BABA;
+	Object::Type FLAG = Object::Type::FLAG;
+	Object::Type LAVA = Object::Type::LAVA;
+	Object::Type ROCK = Object::Type::ROCK;
+	Object::Type WALL = Object::Type::WALL;
+
+	Object::Behaviour YOU = Object::Behaviour::YOU;
+	Object::Behaviour OP = Object::Behaviour::OP;
+	Object::Behaviour PRE = Object::Behaviour::PRE;
+	Object::Behaviour POST = Object::Behaviour::POST;
+
+	for (Object* lava : this->objects)
 	{
-		object->render();
+		if (lava->getType() == LAVA && lava->getBehaviour() != YOU)
+		{
+			lava->render();
+		}
+	}
+
+	for (Object* wall : this->objects)
+	{
+		if (wall->getType() == WALL && wall->getBehaviour() != YOU)
+		{
+			wall->render();
+		}
+	}
+
+	for (Object* flag : this->objects)
+	{
+		if (flag->getType() == FLAG && flag->getBehaviour() != YOU)
+		{
+			flag->render();
+		}
+	}
+
+	for (Object* rock : this->objects)
+	{
+		if (rock->getType() == ROCK && rock->getBehaviour() != YOU)
+		{
+			rock->render();
+		}
+	}
+
+	for (Object* baba : this->objects)
+	{
+		if (baba->getType() == BABA && baba->getBehaviour() != YOU)
+		{
+			baba->render();
+		}
+	}
+
+	for (Object* word : this->objects)
+	{
+		Object::Behaviour beh = word->getBehaviour();
+		if (beh == OP || beh == PRE || beh == POST)
+		{
+			word->render();
+		}
+	}
+
+	for (Object* you : this->objects)
+	{
+		if (you->getBehaviour() == YOU)
+		{
+			you->render();
+		}
 	}
 }
 
@@ -778,6 +847,7 @@ void Level::assignBehaviours()
 
 void Level::collision(Object* object, Object* player)
 {
+	if (this->win) return;
 
 	glm::vec2 posObj = object->getPosition();
 	glm::vec2 posPlayer = player->getPosition();
@@ -893,6 +963,7 @@ void Level::collision(Object* object, Object* player)
 				Sounds::instance().playSoundEffect("WIN");
 				++Settings::level;
 				Settings::changeLevel = true;
+				this->win = true;
 				break;
 			}
 			case Object::Behaviour::DEFEAT:

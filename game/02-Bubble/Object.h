@@ -18,6 +18,8 @@ class Object
 {
 public:
 
+	inline static bool moved = false;
+
 	bool dead = false;
 	bool isFluid = false;
 
@@ -106,6 +108,7 @@ public:
 	void render();
 
 private:
+
 	Object::Behaviour behaviour;
 	Object::Direction direction;
 	Object::Type type;

@@ -39,6 +39,7 @@ private:
 private:
 
 	bool updateBehaviour = false;
+	bool win = false;
 
 	std::string path;
 
