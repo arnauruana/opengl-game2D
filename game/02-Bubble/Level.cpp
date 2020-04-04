@@ -1119,6 +1119,7 @@ bool Level::collision(Object* object, Object* player)
 			case Object::Behaviour::PUSH:
 			{
 				Sounds::instance().playSoundEffect("PUSH");
+				
 				switch (player->getDirection())
 				{
 					case Object::Direction::FORWARD:

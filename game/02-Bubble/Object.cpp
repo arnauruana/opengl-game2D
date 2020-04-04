@@ -107,6 +107,7 @@ void Object::setType(Object::Type type)
 		case Object::Type::LAVA:
 		{
 			this->isFluid = true;
+			this->path += Settings::IMG_LAVA1;
 			this->format = Settings::FORMAT_LAVA;
 			this->behaviour = Object::Behaviour::NONE;
 			this->color = glm::vec3(1.0f, 0.f, 0.f);
