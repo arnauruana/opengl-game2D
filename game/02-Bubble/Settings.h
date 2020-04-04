@@ -85,21 +85,20 @@ struct Settings
 
 	inline static const Format FORMAT_BABA = Format::RGBA;
 	inline static const Format FORMAT_FLAG = Format::RGBA;
-	inline static const Format FORMAT_FLOOR = Format::RGBA;
-	inline static const Format FORMAT_LAVA  = Format::RGBA;
-	inline static const Format FORMAT_ROCK  = Format::RGBA;
-	inline static const Format FORMAT_WATER = Format::RGBA;
+	inline static const Format FORMAT_WALL = Format::RGBA;
+	inline static const Format FORMAT_LAVA = Format::RGBA;
+	inline static const Format FORMAT_ROCK = Format::RGBA;
 
 	inline static const Format FORMAT_TXTBABA = Format::RGBA;
 	inline static const Format FORMAT_TXTFLAG = Format::RGBA;
+	inline static const Format FORMAT_TXTLAVA = Format::RGBA;
 	inline static const Format FORMAT_TXTROCK = Format::RGBA;
 	inline static const Format FORMAT_TXTWALL = Format::RGBA;
-	inline static const Format FORMAT_TXTLAVA = Format::RGBA;
-	inline static const Format FORMAT_TXTDEFEAT = Format::RGBA;
 
 	inline static const Format FORMAT_TXTIS = Format::RGBA;
-	inline static const Format FORMAT_TXTNEAR = Format::RGBA;
+	inline static const Format FORMAT_TXTMAKE = Format::RGBA;
 
+	inline static const Format FORMAT_TXTDEFEAT = Format::RGBA;
 	inline static const Format FORMAT_TXTPUSH = Format::RGBA;
 	inline static const Format FORMAT_TXTSTOP = Format::RGBA;
 	inline static const Format FORMAT_TXTWIN = Format::RGBA;

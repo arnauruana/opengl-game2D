@@ -34,6 +34,11 @@ Object::Direction Object::getDirection() const
 	return this->direction;
 }
 
+Object::Type Object::getMake() const
+{
+	return this->make;
+}
+
 Object::Type Object::getType() const
 {
 	return this->type;
@@ -53,6 +58,11 @@ void Object::setBehaviour(Object::Behaviour behaviour)
 void Object::setDirection(Object::Direction direction)
 {
 	this->direction = direction;
+}
+
+void Object::setMake(Object::Type object)
+{
+	this->make = object;
 }
 
 void Object::setPosition(const glm::vec2& position)
@@ -105,7 +115,7 @@ void Object::setType(Object::Type type)
 		case Object::Type::WALL:
 		{
 			this->path += Settings::IMG_WALL;
-			this->format = Settings::FORMAT_FLOOR;
+			this->format = Settings::FORMAT_WALL;
 			this->behaviour = Object::Behaviour::NONE;
 			this->color = glm::vec3(0.4f, 0.4f, 0.4f);
 			break;
@@ -156,6 +166,14 @@ void Object::setType(Object::Type type)
 			this->format = Settings::FORMAT_TXTIS;
 			this->behaviour = Object::Behaviour::OP;
 			this->color = glm::vec3(1.0f, 0.0f, 1.0f);
+			break;
+		}
+		case Object::Type::TXT_MAKE:
+		{
+			this->path += Settings::TXT_MAKE;
+			this->format = Settings::FORMAT_TXTMAKE;
+			this->behaviour = Object::Behaviour::OP;
+			this->color = glm::vec3(0.0f, 1.0f, 0.0f);
 			break;
 		}
 		case Object::Type::TXT_YOU:

@@ -171,28 +171,102 @@ void Level::update(int deltaTime)
 	{
 		object->update(deltaTime);
 
+		bool move = true;
 		if (object->getBehaviour() == Object::Behaviour::YOU)
 		{
+			glm::ivec2 pos = object->getPosition();
+
 			if (up)
 			{
 				object->move(Object::Direction::BACKWARD);
+				
+				for (Object* obj : this->objects)
+				{
+					if (!this->collision(obj, object))
+					{
+						move = false;
+					}
+				}
+				
+				if (move && object->getMake() != Object::Type::NONE)
+				{
+					Object* obj = Object::create();
+					this->objects.push_back(obj);
+					
+					obj->setType(object->getMake());
+					obj->setShader(this->shader);
+					obj->init();
+					obj->setPosition(pos);
+				}
 			}
 			else if (down)
 			{
 				object->move(Object::Direction::FORWARD);
+
+				for (Object* obj : this->objects)
+				{
+					if (!this->collision(obj, object))
+					{
+						move = false;
+					}
+				}
+
+				if (move && object->getMake() != Object::Type::NONE)
+				{
+					Object* obj = Object::create();
+					this->objects.push_back(obj);
+
+					obj->setType(object->getMake());
+					obj->setShader(this->shader);
+					obj->init();
+					obj->setPosition(pos);
+				}
 			}
 			else if (left)
 			{
 				object->move(Object::Direction::LEFT);
+
+				for (Object* obj : this->objects)
+				{
+					if (!this->collision(obj, object))
+					{
+						move = false;
+					}
+				}
+
+				if (move && object->getMake() != Object::Type::NONE)
+				{
+					Object* obj = Object::create();
+					this->objects.push_back(obj);
+
+					obj->setType(object->getMake());
+					obj->setShader(this->shader);
+					obj->init();
+					obj->setPosition(pos);
+				}
 			}
 			else if (right)
 			{
 				object->move(Object::Direction::RIGHT);
-			}
 
-			for (Object* obj : this->objects)
-			{
-				this->collision(obj, object);
+				for (Object* obj : this->objects)
+				{
+					if (!this->collision(obj, object))
+					{
+						move = false;
+					}
+				}
+
+				if (move && object->getMake() != Object::Type::NONE)
+				{
+					Object* obj = Object::create();
+					this->objects.push_back(obj);
+
+					obj->setType(object->getMake());
+					obj->setShader(this->shader);
+					obj->init();
+					obj->setPosition(pos);
+				}
 			}
 		}
 	}
@@ -312,7 +386,6 @@ bool Level::loadMap()
 
 			if (obj != "none")
 			{
-
 				Object* object = Object::create();
 				this->objects.push_back(object);
 				if (obj == "baba") object->setType(Object::Type::BABA);
@@ -347,7 +420,6 @@ bool Level::loadMap()
 				object->setType(Object::Type::NONE);
 				object->init();
 				object->setPosition(glm::vec2(c * spriteSize, r * spriteSize));
-
 			}
 		}
 	}
@@ -528,6 +600,37 @@ void Level::assignBehaviours()
 							}
 						}
 					}
+
+					if (text.pre == Object::Type::TXT_FLAG && text.op == Object::Type::TXT_MAKE)
+					{
+						switch (text.post)
+						{
+							case Object::Type::TXT_LAVA:
+							{
+								object->setMake(Object::Type::LAVA);
+								break;
+							}
+							case Object::Type::TXT_BABA:
+							{
+								object->setMake(Object::Type::BABA);
+								break;
+							}
+							case Object::Type::TXT_ROCK:
+							{
+								object->setMake(Object::Type::ROCK);
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setMake(Object::Type::WALL);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
 				}
 				break;
 			}
@@ -596,6 +699,37 @@ void Level::assignBehaviours()
 							case Object::Type::TXT_YOU:
 							{
 								object->setBehaviour(Object::Behaviour::YOU);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
+
+					if (text.pre == Object::Type::TXT_ROCK && text.op == Object::Type::TXT_MAKE)
+					{
+						switch (text.post)
+						{
+							case Object::Type::TXT_BABA:
+							{
+								object->setMake(Object::Type::BABA);
+								break;
+							}
+							case Object::Type::TXT_FLAG:
+							{
+								object->setMake(Object::Type::FLAG);
+								break;
+							}
+							case Object::Type::TXT_LAVA:
+							{
+								object->setMake(Object::Type::LAVA);
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setMake(Object::Type::WALL);
 								break;
 							}
 							default:
@@ -680,6 +814,37 @@ void Level::assignBehaviours()
 							}
 						}
 					}
+
+					if (text.pre == Object::Type::TXT_WALL && text.op == Object::Type::TXT_MAKE)
+					{
+						switch (text.post)
+						{
+							case Object::Type::TXT_BABA:
+							{
+								object->setMake(Object::Type::BABA);
+								break;
+							}
+							case Object::Type::TXT_FLAG:
+							{
+								object->setMake(Object::Type::FLAG);
+								break;
+							}
+							case Object::Type::TXT_LAVA:
+							{
+								object->setMake(Object::Type::LAVA);
+								break;
+							}
+							case Object::Type::TXT_ROCK:
+							{
+								object->setMake(Object::Type::ROCK);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
 				}
 				break;
 			}
@@ -748,6 +913,37 @@ void Level::assignBehaviours()
 							case Object::Type::TXT_YOU:
 							{
 								object->setBehaviour(Object::Behaviour::YOU);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
+
+					if (text.pre == Object::Type::TXT_LAVA && text.op == Object::Type::TXT_MAKE)
+					{
+						switch (text.post)
+						{
+							case Object::Type::TXT_BABA:
+							{
+								object->setMake(Object::Type::BABA);
+								break;
+							}
+							case Object::Type::TXT_FLAG:
+							{
+								object->setMake(Object::Type::FLAG);
+								break;
+							}
+							case Object::Type::TXT_ROCK:
+							{
+								object->setMake(Object::Type::ROCK);
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setMake(Object::Type::WALL);
 								break;
 							}
 							default:
@@ -832,6 +1028,37 @@ void Level::assignBehaviours()
 							}
 						}
 					}
+
+					if (text.pre == Object::Type::TXT_BABA && text.op == Object::Type::TXT_MAKE)
+					{
+						switch (text.post)
+						{
+							case Object::Type::TXT_ROCK:
+							{
+								object->setMake(Object::Type::ROCK);
+								break;
+							}
+							case Object::Type::TXT_FLAG:
+							{
+								object->setMake(Object::Type::FLAG);
+								break;
+							}
+							case Object::Type::TXT_LAVA:
+							{
+								object->setMake(Object::Type::LAVA);
+								break;
+							}
+							case Object::Type::TXT_WALL:
+							{
+								object->setMake(Object::Type::WALL);
+								break;
+							}
+							default:
+							{
+								break;
+							}
+						}
+					}
 				}
 				break;
 			}
@@ -845,9 +1072,9 @@ void Level::assignBehaviours()
 	this->updateBehaviour = false;
 }
 
-void Level::collision(Object* object, Object* player)
+bool Level::collision(Object* object, Object* player)
 {
-	if (this->win) return;
+	if (this->win) return false;
 
 	glm::vec2 posObj = object->getPosition();
 	glm::vec2 posPlayer = player->getPosition();
@@ -880,12 +1107,8 @@ void Level::collision(Object* object, Object* player)
 						player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
 						break;
 					}
-					default:
-					{
-						exit(1);
-					}
 				}
-				break;
+				return false;
 			}
 			case Object::Behaviour::OP:
 			case Object::Behaviour::PRE:
@@ -907,6 +1130,7 @@ void Level::collision(Object* object, Object* player)
 						{
 							object->setPosition(posObj);
 							player->setPosition(glm::vec2(posPlayer.x, posPlayer.y - 24));
+							return false;
 						}
 
 						break;
@@ -920,6 +1144,7 @@ void Level::collision(Object* object, Object* player)
 						{
 							object->setPosition(posObj);
 							player->setPosition(glm::vec2(posPlayer.x, posPlayer.y + 24));
+							return false;
 						}
 
 						break;
@@ -933,6 +1158,7 @@ void Level::collision(Object* object, Object* player)
 						{
 							object->setPosition(posObj);
 							player->setPosition(glm::vec2(posPlayer.x - 24, posPlayer.y));
+							return false;
 						}
 
 						break;
@@ -946,6 +1172,7 @@ void Level::collision(Object* object, Object* player)
 						{
 							object->setPosition(posObj);
 							player->setPosition(glm::vec2(posPlayer.x + 24, posPlayer.y));
+							return false;
 						}
 
 						break;
@@ -976,6 +1203,7 @@ void Level::collision(Object* object, Object* player)
 		}
 	}
 
+	return true;
 }
 
 bool Level::collision(Object* object)

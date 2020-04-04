@@ -39,7 +39,6 @@ public:
 		TXT_LAVA,
 		TXT_ROCK,
 		TXT_WALL,
-		TXT_WATER,
 
 		TXT_IS,
 		TXT_MAKE,
@@ -92,11 +91,13 @@ public:
 	int getAnimation() const;
 	Object::Behaviour getBehaviour() const;
 	Object::Direction getDirection() const;
+	Object::Type getMake() const;
 	Object::Type getType() const;
 	glm::ivec2 getPosition() const;
 
 	void setBehaviour(Object::Behaviour behaviour);
 	void setDirection(Object::Direction direction);
+	void setMake(Object::Type object);
 	void setPosition(const glm::vec2& position);
 	void setShader(const ShaderProgram& shader);
 	void setType(Object::Type type);
@@ -112,6 +113,7 @@ private:
 	Object::Behaviour behaviour;
 	Object::Direction direction;
 	Object::Type type;
+	Object::Type make = Object::Type::NONE;
 	glm::vec3 color;
 
 	Sprite* sprite;

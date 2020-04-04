@@ -32,7 +32,7 @@ private:
 	void cleanMap();
 	void updateLava();
 	void assignBehaviours();
-	void collision(Object* object, Object* player);
+	bool collision(Object* object, Object* player);
 	bool collision(Object* object);
 	Object* find(int posX, int posY) const;
 
