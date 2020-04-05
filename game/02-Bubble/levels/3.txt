@@ -1,7 +1,7 @@
 MAP
 20 20
 24
-none none LAVA IS PUSH none none none lava wall none none none none none none FLAG IS  WIN none
+none none LAVA IS DEFEAT none none none lava wall none none none none none none FLAG IS   WIN  none
 none none none none none none none none lava wall none none none none none none none none none none
 none none none none none none none none lava wall none none none none none none none none none none
 none none none none none none none none lava wall none none none none none none none none none none
