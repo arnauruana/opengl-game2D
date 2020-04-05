@@ -335,9 +335,9 @@ void Object::setTexture(int caso) {
 	}
 }
 
-void Object::move(Object::Direction direction)
+bool Object::move(Object::Direction direction)
 {
-	if (this->dead) return;
+	if (this->dead) return false;
 
 	this->direction = direction;
 
@@ -347,12 +347,12 @@ void Object::move(Object::Direction direction)
 	{
 		case Object::Direction::BACKWARD:
 		{
-			if (pos.y == 0) return;
-
 			if (this->getAnimation() != Object::Animation::MOVE_BACKWARD)
 			{
 				this->sprite->changeAnimation(Object::Animation::MOVE_BACKWARD);
 			}
+
+			if (pos.y == 0) return false;
 
 			pos.y -= 24;
 			this->sprite->setPosition(pos);
@@ -361,12 +361,12 @@ void Object::move(Object::Direction direction)
 		}
 		case Object::Direction::FORWARD:
 		{
-			if (pos.y == 480 - 24) return;
-
 			if (this->getAnimation() != Object::Animation::MOVE_FORWARD)
 			{
 				this->sprite->changeAnimation(Object::Animation::MOVE_FORWARD);
 			}
+
+			if (pos.y == 480 - 24) return false;
 
 			pos.y += 24;
 			this->sprite->setPosition(pos);
@@ -375,12 +375,12 @@ void Object::move(Object::Direction direction)
 		}
 		case Object::Direction::LEFT:
 		{
-			if (pos.x == 0) return;
-
 			if (this->getAnimation() != Object::Animation::MOVE_LEFT)
 			{
 				this->sprite->changeAnimation(Object::Animation::MOVE_LEFT);
 			}
+
+			if (pos.x == 0) return false;
 
 			pos.x -= 24;
 			this->sprite->setPosition(pos);
@@ -389,12 +389,12 @@ void Object::move(Object::Direction direction)
 		}
 		case Object::Direction::RIGHT:
 		{
-			if (pos.x == 480 - 24) return;
-
 			if (this->getAnimation() != Object::Animation::MOVE_RIGHT)
 			{
 				this->sprite->changeAnimation(Object::Animation::MOVE_RIGHT);
 			}
+
+			if (pos.x == 480 - 24) return false;
 
 			pos.x += 24;
 			this->sprite->setPosition(pos);
@@ -413,6 +413,8 @@ void Object::move(Object::Direction direction)
 		Sounds::instance().playSoundEffect("MOVE");
 		Object::moved = true;
 	}
+
+	return true;
 }
 
 

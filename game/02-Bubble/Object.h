@@ -102,7 +102,7 @@ public:
 	void setShader(const ShaderProgram& shader);
 	void setType(Object::Type type);
 	void setTexture(int caso);
-	void move(Object::Direction direction);
+	bool move(Object::Direction direction);
 
 	void init();
 	void update(int deltaTime);
