@@ -1,0 +1,99 @@
+****************
+***** INFO *****
+****************
+
+Juego
+*****
+  - Baba Is You
+  - https://hempuli.com/baba/
+
+Integrantes
+***********
+  - Arnau Ruana
+  - Víctor Barroso
+
+Proyecto
+********
+  - demo.avi -> pequeña muestra del trabajo realizado
+  - info.txt -> información de utilidad
+  - Binari   -> directorio con el ejecutable
+  - Projecte -> directorio con el código fuente
+
+Funcionalidades
+***************
+  - estructura de cinco pantallas:
+      - menú principal
+      - jugar
+      - controles
+      - créditos
+      - felicitación de fin de juego
+  - sonido:
+      - música de fondo para el menú principal
+      - música de fondo para el juego
+      - efectos especiales para todos los objetos
+  - gameplay:
+      - cinco niveles con dificultad incremental
+      - nombres:
+          - baba
+          - flag
+          - lava
+          - rock
+          - wall
+      - operadores:
+          - is
+          - make
+      - propiedades:
+          - defeat
+          - push
+          - stop
+          - win
+          - you
+  - interactividad de todas las entidades
+
+Instruciones
+************
+Una vez ejecutado el binario se nos abrirá el menú principal con las siguientes opciones (seleccionamos con las
+flechas y entramos con el ENTER):
+  - ENTER IS PLAY     -> emepezar a jugar
+  - ENTER IS CONTROLS -> mostrar la ayuda sobre los controles del juego
+  - ENTER IS CREDITS  -> mostrar los créditos del juego
+
+Una vez estemos jugando, los controles, como se muestra en el menú, son los siguientes:
+  - B ('BACK')         -> volver al menú principal reseteando todos los niveles
+  - M ('MUTE')         -> silenciar/desilenciar la música, el sonido y los efectos especiales del juego
+  - R ('RESTART')      -> volver a cargar el mapa del nivel en el cual nos encontramos
+  - F11 ('FULLSCREEN') -> habilitar/deshabilitar la pantalla completa
+  - FLECHAS ('MOVE')   -> movimiento del personaje
+  - ESC ('CLOSE')      -> salir del juego
+
+Cuando nos hayamos pasado los cinco niveles, aparecerá una pantalla de felicitación desde la cual podemos volver
+al menú principal pulsando 'B'.
+
+Soluciones
+**********
+A continuación podrás consultar una de las muchas soluciones posibles por cada nivel:
+  
+Nivel 1:
+  - mover roca
+  - coger bandera
+Nivel 2:
+  - formar ROCK IS WIN
+  - tocar una de las rocas
+Nivel 3:
+  - mover WALL IS STOP por debajo de BABA IS YOU
+  - pegar BABA IS YOU al borde izquierdo del mapa
+  - formar WALL IS YOU subiendo WALL IS STOP
+  - coger bandera con uno de los muros
+Nivel 4:
+  - mover baba por debajo de ROCK IS PUSH rodeándolo hacia la derecha y hacia arriba
+  - arrastrar ROCK hasta BABA MAKE LAVA
+  - formar BABA MAKE ROCK sustituyendo LAVA por ROCK
+  - generar alguna roca
+  - tocar alguna de las rocas generadas
+Nivel 5:
+  - mover BABA una casilla a la derecha
+  - mover IS al lado izquierdo de BABA
+  - formar BABA MAKE ROCK en vertical
+  - formar ROCK IS BABA llevando ROCK delante de IS
+  - formar FLAG IS WIN trasladando uno de los baba abajo a la derecha i empujando WIN
+  - cojer bandera con algún baba restante
