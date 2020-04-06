@@ -1,6 +1,11 @@
 #include "Game.h"
 #include "resource.h"
 
+
+//Remove console (only works in Visual Studio)
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
+
+
 const float TPF = 1000.f / Game::FPS;
 
 int prevTime;
