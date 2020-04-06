@@ -530,11 +530,19 @@ void Level::assignBehaviours()
 							}
 							case Object::Type::TXT_WIN:
 							{
+								if (object->getBehaviour() == Object::Behaviour::YOU)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::WIN);
 								break;
 							}
 							case Object::Type::TXT_YOU:
 							{
+								if (object->getBehaviour() == Object::Behaviour::WIN)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::YOU);
 								break;
 							}
@@ -637,11 +645,19 @@ void Level::assignBehaviours()
 							}
 							case Object::Type::TXT_WIN:
 							{
+								if (object->getBehaviour() == Object::Behaviour::YOU)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::WIN);
 								break;
 							}
 							case Object::Type::TXT_YOU:
 							{
+								if (object->getBehaviour() == Object::Behaviour::WIN)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::YOU);
 								break;
 							}
@@ -744,11 +760,19 @@ void Level::assignBehaviours()
 							}
 							case Object::Type::TXT_WIN:
 							{
+								if (object->getBehaviour() == Object::Behaviour::YOU)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::WIN);
 								break;
 							}
 							case Object::Type::TXT_YOU:
 							{
+								if (object->getBehaviour() == Object::Behaviour::WIN)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::YOU);
 								break;
 							}
@@ -851,11 +875,19 @@ void Level::assignBehaviours()
 							}
 							case Object::Type::TXT_WIN:
 							{
+								if (object->getBehaviour() == Object::Behaviour::YOU)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::WIN);
 								break;
 							}
 							case Object::Type::TXT_YOU:
 							{
+								if (object->getBehaviour() == Object::Behaviour::WIN)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::YOU);
 								break;
 							}
@@ -958,11 +990,19 @@ void Level::assignBehaviours()
 							}
 							case Object::Type::TXT_WIN:
 							{
+								if (object->getBehaviour() == Object::Behaviour::YOU)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::WIN);
 								break;
 							}
 							case Object::Type::TXT_YOU:
 							{
+								if (object->getBehaviour() == Object::Behaviour::WIN)
+								{
+									this->winLevel();
+								}
 								object->setBehaviour(Object::Behaviour::YOU);
 								break;
 							}
@@ -1132,10 +1172,7 @@ bool Level::collision(Object* object, Object* player)
 			}
 			case Object::Behaviour::WIN:
 			{
-				Sounds::instance().playSoundEffect("WIN");
-				++Settings::level;
-				Settings::changeLevel = true;
-				this->win = true;
+				this->winLevel();
 				break;
 			}
 			case Object::Behaviour::DEFEAT:
@@ -1242,4 +1279,12 @@ Object* Level::find(int posX, int posY) const
 	Object* obj = Object::create();
 	obj->setType(Object::Type::NONE);
 	return obj;
+}
+
+void Level::winLevel()
+{
+	Sounds::instance().playSoundEffect("WIN");
+	++Settings::level;
+	Settings::changeLevel = true;
+	this->win = true;
 }

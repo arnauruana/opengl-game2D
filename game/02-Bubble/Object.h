@@ -32,7 +32,6 @@ public:
 		LAVA,
 		ROCK,
 		WALL,
-		WATER,
 
 		TXT_BABA,
 		TXT_FLAG,
