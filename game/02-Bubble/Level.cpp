@@ -397,6 +397,7 @@ void Level::assignBehaviours()
 		if (type == flag || type == lava || type == rock || type == wall || type == baba)
 		{
 			object->setBehaviour(Object::Behaviour::NONE);
+			object->setMake(Object::Type::NONE);
 		}
 	}
 
