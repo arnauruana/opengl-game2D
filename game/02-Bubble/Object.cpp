@@ -485,3 +485,8 @@ void Object::render()
 	this->shader.setUniform4f("color", this->color.x, this->color.y, this->color.z, 1.0f);
 	this->sprite->render();
 }
+
+void Object::free()
+{
+	this->sprite->free();
+}

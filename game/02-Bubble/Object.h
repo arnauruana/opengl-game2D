@@ -107,6 +107,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
+	void free();
 
 private:
 

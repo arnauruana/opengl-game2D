@@ -375,6 +375,7 @@ bool Level::loadMap()
 void Level::cleanMap() {
 	int x = objects.size() - 1;
 	for (int x = objects.size() - 1; x >= 0; --x) {
+		objects[x]->free();
 		delete objects[x];
 		objects.pop_back();
 	}
