@@ -1,6 +1,6 @@
 # Game2D - Baba Is You
 
-This is a recreation of the game [Baba Is You](https://www.hempuli.com/baba/). It belongs to the first laboratory assignment of the videogames subject. (UPC-FIB-VJ)
+This repository contains an OpenGL recreation of the game [*Baba Is You*](https://www.hempuli.com/baba/). It belongs to the first laboratory assignment of the videogames subject. (UPC-FIB-VJ)
 
 
 ## Authros ✒️
