@@ -10,7 +10,7 @@ This project has been completely made by:
 - **Arnau Ruana** - [@arnauruana](https://github.com/arnauruana)
 - **Víctor Barroso** - [@victorbarroso1](https://github.com/victorbarroso1)
 
-You can also se the [contributors](https://github.com/arnauruana/opengl-game2D/contributors) page for more details. 
+You can also see the [contributors](https://github.com/arnauruana/opengl-game2D/contributors) page for more details. 
 
 
 ## License 📄
